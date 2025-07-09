@@ -395,8 +395,7 @@ class CartHandler {
 
 // Instância global do gerenciador de carrinho
 window.cartHandler = new CartHandler();
-
-// Inicializar carrinho quando o documento carregar
-document.addEventListener('DOMContentLoaded', () => {
-    window.cartHandler.init();
-}); 
+// Removido: Inicializar carrinho automaticamente
+// document.addEventListener('DOMContentLoaded', () => {
+//     window.cartHandler.init();
+// }); 

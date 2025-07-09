@@ -5,93 +5,12 @@
 // DADOS GLOBAIS DA APLICAÇÃO
 // ========================================
 
-// Carrinho de compras
-let cart = [];
-let cartTotal = 0;
+// Carrinho de compras (agora gerenciado pelo CartHandler)
+// let cart = [];
+// let cartTotal = 0;
 
-// Produtos disponíveis
-let products = [
-    {
-        id: 1,
-        name: "Cesta de Legumes Orgânicos",
-        price: 25.90,
-        category: "vegetables",
-        rating: 4.5,
-        reviews: 24,
-        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Seleção de legumes frescos da fazenda familiar"
-    },
-    {
-        id: 2,
-        name: "Queijo Artesanal",
-        price: 32.50,
-        category: "cheese",
-        rating: 4.0,
-        reviews: 18,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Queijo colonial feito com leite fresco"
-    },
-    {
-        id: 3,
-        name: "Salada Pronta",
-        price: 15.90,
-        category: "salad",
-        rating: 5.0,
-        reviews: 36,
-        image: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Mix de folhas lavadas e prontas para consumo"
-    },
-    {
-        id: 4,
-        name: "Geleia Caseira de Morango",
-        price: 18.50,
-        category: "jam",
-        rating: 4.5,
-        reviews: 29,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Geleia artesanal sem conservantes"
-    },
-    {
-        id: 5,
-        name: "Cesta de Frutas da Estação",
-        price: 28.90,
-        category: "fruits",
-        rating: 4.0,
-        reviews: 21,
-        image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Seleção de frutas frescas colhidas no dia"
-    },
-    {
-        id: 6,
-        name: "Tomate Cereja Orgânico",
-        price: 12.90,
-        category: "vegetables",
-        rating: 5.0,
-        reviews: 42,
-        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-        description: "Tomates cereja cultivados sem agrotóxicos"
-    },
-    {
-        id: 7,
-        name: "Queijo Minas Frescal",
-        price: 24.90,
-        category: "cheese",
-        rating: 4.5,
-        reviews: 19,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Queijo minas tradicional feito artesanalmente"
-    },
-    {
-        id: 8,
-        name: "Geleia de Pimenta",
-        price: 19.90,
-        category: "jam",
-        rating: 4.0,
-        reviews: 15,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Geleia artesanal com um toque picante"
-    }
-];
+// Produtos disponíveis (agora carregados do IndexedDB)
+let products = [];
 
 // Produtos cadastrados pelos vendedores
 let sellerProducts = [
@@ -133,10 +52,12 @@ let balances = {
 // INICIALIZAÇÃO DA APLICAÇÃO
 // ========================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Aguardar inicialização do banco de dados
+    await window.hortiPertoDB.init();
+    
     initializeApp();
-    loadProducts();
-    updateCartDisplay();
+    await loadProductsFromDB();
     setupCEPValidation();
     setupCPFValidation(); // Configurar validação de CPF
     setupFileUploads(); // Configurar upload de arquivos
@@ -260,16 +181,25 @@ function setupMobileMenu() {
 // PRODUTOS E CATÁLOGO
 // ========================================
 
-function loadProducts() {
-    const productsContainer = document.querySelector('#products .grid');
-    if (!productsContainer) return;
-    
-    productsContainer.innerHTML = '';
-    
-    products.forEach(product => {
-        const productCard = createProductCard(product);
-        productsContainer.appendChild(productCard);
-    });
+async function loadProductsFromDB() {
+    try {
+        const productsContainer = document.querySelector('#products .grid');
+        if (!productsContainer) return;
+
+        // Carregar produtos do banco de dados
+        products = await window.hortiPertoDB.getActiveProducts();
+        
+        productsContainer.innerHTML = '';
+        products.forEach(product => {
+            const productCard = createProductCard(product);
+            productsContainer.appendChild(productCard);
+        });
+
+        console.log(`${products.length} produtos carregados do banco de dados`);
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        showNotification('Erro ao carregar produtos', 'error');
+    }
 }
 
 function createProductCard(product) {
@@ -367,124 +297,31 @@ function setupCartHandlers() {
     });
 }
 
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1
-        });
-    }
-    
-    updateCartDisplay();
-    showNotification(`${product.name} adicionado ao carrinho!`, 'success');
+async function addToCart(productId) {
+    await window.cartHandler.addToCart(productId, 1);
 }
 
+// Função updateCartDisplay agora é gerenciada pelo CartHandler
 function updateCartDisplay() {
-    const cartContainer = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const mobileCartCount = document.getElementById('mobile-cart-count');
-    
-    if (!cartContainer) return;
-    
-    // Atualizar contador
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    if (cartCount) cartCount.textContent = totalItems;
-    if (mobileCartCount) mobileCartCount.textContent = totalItems;
-    
-    // Atualizar lista de itens
-    if (cart.length === 0) {
-        cartContainer.innerHTML = '<p class="text-center text-gray-500 py-8">Seu carrinho está vazio</p>';
-        return;
-    }
-    
-    cartContainer.innerHTML = '';
-    cartTotal = 0;
-    
-    cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        cartTotal += itemTotal;
-        
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item flex justify-between items-center p-4 border-b border-gray-200';
-        cartItem.innerHTML = `
-            <div class="flex-1">
-                <h4 class="font-semibold">${item.name}</h4>
-                <p class="text-gray-600">R$ ${item.price.toFixed(2).replace('.', ',')} x ${item.quantity}</p>
-            </div>
-            <div class="flex items-center space-x-2">
-                <button class="quantity-btn bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="updateQuantity(${index}, -1)">-</button>
-                <span>${item.quantity}</span>
-                <button class="quantity-btn bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="updateQuantity(${index}, 1)">+</button>
-                <button class="remove-item text-red-500 hover:text-red-700" onclick="removeFromCart(${index})">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `;
-        
-        cartContainer.appendChild(cartItem);
-    });
-    
-    // Atualizar total
-    const cartTotalElement = document.getElementById('cart-total');
-    const cartTotalWithShippingElement = document.getElementById('cart-total-with-shipping');
-    
-    if (cartTotalElement) {
-        cartTotalElement.textContent = `R$ ${cartTotal.toFixed(2).replace('.', ',')}`;
-    }
-    
-    if (cartTotalWithShippingElement) {
-        const shippingCost = cart.length > 0 ? 5.00 : 0.00;
-        const totalWithShipping = cartTotal + shippingCost;
-        cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
-    }
+    window.cartHandler.updateCartDisplay();
 }
 
-function updateQuantity(index, change) {
-    if (index < 0 || index >= cart.length) return;
-    
-    cart[index].quantity += change;
-    
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-        showNotification('Item removido do carrinho', 'info');
-    }
-    
-    updateCartDisplay();
+// Funções do carrinho agora são gerenciadas pelo CartHandler
+async function updateQuantity(itemId, change) {
+    const newQuantity = window.cartHandler.getCartItemById(itemId).quantity + change;
+    await window.cartHandler.updateQuantity(itemId, newQuantity);
 }
 
-function removeFromCart(index) {
-    if (index < 0 || index >= cart.length) return;
-    
-    const removedItem = cart[index];
-    cart.splice(index, 1);
-    updateCartDisplay();
-    showNotification(`${removedItem.name} removido do carrinho`, 'info');
+async function removeFromCart(itemId) {
+    await window.cartHandler.removeFromCart(itemId);
 }
 
-function clearCart() {
-    cart = [];
-    updateCartDisplay();
-    showNotification('Carrinho limpo', 'info');
+async function clearCart() {
+    await window.cartHandler.clearCart();
 }
 
-function proceedToCheckout() {
-    if (cart.length === 0) {
-        showNotification('Adicione itens ao carrinho antes de finalizar a compra', 'error');
-        return;
-    }
-    
-    showNotification('Redirecionando para o checkout...', 'success');
-    // Aqui você pode adicionar a lógica para ir para a página de checkout
-    // Por enquanto, apenas mostra uma notificação
+async function proceedToCheckout() {
+    await window.cartHandler.proceedToCheckout();
 }
 
 // ========================================
@@ -539,100 +376,100 @@ function goToFormStep(currentStep, targetStepNum) {
     }
 }
 
-function handleSellerSubmit(e) {
+async function handleSellerSubmit(e) {
     e.preventDefault();
     
-    // Validação básica
-    const requiredFields = ['seller-name', 'seller-doc', 'seller-email', 'seller-phone', 'seller-cpp'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
-        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
-        return;
+    try {
+        // Capturar dados do formulário
+        const formData = window.formHandler.captureSellerFormData();
+        
+        // Salvar no banco de dados
+        const sellerId = await window.formHandler.handleSellerSubmit(formData);
+        
+        // Definir vendedor atual
+        window.formHandler.setCurrentSeller(sellerId);
+        
+        // Limpar formulário
+        window.formHandler.clearForm('seller-form');
+        
+        // Resetar para primeiro passo
+        const formSteps = e.target.querySelectorAll('.form-step');
+        formSteps.forEach((step, index) => {
+            if (index === 0) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+        
+    } catch (error) {
+        console.error('Erro ao cadastrar vendedor:', error);
+        showNotification(error.message, 'error');
     }
-    
-    // Validar CPF/CNPJ
-    if (!validateAllCPFs()) {
-        showNotification('Por favor, verifique o CPF/CNPJ informado', 'error');
-        return;
-    }
-    
-    showNotification('Cadastro de vendedor enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
-    });
 }
 
-function handleDeliverySubmit(e) {
+async function handleDeliverySubmit(e) {
     e.preventDefault();
     
-    // Validação básica
-    const requiredFields = ['delivery-name', 'delivery-cpf', 'delivery-email', 'delivery-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
-        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
-        return;
+    try {
+        // Capturar dados do formulário
+        const formData = window.formHandler.captureDeliveryFormData();
+        
+        // Salvar no banco de dados
+        const deliveryId = await window.formHandler.handleDeliverySubmit(formData);
+        
+        // Definir entregador atual
+        window.formHandler.setCurrentDelivery(deliveryId);
+        
+        // Limpar formulário
+        window.formHandler.clearForm('delivery-form');
+        
+        // Resetar para primeiro passo
+        const formSteps = e.target.querySelectorAll('.form-step');
+        formSteps.forEach((step, index) => {
+            if (index === 0) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+        
+    } catch (error) {
+        console.error('Erro ao cadastrar entregador:', error);
+        showNotification(error.message, 'error');
     }
-    
-    // Validar CPF
-    if (!validateAllCPFs()) {
-        showNotification('Por favor, verifique os CPFs informados', 'error');
-        return;
-    }
-    
-    showNotification('Cadastro de entregador enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
-    });
 }
 
-function handleUserSubmit(e) {
+async function handleUserSubmit(e) {
     e.preventDefault();
     
-    // Validação básica
-    const requiredFields = ['user-name', 'user-cpf', 'user-email', 'user-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
-        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
-        return;
+    try {
+        // Capturar dados do formulário
+        const formData = window.formHandler.captureUserFormData();
+        
+        // Salvar no banco de dados
+        const userId = await window.formHandler.handleUserSubmit(formData);
+        
+        // Definir usuário atual
+        window.formHandler.setCurrentUser(userId);
+        
+        // Limpar formulário
+        window.formHandler.clearForm('user-form');
+        
+        // Resetar para primeiro passo
+        const formSteps = e.target.querySelectorAll('.form-step');
+        formSteps.forEach((step, index) => {
+            if (index === 0) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+        
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+        showNotification(error.message, 'error');
     }
-    
-    // Validar CPF
-    if (!validateAllCPFs()) {
-        showNotification('Por favor, verifique os CPFs informados', 'error');
-        return;
-    }
-    
-    showNotification('Cadastro realizado com sucesso! Bem-vindo ao HortiPerto!', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
-    });
 }
 
 function validateRequiredFields(fieldIds) {
@@ -649,29 +486,51 @@ function validateRequiredFields(fieldIds) {
 // CADASTRO DE PRODUTOS (VENDEDORES)
 // ========================================
 
-function loadSellerProducts() {
-    const productsGrid = document.getElementById('seller-products-grid');
-    if (!productsGrid) return;
-    
-    if (sellerProducts.length === 0) {
-        productsGrid.innerHTML = `
-            <div class="col-span-full text-center py-8">
-                <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
-                <h3 class="text-lg font-semibold text-gray-600 mb-2">Nenhum produto cadastrado</h3>
-                <p class="text-gray-500 mb-4">Comece cadastrando seu primeiro produto!</p>
-                <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="showProductForm()">
-                    Cadastrar Produto
-                </button>
-            </div>
-        `;
-        return;
+async function loadSellerProductsFromDB() {
+    try {
+        const productsGrid = document.getElementById('seller-products-grid');
+        if (!productsGrid) return;
+        
+        const currentSellerId = window.formHandler.getCurrentSeller();
+        
+        if (!currentSellerId) {
+            productsGrid.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <i class="fas fa-user-lock text-4xl text-gray-400 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-600 mb-2">Faça login como vendedor</h3>
+                    <p class="text-gray-500 mb-4">Você precisa estar logado para gerenciar produtos</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Carregar produtos do vendedor do banco
+        const sellerProducts = await window.hortiPertoDB.getProductsBySeller(currentSellerId);
+        
+        if (sellerProducts.length === 0) {
+            productsGrid.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-600 mb-2">Nenhum produto cadastrado</h3>
+                    <p class="text-gray-500 mb-4">Comece cadastrando seu primeiro produto!</p>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="showProductForm()">
+                        Cadastrar Produto
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        productsGrid.innerHTML = '';
+        sellerProducts.forEach(product => {
+            const productCard = createSellerProductCard(product);
+            productsGrid.appendChild(productCard);
+        });
+        
+    } catch (error) {
+        console.error('Erro ao carregar produtos do vendedor:', error);
+        showNotification('Erro ao carregar produtos', 'error');
     }
-    
-    productsGrid.innerHTML = '';
-    sellerProducts.forEach(product => {
-        const productCard = createSellerProductCard(product);
-        productsGrid.appendChild(productCard);
-    });
 }
 
 function createSellerProductCard(product) {
@@ -829,69 +688,29 @@ function setupProductFormHandlers() {
     }
 }
 
-function handleNewProductSubmit(e) {
+async function handleNewProductSubmit(e) {
     e.preventDefault();
     
-    const formData = {
-        name: document.getElementById('product-name').value,
-        category: document.getElementById('product-category').value,
-        price: parseFloat(document.getElementById('product-price').value),
-        unit: document.getElementById('product-unit').value,
-        quantity: parseInt(document.getElementById('product-quantity').value),
-        description: document.getElementById('product-description').value,
-        organic: document.getElementById('product-organic').checked
-    };
-    
-    // Validação
-    if (!formData.name || !formData.category || !formData.price || 
-        !formData.unit || !formData.quantity || !formData.description) {
-        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
-        return;
+    try {
+        // Capturar dados do formulário
+        const formData = window.formHandler.captureProductFormData();
+        
+        // Salvar no banco de dados
+        const productId = await window.formHandler.handleProductSubmit(formData);
+        
+        // Fechar modal e limpar formulário
+        closeProductForm();
+        
+        // Mostrar sucesso
+        showNotification('Produto cadastrado com sucesso!', 'success');
+        
+        // Atualizar lista
+        await loadSellerProductsFromDB();
+        
+    } catch (error) {
+        console.error('Erro ao cadastrar produto:', error);
+        showNotification(error.message, 'error');
     }
-    
-    if (formData.price <= 0) {
-        showNotification('O preço deve ser maior que zero', 'error');
-        return;
-    }
-    
-    if (formData.quantity < 0) {
-        showNotification('A quantidade não pode ser negativa', 'error');
-        return;
-    }
-    
-    // Simular upload de foto
-    const imageInput = document.getElementById('product-image');
-    if (!imageInput.files[0]) {
-        showNotification('Por favor, selecione uma foto do produto', 'error');
-        return;
-    }
-    
-    // Criar novo produto
-    const newProduct = {
-        id: Date.now(),
-        name: formData.name,
-        category: formData.category,
-        price: formData.price,
-        unit: formData.unit,
-        quantity: formData.quantity,
-        description: formData.description,
-        image: URL.createObjectURL(imageInput.files[0]),
-        organic: formData.organic,
-        dateCreated: new Date().toISOString().split('T')[0],
-        status: 'ativo'
-    };
-    
-    // Adicionar à lista
-    sellerProducts.push(newProduct);
-    
-    // Fechar modal e limpar formulário
-    closeProductForm();
-    
-    // Mostrar sucesso
-    showNotification('Produto cadastrado com sucesso!', 'success');
-    
-    // Atualizar lista
-    loadSellerProducts();
 }
 
 function setupImagePreview() {
@@ -916,30 +735,50 @@ function setupImagePreview() {
     }
 }
 
-function editProduct(id) {
-    const product = sellerProducts.find(p => p.id === id);
-    if (!product) return;
-    
-    showNotification(`Editando produto: ${product.name}`, 'info');
-}
-
-function deleteProduct(id) {
-    if (confirm('Tem certeza que deseja excluir este produto?')) {
-        sellerProducts = sellerProducts.filter(p => p.id !== id);
-        loadSellerProducts();
-        showNotification('Produto excluído com sucesso!', 'success');
+async function editProduct(id) {
+    try {
+        const product = await window.hortiPertoDB.getProductById(id);
+        if (!product) {
+            showNotification('Produto não encontrado', 'error');
+            return;
+        }
+        
+        showNotification(`Editando produto: ${product.name}`, 'info');
+        // Aqui você pode implementar a lógica de edição
+        // Por exemplo, abrir um modal com os dados do produto
+        
+    } catch (error) {
+        console.error('Erro ao editar produto:', error);
+        showNotification('Erro ao editar produto', 'error');
     }
 }
 
-function toggleProductStatus(id) {
-    const product = sellerProducts.find(p => p.id === id);
-    if (!product) return;
-    
-    product.status = product.status === 'ativo' ? 'inativo' : 'ativo';
-    loadSellerProducts();
-    
-    const statusText = product.status === 'ativo' ? 'ativado' : 'pausado';
-    showNotification(`Produto ${statusText} com sucesso!`, 'success');
+async function deleteProduct(id) {
+    if (confirm('Tem certeza que deseja excluir este produto?')) {
+        try {
+            await window.hortiPertoDB.deleteProduct(id);
+            await loadSellerProductsFromDB();
+            showNotification('Produto excluído com sucesso!', 'success');
+        } catch (error) {
+            console.error('Erro ao excluir produto:', error);
+            showNotification('Erro ao excluir produto', 'error');
+        }
+    }
+}
+
+async function toggleProductStatus(id) {
+    try {
+        await window.hortiPertoDB.toggleProductStatus(id);
+        await loadSellerProductsFromDB();
+        
+        const product = await window.hortiPertoDB.getProductById(id);
+        const statusText = product.status === 'ativo' ? 'ativado' : 'pausado';
+        showNotification(`Produto ${statusText} com sucesso!`, 'success');
+        
+    } catch (error) {
+        console.error('Erro ao alterar status do produto:', error);
+        showNotification('Erro ao alterar status do produto', 'error');
+    }
 }
 
 

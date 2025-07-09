@@ -280,23 +280,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    // Navegação entre abas
+    console.log('🚀 Inicializando HortiPerto...');
+    
+    // Inicializar funcionalidades existentes
     setupTabNavigation();
-    
-    // Menu mobile
     setupMobileMenu();
-    
-    // Formulários
-    setupFormHandlers();
-    
-    // Filtros de produtos
+    loadProducts();
     setupProductFilters();
-    
-    // Carrinho
     setupCartHandlers();
-    
-    // Passos dos formulários
+    setupFormHandlers();
     setupFormSteps();
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    // Inicializar Typebot após um delay
+    setTimeout(() => {
+        initializeTypebot();
+    }, 3000);
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
 }
 
 // ========================================
@@ -591,13 +599,12 @@ function clearCart() {
 
 function proceedToCheckout() {
     if (cart.length === 0) {
-        showNotification('Adicione itens ao carrinho antes de finalizar a compra', 'error');
+        showNotification('Seu carrinho está vazio', 'error');
         return;
     }
     
-    showNotification('Redirecionando para o checkout...', 'success');
-    // Aqui você pode adicionar a lógica para ir para a página de checkout
-    // Por enquanto, apenas mostra uma notificação
+    showTab('payment');
+    updatePaymentSummary();
 }
 
 // ========================================
@@ -2062,6 +2069,478 @@ function updateLoginButton() {
         const dropdown = document.getElementById('logout-btn');
         if (dropdown) dropdown.remove();
     }
+}
+
+// ========================================
+// SISTEMA DE PAGAMENTO
+// ========================================
+
+function setupPaymentSystem() {
+    setupPaymentMethodSelection();
+    setupCardFormValidation();
+    setupPixCopy();
+    setupPixQRCode();
+    updatePaymentSummary();
+}
+
+function setupPaymentMethodSelection() {
+    const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
+    const paymentForms = document.querySelectorAll('.payment-form');
+    
+    paymentOptions.forEach(option => {
+        option.addEventListener('change', function() {
+            // Esconder todos os formulários
+            paymentForms.forEach(form => {
+                form.classList.add('hidden');
+            });
+            
+            // Mostrar o formulário selecionado
+            const selectedForm = document.getElementById(this.value + '-form');
+            if (selectedForm) {
+                selectedForm.classList.remove('hidden');
+            }
+            
+            // Atualizar resumo do pagamento
+            updatePaymentSummary();
+            
+            // Atualizar visual dos botões de opção
+            updatePaymentOptionVisuals();
+        });
+    });
+}
+
+function updatePaymentOptionVisuals() {
+    const paymentOptions = document.querySelectorAll('.payment-option');
+    
+    paymentOptions.forEach(option => {
+        const radio = option.querySelector('input[type="radio"]');
+        const circle = option.querySelector('.w-3.h-3');
+        const label = option.querySelector('label');
+        
+        if (radio.checked) {
+            circle.classList.remove('hidden');
+            label.classList.add('border-green-500', 'bg-green-50');
+        } else {
+            circle.classList.add('hidden');
+            label.classList.remove('border-green-500', 'bg-green-50');
+        }
+    });
+}
+
+function setupCardFormValidation() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    
+    if (cardNumber) {
+        cardNumber.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            this.value = value;
+        });
+    }
+    
+    if (cardExpiry) {
+        cardExpiry.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            this.value = value;
+        });
+    }
+    
+    if (cardCvv) {
+        cardCvv.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+}
+
+function setupPixCopy() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.addEventListener('click', function() {
+            this.select();
+        });
+    }
+}
+
+function copyPixKey() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.select();
+        document.execCommand('copy');
+        
+        // Mostrar feedback visual
+        const copyBtn = document.querySelector('button[onclick="copyPixKey()"]');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        copyBtn.classList.add('bg-green-700');
+        
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.classList.remove('bg-green-700');
+        }, 2000);
+        
+        showNotification('Chave PIX copiada!', 'success');
+    }
+}
+
+function updatePaymentSummary() {
+    const subtotal = cartTotal;
+    const shipping = 5.00;
+    let paymentFee = 0.00;
+    
+    // Calcular taxa baseada no método de pagamento
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    if (selectedMethod) {
+        switch (selectedMethod.value) {
+            case 'card':
+                paymentFee = subtotal * 0.029; // 2.9% para cartão
+                break;
+            case 'pix':
+                paymentFee = 0; // PIX sem taxa
+                break;
+            case 'cash':
+                paymentFee = 0; // Dinheiro sem taxa
+                break;
+        }
+    }
+    
+    const total = subtotal + shipping + paymentFee;
+    
+    // Atualizar valores na interface
+    const subtotalElement = document.getElementById('payment-subtotal');
+    const feeElement = document.getElementById('payment-fee');
+    const totalElement = document.getElementById('payment-total');
+    
+    if (subtotalElement) subtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    if (feeElement) feeElement.textContent = `R$ ${paymentFee.toFixed(2).replace('.', ',')}`;
+    if (totalElement) totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+function confirmPayment() {
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    
+    if (!selectedMethod) {
+        showNotification('Selecione uma forma de pagamento', 'error');
+        return;
+    }
+    
+    // Validar formulário baseado no método selecionado
+    if (!validatePaymentForm(selectedMethod.value)) {
+        return;
+    }
+    
+    // Simular processamento de pagamento
+    const confirmBtn = document.getElementById('confirm-payment');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Processando...';
+    confirmBtn.disabled = true;
+    
+    setTimeout(() => {
+        // Simular sucesso do pagamento
+        showNotification('Pagamento processado com sucesso!', 'success');
+        
+        // Limpar carrinho
+        cart = [];
+        cartTotal = 0;
+        updateCartDisplay();
+        
+        // Redirecionar para página de sucesso ou home
+        showTab('home');
+        
+        // Resetar botão
+        confirmBtn.textContent = originalText;
+        confirmBtn.disabled = false;
+        
+    }, 2000);
+}
+
+function validatePaymentForm(method) {
+    switch (method) {
+        case 'card':
+            return validateCardForm();
+        case 'cash':
+            return validateCashForm();
+        case 'pix':
+            return true; // PIX não precisa de validação específica
+        default:
+            return false;
+    }
+}
+
+function validateCardForm() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    const cardHolder = document.getElementById('card-holder');
+    
+    if (!cardNumber.value.replace(/\s/g, '').match(/^\d{16}$/)) {
+        showNotification('Número do cartão inválido', 'error');
+        return false;
+    }
+    
+    if (!cardExpiry.value.match(/^\d{2}\/\d{2}$/)) {
+        showNotification('Data de validade inválida', 'error');
+        return false;
+    }
+    
+    if (!cardCvv.value.match(/^\d{3,4}$/)) {
+        showNotification('CVV inválido', 'error');
+        return false;
+    }
+    
+    if (!cardHolder.value.trim()) {
+        showNotification('Nome do titular é obrigatório', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function validateCashForm() {
+    // Validação básica para dinheiro (opcional)
+    return true;
+}
+
+// Modificar a função proceedToCheckout para redirecionar para a aba de pagamento
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        showNotification('Seu carrinho está vazio', 'error');
+        return;
+    }
+    
+    showTab('payment');
+    updatePaymentSummary();
+}
+
+// ========================================
+// TYPEBOT INTEGRATION
+// ========================================
+
+function initializeTypebot() {
+    try {
+        if (typeof HortiPertoTypebot !== 'undefined') {
+            console.log('[Typebot] Avançado detectado. Inicializando HortiPertoTypebot...');
+            const typebot = new HortiPertoTypebot();
+            if (typebot && typebot.showWelcomeMessage) {
+                typebot.showWelcomeMessage();
+            }
+            return typebot;
+        } else {
+            console.warn('[Typebot] HortiPertoTypebot não encontrado. Usando fallback básico.');
+            const fallback = createBasicTypebot();
+            fallback.showWelcomeMessage();
+            return fallback;
+        }
+    } catch (e) {
+        console.error('[Typebot] Erro ao inicializar:', e);
+        const fallback = createBasicTypebot();
+        fallback.showWelcomeMessage();
+        return fallback;
+    }
+}
+
+function createBasicTypebot() {
+    return {
+        showWelcomeMessage: function() {
+            const welcomeMessage = `
+                <div id="typebot-welcome" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-green-600">🌱 HortiPerto</h3>
+                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">Olá! Bem-vindo ao HortiPerto! Como posso te ajudar hoje?</p>
+                    <div class="space-y-2">
+                        <button onclick="typebotAction('products')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            🛒 Quero comprar produtos
+                        </button>
+                        <button onclick="typebotAction('seller')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            👨‍🌾 Quero vender produtos
+                        </button>
+                        <button onclick="typebotAction('delivery')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            🚚 Quero ser entregador
+                        </button>
+                        <button onclick="typebotAction('help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            ❓ Preciso de ajuda
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Remover mensagem anterior se existir
+            const existingMessage = document.getElementById('typebot-welcome');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Adicionar nova mensagem
+            document.body.insertAdjacentHTML('beforeend', welcomeMessage);
+            
+            // Auto-remover após 30 segundos
+            setTimeout(() => {
+                closeTypebot();
+            }, 30000);
+        },
+        
+        showHelpMessage: function() {
+            const helpMessage = `
+                <div id="typebot-help" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-green-600">🤝 Suporte</h3>
+                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3">Como posso te ajudar?</p>
+                    <div class="space-y-2">
+                        <button onclick="typebotAction('shopping-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            ❓ Dúvidas sobre compras
+                        </button>
+                        <button onclick="typebotAction('delivery-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            📦 Problemas com entrega
+                        </button>
+                        <button onclick="typebotAction('payment-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
+                            💳 Problemas com pagamento
+                        </button>
+                        <button onclick="typebotAction('human-support')" class="w-full text-left p-2 rounded bg-blue-50 hover:bg-blue-100 text-sm">
+                            📞 Falar com atendente
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', helpMessage);
+        }
+    };
+}
+
+function closeTypebot() {
+    const typebotElements = document.querySelectorAll('#typebot-welcome, #typebot-help');
+    typebotElements.forEach(element => element.remove());
+}
+
+function typebotAction(action) {
+    closeTypebot();
+    
+    switch (action) {
+        case 'products':
+            showTab('products');
+            showNotification('Navegando para produtos...', 'info');
+            break;
+        case 'seller':
+            showTab('seller-register');
+            showNotification('Navegando para cadastro de vendedor...', 'info');
+            break;
+        case 'delivery':
+            showTab('delivery-register');
+            showNotification('Navegando para cadastro de entregador...', 'info');
+            break;
+        case 'help':
+            // Mostrar mensagem de ajuda
+            const basicTypebot = createBasicTypebot();
+            basicTypebot.showHelpMessage();
+            break;
+        case 'shopping-help':
+            showNotification('Para dúvidas sobre compras, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
+            break;
+        case 'delivery-help':
+            showNotification('Para problemas com entrega, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
+            break;
+        case 'payment-help':
+            showNotification('Para problemas com pagamento, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
+            break;
+        case 'human-support':
+            showNotification('Redirecionando para atendente humano...', 'info');
+            // Aqui você pode integrar com um sistema de chat real
+            break;
+    }
+}
+
+// ========================================
+// INICIALIZAÇÃO DO SISTEMA
+// ========================================
+
+// Modificar a função initializeApp para incluir as novas funcionalidades
+function initializeApp() {
+    console.log('🚀 Inicializando HortiPerto...');
+    
+    // Inicializar funcionalidades existentes
+    setupTabNavigation();
+    setupMobileMenu();
+    loadProducts();
+    setupProductFilters();
+    setupCartHandlers();
+    setupFormHandlers();
+    setupFormSteps();
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    // Inicializar Typebot após um delay
+    setTimeout(() => {
+        initializeTypebot();
+    }, 3000);
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
+}
+
+// Chamar inicialização quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}
+
+function setupPixQRCode() {
+    const qrContainer = document.getElementById('pix-qr-code');
+    if (qrContainer) {
+        // Limpa o conteúdo anterior
+        qrContainer.innerHTML = '';
+        // Gera o QR Code real
+        const qr = new QRious({
+            element: document.createElement('canvas'),
+            value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F', // Exemplo de payload PIX fake
+            size: 180
+        });
+        qrContainer.appendChild(qr.element);
+    }
+}
+
+// Efeito visual de ripple para botões
+function createRippleEffect(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+    circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+    circle.classList.add('ripple');
+    // Remove ripples antigos
+    const rippleOld = button.querySelector('.ripple');
+    if (rippleOld) rippleOld.remove();
+    button.appendChild(circle);
+    setTimeout(() => {
+        circle.remove();
+    }, 600);
+}
+
+// Adicionar ripple a todos os botões com classe .btn-neon ou .action-btn
+function setupRippleEffect() {
+    const rippleButtons = document.querySelectorAll('.btn-neon, .action-btn');
+    rippleButtons.forEach(btn => {
+        btn.addEventListener('click', createRippleEffect);
+    });
 }
 
  

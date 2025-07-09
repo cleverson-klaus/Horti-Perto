@@ -1,278 +1,201 @@
-# 🌱 HortiPerto - Plataforma Digital
+# 🌱 HortiPerto - Plataforma de Conectividade Rural
 
-**Conectando produtores rurais a consumidores finais**
+## 📋 Visão Geral
 
-HortiPerto é uma plataforma digital inovadora que facilita a venda direta de produtos frescos entre produtores rurais e consumidores finais, promovendo o acesso a alimentos saudáveis e valorizando o pequeno produtor.
+O HortiPerto é uma plataforma web inovadora que conecta produtores rurais diretamente aos consumidores, facilitando a comercialização de produtos frescos e artesanais. A plataforma oferece um sistema completo de e-commerce com funcionalidades avançadas de pagamento, atendimento automatizado e gestão de usuários.
 
-## 🚀 Funcionalidades Implementadas
+## ✨ Funcionalidades Principais
 
-### 📱 Interface Principal
-- **Navegação por Abas**: Sistema de navegação intuitivo entre diferentes seções
-- **Menu Mobile**: Menu responsivo para dispositivos móveis
-- **Design Responsivo**: Interface adaptável para desktop, tablet e mobile
-- **Notificações**: Sistema de notificações em tempo real
+### 🛒 Sistema de E-commerce
+- **Catálogo de Produtos**: Visualização organizada por categorias
+- **Carrinho de Compras**: Gestão completa de itens e quantidades
+- **Filtros Inteligentes**: Busca por categoria, preço e disponibilidade
+- **Avaliações e Reviews**: Sistema de feedback dos clientes
 
-### 🏠 Página Inicial
-- **Apresentação da Plataforma**: Informações sobre o HortiPerto
-- **Produtos em Destaque**: Exibição dos produtos mais populares
-- **Como Funciona**: Explicação do processo da plataforma
-- **Call-to-Action**: Botões para comprar ou se tornar vendedor
+### 💳 Sistema de Pagamento Avançado
+- **Cartão de Crédito/Débito**: Suporte a múltiplas bandeiras
+- **Pagamento em Dinheiro**: Com opção de troco personalizado
+- **PIX Instantâneo**: QR Code e chave PIX da empresa
+- **Validação em Tempo Real**: Formatação automática e validação de dados
+- **Taxas Dinâmicas**: Cálculo automático baseado no método de pagamento
 
-### 🛍️ Catálogo de Produtos
-- **Listagem de Produtos**: Grid responsivo com cards de produtos
-- **Filtros por Categoria**: Filtros para frutas, verduras, queijos, geleias, etc.
-- **Sistema de Avaliações**: Estrelas e comentários dos clientes
-- **Adição ao Carrinho**: Funcionalidade de adicionar produtos ao carrinho
+### 🤖 Typebot Integrado
+- **Saudação Automática**: Mensagem de boas-vindas personalizada
+- **Atendimento 24h**: Respostas automáticas para dúvidas comuns
+- **Navegação Inteligente**: Direcionamento automático para seções relevantes
+- **Suporte Humano**: Redirecionamento para atendente quando necessário
 
-### 🛒 Carrinho de Compras
-- **Gestão de Itens**: Adicionar, remover e alterar quantidades
-- **Cálculo Automático**: Total atualizado automaticamente
-- **Contador de Itens**: Indicador visual no menu de navegação
-- **Limpeza do Carrinho**: Opção para limpar todos os itens
+### 🔐 Sistema de Autenticação
+- **Login Simples**: Acesso por e-mail/senha
+- **Gestão de Conta**: Interface para usuários logados
+- **Logout Seguro**: Encerramento de sessão
+- **Credenciais Demo**: demo/1234 para testes
 
-### 👨‍🌾 Cadastro de Vendedores
-- **Formulário Multi-step**: Processo dividido em 4 etapas
-- **Informações Pessoais**: Nome, CPF/CNPJ, email, telefone, CPP
-- **Validação de CPF/CNPJ**: Validação automática de dígitos verificadores
-- **Endereço Completo**: CEP, endereço, cidade, estado
-- **Documentos**: Alvará sanitário, CAR, inscrição estadual
-- **Informações Bancárias**: Banco, agência, conta, PIX
-- **Gestão de Produtos**: Cadastro, edição e exclusão de produtos
-- **Resgate de Valores**: Sistema de saldo e solicitação de resgate
+### 👨‍🌾 Cadastros Especializados
+- **Produtores**: Formulário completo com validação de documentos
+- **Entregadores**: Cadastro com documentos de veículo
+- **Consumidores**: Registro simplificado para compras
 
-### 🚚 Cadastro de Entregadores
-- **Formulário Multi-step**: Processo dividido em 3 etapas
-- **Informações Pessoais**: Nome, CPF, email, telefone
-- **Validação de CPF**: Validação automática de dígitos verificadores
-- **Endereço**: Endereço completo do entregador
-- **Documentos**: CNH, documentos do veículo, foto de perfil
-- **Informações Bancárias**: Dados bancários ou PIX
-- **Resgate de Valores**: Sistema de saldo e solicitação de resgate
+## 🚀 Tecnologias Utilizadas
 
-### 👤 Cadastro de Usuários
-- **Formulário Completo**: Dados pessoais e de pagamento
-- **Validação de CPF**: Validação automática de dígitos verificadores
-- **Validação de Campos**: Verificação de campos obrigatórios
-- **Dados de Pagamento**: Informações para finalizar compras
-
-### 💳 Sistema de Pagamento
-- **Métodos de Pagamento**: Cartão de crédito, PIX, boleto
-- **Cupons de Desconto**: Sistema de cupons promocionais
-- **Cálculo de Frete**: Opções de entrega e pickup
-- **Resumo do Pedido**: Detalhes completos antes da finalização
-
-### ✅ Sistema de Validações
-- **Validação de CPF**: Algoritmo oficial de dígitos verificadores
-- **Validação de CNPJ**: Algoritmo oficial de dígitos verificadores
-- **Detecção Automática**: Identifica CPF (11 dígitos) ou CNPJ (14 dígitos)
-- **Formatação Automática**: Máscara aplicada durante a digitação
-- **Validação de CEP**: Integração com ViaCEP para endereços
-- **Feedback Visual**: Estados de validação com cores e mensagens
-- **Validação no Backend**: Endpoints REST para validação no servidor
-
-### 📦 Gestão de Produtos (Vendedores)
-- **Cadastro de Produtos**: Formulário completo com foto
-- **Edição de Produtos**: Modificar informações existentes
-- **Exclusão de Produtos**: Remover produtos do catálogo
-- **Ativação/Desativação**: Controle de status dos produtos
-- **Preview de Imagem**: Visualização antes do upload
-- **Categorização**: Organização por tipos de produtos
-- **Controle de Estoque**: Gestão de quantidades disponíveis
-
-## 🛠️ Tecnologias Utilizadas
-
-### Frontend
-- **HTML5**: Estrutura semântica e acessível
-- **CSS3 (Tailwind CSS)**: Framework CSS utilitário para design responsivo
-- **JavaScript (ES6+)**: Funcionalidades interativas e dinâmicas
-- **Font Awesome**: Ícones e elementos visuais
-
-### Banco de Dados Local
-- **IndexedDB**: Banco de dados local para persistência offline
-- **LocalStorage**: Backup para dados temporários
-- **Sincronização Automática**: Entre localStorage e IndexedDB
-
-### Funcionalidades JavaScript
-- **Navegação por Abas**: Sistema de roteamento client-side
-- **Gestão de Estado**: Controle de dados da aplicação
-- **Validação de Formulários**: Verificação de campos obrigatórios
-- **Upload de Imagens**: Preview e gestão de arquivos
-- **Sistema de Notificações**: Feedback visual para o usuário
-- **Carrinho de Compras**: Gestão de itens e cálculos
-- **Filtros Dinâmicos**: Busca e filtragem de produtos
-- **IndexedDB Integration**: Persistência local completa
-- **FormHandler**: Gerenciamento automatizado de formulários
-- **CartHandler**: Gestão avançada do carrinho de compras
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Estilização**: Tailwind CSS
+- **Ícones**: Font Awesome 6.4.0
+- **Validações**: JavaScript nativo com regex
+- **APIs**: ViaCEP para validação de endereços
+- **Armazenamento**: IndexedDB para dados locais
 
 ## 📁 Estrutura do Projeto
 
 ```
-HortiPerto/
-├── HortiPerto.html              # Página principal da aplicação
-├── cadastro-produtos.html       # Página específica de cadastro de produtos
-├── js/
-│   ├── database.js              # Sistema de banco de dados IndexedDB
-│   ├── form-handlers.js         # Gerenciador de formulários
-│   ├── cart-handler.js          # Gerenciador de carrinho de compras
-│   ├── hortiperto-main.js       # JavaScript principal unificado
-│   ├── app.js                   # JavaScript anterior (legado)
-│   └── cadastro-produtos.js     # JavaScript específico de produtos (legado)
+Horti-Perto/
 ├── css/
-│   └── styles.css               # Estilos customizados
-├── tests/                       # Testes automatizados
-├── docs/
-│   ├── CPF-CNPJ-Validation.md   # Documentação de validação
-│   └── IndexedDB-Integration.md # Documentação do banco de dados
-├── README.md                    # Documentação do projeto
-└── DEMO.md                      # Guia de demonstração
+│   ├── hortiperto-styles.css      # Estilos principais
+│   ├── form-fix.css              # Correções de formulário
+│   └── shopping-assistant.css    # Estilos do assistente
+├── js/
+│   ├── hortiperto-main.js        # JavaScript principal
+│   ├── typebot-integration.js    # Integração Typebot
+│   └── shopping-assistant.js     # Assistente de compras
+├── imagens/                      # Assets de imagem
+├── docs/                         # Documentação
+├── tests/                        # Testes automatizados
+├── server/                       # Servidor de upload
+└── HortiPerto.html              # Página principal
 ```
+
+## 🎯 Funcionalidades Detalhadas
+
+### Sistema de Pagamento
+
+#### 💳 Cartão de Crédito/Débito
+- Formatação automática do número do cartão
+- Validação de data de validade (MM/AA)
+- Verificação de CVV (3-4 dígitos)
+- Parcelamento em até 6x sem juros
+- Taxa de 2.9% sobre o valor
+
+#### 💵 Dinheiro
+- Pagamento na entrega
+- Campo opcional para troco
+- Observações personalizadas
+- Sem taxa adicional
+
+#### 📲 PIX
+- QR Code gerado automaticamente
+- Chave PIX: hortiperto@email.com
+- Pagamento instantâneo
+- Sem taxa de processamento
+- Feedback visual ao copiar chave
+
+### Typebot - Atendimento Inteligente
+
+#### 🌟 Mensagem de Boas-Vindas
+- Aparece automaticamente após 3 segundos
+- Opções de navegação rápida
+- Auto-remoção após 30 segundos
+- Design responsivo e moderno
+
+#### 🤝 Suporte Automatizado
+- Dúvidas sobre compras
+- Problemas com entrega
+- Questões de pagamento
+- Redirecionamento para atendente humano
+
+#### 🎯 Ações Contextuais
+- Navegação direta para produtos
+- Acesso rápido aos cadastros
+- Exibição de notificações informativas
+
+### Sistema de Login
+
+#### 🔑 Autenticação
+- Credenciais de teste: demo/1234
+- Validação em tempo real
+- Feedback visual de erros
+- Persistência de sessão
+
+#### 👤 Gestão de Conta
+- Botão "Minha Conta" quando logado
+- Dropdown com opção de logout
+- Transições suaves entre estados
+
+## 🧪 Testes
+
+Execute o arquivo `tests/payment-test.html` para verificar todas as funcionalidades:
+
+- ✅ Teste de métodos de pagamento
+- ✅ Validação de cartão de crédito
+- ✅ Funcionalidade PIX
+- ✅ Sistema de login
+- ✅ Integração Typebot
 
 ## 🚀 Como Executar
 
 1. **Clone o repositório**:
    ```bash
    git clone [url-do-repositorio]
-   cd HortiPerto
+   cd Horti-Perto
    ```
 
 2. **Abra o arquivo principal**:
-   - Abra `HortiPerto.html` em qualquer navegador moderno
-   - Ou use um servidor local para melhor experiência
-
-3. **Para desenvolvimento**:
    ```bash
-   # Usando Python
-   python -m http.server 8000
-   
-   # Usando Node.js
-   npx serve .
-   
-   # Usando PHP
-   php -S localhost:8000
+   # No navegador, abra:
+   HortiPerto.html
    ```
 
-## 🎯 Funcionalidades Principais
-
-### Para Consumidores
-- ✅ Navegação pelo catálogo de produtos
-- ✅ Filtros por categoria
-- ✅ Adição de produtos ao carrinho
-- ✅ Gestão do carrinho de compras
-- ✅ Cadastro de usuário
-- ✅ Sistema de pagamento
-- ✅ Avaliações e comentários
-
-### Para Vendedores
-- ✅ Cadastro completo com validação
-- ✅ Gestão de produtos (CRUD completo)
-- ✅ Upload de fotos com preview
-- ✅ Controle de estoque
-- ✅ Sistema de resgate de valores
-- ✅ Dashboard de produtos
-
-### Para Entregadores
-- ✅ Cadastro com documentos
-- ✅ Informações de veículo
-- ✅ Sistema de resgate de valores
-- ✅ Gestão de perfil
-
-## 🔧 Funcionalidades Técnicas
-
-### Sistema de Navegação
-- Navegação por abas sem recarregamento da página
-- Menu mobile responsivo
-- Histórico de navegação
-
-### Sistema de Banco de Dados Local
-- ✅ **IndexedDB**: Banco de dados local completo
-- ✅ **7 Stores**: Users, Sellers, Delivery, Products, Cart, Orders, Uploads
-- ✅ **Relacionamentos**: Índices e chaves estrangeiras
-- ✅ **CRUD Completo**: Todas as operações de banco
-- ✅ **Sincronização**: Entre localStorage e IndexedDB
-- ✅ **Export/Import**: Backup e restauração de dados
-
-### Gestão de Dados
-- Armazenamento local de produtos
-- Gestão de estado da aplicação
-- Sincronização entre componentes
-
-### Validação e Segurança
-- Validação de formulários em tempo real
-- Verificação de campos obrigatórios
-- Sanitização de dados de entrada
-
-### Interface do Usuário
-- Design responsivo com Tailwind CSS
-- Animações e transições suaves
-- Feedback visual para ações do usuário
-- Sistema de notificações
+3. **Teste as funcionalidades**:
+   - Adicione produtos ao carrinho
+   - Teste o sistema de pagamento
+   - Interaja com o Typebot
+   - Faça login com demo/1234
 
 ## 📱 Responsividade
 
-A aplicação é totalmente responsiva e funciona em:
-- 📱 Smartphones (320px+)
-- 📱 Tablets (768px+)
-- 💻 Desktops (1024px+)
-- 🖥️ Telas grandes (1440px+)
+A plataforma é totalmente responsiva e funciona em:
+- 📱 Dispositivos móveis
+- 💻 Tablets
+- 🖥️ Desktops
+- 📺 Telas grandes
 
 ## 🎨 Design System
 
-### Cores
-- **Verde Principal**: #059669 (green-600)
-- **Verde Escuro**: #047857 (green-700)
-- **Verde Claro**: #10b981 (green-500)
-- **Cinza**: #6b7280 (gray-500)
-- **Branco**: #ffffff
+### Cores Principais
+- **Verde Primário**: #22c55e
+- **Verde Secundário**: #16a34a
+- **Verde Escuro**: #166534
+- **Cinza**: #6b7280
 
 ### Tipografia
-- **Fonte Principal**: Inter/Sans-serif
-- **Títulos**: Font-weight 700 (bold)
-- **Subtítulos**: Font-weight 600 (semibold)
-- **Texto**: Font-weight 400 (normal)
+- **Fonte Principal**: Font Sans (Tailwind)
+- **Tamanhos**: Responsivos e escaláveis
+- **Hierarquia**: Clara e consistente
 
-### Componentes
-- Cards com sombras suaves
-- Botões com hover effects
-- Formulários com focus states
-- Modais responsivos
+## 🔧 Configurações
 
-## 🔮 Próximas Funcionalidades
+### Typebot
+- **Delay inicial**: 3 segundos
+- **Auto-remoção**: 30 segundos
+- **Posição**: Canto inferior direito
+- **Tema**: Verde HortiPerto
 
-### Planejadas
-- [ ] Sistema de login/autenticação
-- [ ] Backend com banco de dados
-- [ ] Sistema de pagamentos real
-- [ ] Chat entre vendedor e cliente
-- [ ] Sistema de avaliações
-- [ ] Notificações push
-- [ ] App mobile nativo
+### Pagamento
+- **Taxa cartão**: 2.9%
+- **Taxa PIX**: 0%
+- **Taxa dinheiro**: 0%
+- **Frete padrão**: R$ 5,00
 
-### Melhorias
-- [ ] PWA (Progressive Web App)
-- [ ] Cache offline
-- [ ] Compressão de imagens
-- [ ] SEO otimizado
-- [ ] Analytics integrado
+## 📞 Suporte
 
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+Para dúvidas ou problemas:
+- 📧 Email: hortiperto@email.com
+- 📱 WhatsApp: (11) 99999-9999
+- 🌐 Website: [hortiperto.com.br]
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-## 👨‍💻 Desenvolvido por
-
-**HortiPerto Team**
-- Plataforma para conectar produtores e consumidores
-- Foco em produtos frescos e artesanais
-- Suporte ao pequeno produtor rural
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ---
 
-**HortiPerto** - Conectando o campo à cidade, um produto de cada vez! 🌱
+**Desenvolvido com ❤️ para conectar o campo à cidade**

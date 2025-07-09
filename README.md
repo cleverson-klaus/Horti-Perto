@@ -87,6 +87,11 @@ HortiPerto é uma plataforma digital inovadora que facilita a venda direta de pr
 - **JavaScript (ES6+)**: Funcionalidades interativas e dinâmicas
 - **Font Awesome**: Ícones e elementos visuais
 
+### Banco de Dados Local
+- **IndexedDB**: Banco de dados local para persistência offline
+- **LocalStorage**: Backup para dados temporários
+- **Sincronização Automática**: Entre localStorage e IndexedDB
+
 ### Funcionalidades JavaScript
 - **Navegação por Abas**: Sistema de roteamento client-side
 - **Gestão de Estado**: Controle de dados da aplicação
@@ -95,22 +100,31 @@ HortiPerto é uma plataforma digital inovadora que facilita a venda direta de pr
 - **Sistema de Notificações**: Feedback visual para o usuário
 - **Carrinho de Compras**: Gestão de itens e cálculos
 - **Filtros Dinâmicos**: Busca e filtragem de produtos
+- **IndexedDB Integration**: Persistência local completa
+- **FormHandler**: Gerenciamento automatizado de formulários
+- **CartHandler**: Gestão avançada do carrinho de compras
 
 ## 📁 Estrutura do Projeto
 
 ```
 HortiPerto/
-├── HortiPerto.html          # Página principal da aplicação
-├── cadastro-produtos.html   # Página específica de cadastro de produtos
+├── HortiPerto.html              # Página principal da aplicação
+├── cadastro-produtos.html       # Página específica de cadastro de produtos
 ├── js/
-│   ├── hortiperto-main.js   # JavaScript principal unificado
-│   ├── app.js              # JavaScript anterior (legado)
-│   └── cadastro-produtos.js # JavaScript específico de produtos (legado)
+│   ├── database.js              # Sistema de banco de dados IndexedDB
+│   ├── form-handlers.js         # Gerenciador de formulários
+│   ├── cart-handler.js          # Gerenciador de carrinho de compras
+│   ├── hortiperto-main.js       # JavaScript principal unificado
+│   ├── app.js                   # JavaScript anterior (legado)
+│   └── cadastro-produtos.js     # JavaScript específico de produtos (legado)
 ├── css/
-│   └── styles.css          # Estilos customizados
-├── tests/                  # Testes automatizados
-├── README.md              # Documentação do projeto
-└── DEMO.md               # Guia de demonstração
+│   └── styles.css               # Estilos customizados
+├── tests/                       # Testes automatizados
+├── docs/
+│   ├── CPF-CNPJ-Validation.md   # Documentação de validação
+│   └── IndexedDB-Integration.md # Documentação do banco de dados
+├── README.md                    # Documentação do projeto
+└── DEMO.md                      # Guia de demonstração
 ```
 
 ## 🚀 Como Executar
@@ -168,6 +182,14 @@ HortiPerto/
 - Navegação por abas sem recarregamento da página
 - Menu mobile responsivo
 - Histórico de navegação
+
+### Sistema de Banco de Dados Local
+- ✅ **IndexedDB**: Banco de dados local completo
+- ✅ **7 Stores**: Users, Sellers, Delivery, Products, Cart, Orders, Uploads
+- ✅ **Relacionamentos**: Índices e chaves estrangeiras
+- ✅ **CRUD Completo**: Todas as operações de banco
+- ✅ **Sincronização**: Entre localStorage e IndexedDB
+- ✅ **Export/Import**: Backup e restauração de dados
 
 ### Gestão de Dados
 - Armazenamento local de produtos

@@ -13,83 +13,201 @@ let cartTotal = 0;
 let products = [
     {
         id: 1,
-        name: "Cesta de Legumes Orgânicos",
-        price: 25.90,
-        category: "vegetables",
-        rating: 4.5,
-        reviews: 24,
-        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Seleção de legumes frescos da fazenda familiar"
+        name: "Geleia de Maracujá",
+        price: 25.00,
+        category: "geleias",
+        rating: 5.0,
+        reviews: 0,
+        image: "imagens/img-geleiademaracuja.jpg",
+        unit: "500ml",
+        description: "Descubra o sabor tropical da nossa <b>Geleia de Maracujá</b> artesanal! Preparada com maracujás frescos e selecionados, ela traz o equilíbrio perfeito entre o doce e o azedinho da fruta. Sem conservantes, é ideal para acompanhar pães, torradas, queijos ou dar um toque especial em sobremesas. Cada pote de 500ml é feito com carinho, levando o frescor e a tradição do campo direto para sua mesa. Experimente e surpreenda-se com essa explosão de sabor!"
     },
     {
         id: 2,
-        name: "Queijo Artesanal",
-        price: 32.50,
-        category: "cheese",
-        rating: 4.0,
-        reviews: 18,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Queijo colonial feito com leite fresco"
+        name: "Alfaces",
+        price: 3.99,
+        category: "salad",
+        rating: 4.5,
+        reviews: 9,
+        image: "imagens/img-alfaces.jpg",
+        unit: "unidade",
+        description: "Nossas <b>Alfaces</b> são cultivadas com todo cuidado para garantir folhas frescas, crocantes e cheias de sabor. Perfeitas para saladas, sanduíches ou como acompanhamento, trazem leveza e saúde para o seu dia a dia. Vendidas por unidade, são colhidas no ponto ideal para você levar o melhor da horta para sua mesa!"
     },
     {
         id: 3,
-        name: "Salada Pronta",
-        price: 15.90,
+        name: "Rúculas",
+        price: 3.99,
         category: "salad",
-        rating: 5.0,
-        reviews: 36,
-        image: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Mix de folhas lavadas e prontas para consumo"
+        rating: 4.7,
+        reviews: 12,
+        image: "imagens/img-ruculas.jpg",
+        unit: "unidade",
+        description: "Aproveite a delicadeza e o sabor marcante das nossas <b>Rúculas</b> frescas! Colhidas diariamente, são ideais para saladas, pizzas, sanduíches ou para dar um toque especial em pratos quentes. Fonte de nutrientes e com aquele leve amargor característico, nossas rúculas vão conquistar seu paladar. Vendidas por unidade, sempre fresquinhas para você!"
     },
     {
         id: 4,
-        name: "Geleia Caseira de Morango",
-        price: 18.50,
-        category: "jam",
-        rating: 4.5,
-        reviews: 29,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Geleia artesanal sem conservantes"
+        name: "Agrião",
+        price: 3.99,
+        category: "salad",
+        rating: 4.3,
+        reviews: 6,
+        image: "imagens/img-agriao.jpg",
+        unit: "unidade",
+        description: "O <b>Agrião</b> fresco é perfeito para quem busca sabor e saúde na mesma folha! Rico em vitaminas e minerais, tem sabor levemente picante e textura crocante. Ideal para saladas, sucos verdes ou como acompanhamento de pratos quentes. Vendido por unidade, sempre colhido no ponto certo para garantir frescor e qualidade na sua mesa!"
     },
     {
         id: 5,
-        name: "Cesta de Frutas da Estação",
-        price: 28.90,
-        category: "fruits",
-        rating: 4.0,
-        reviews: 21,
-        image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Seleção de frutas frescas colhidas no dia"
+        name: "Acelga",
+        price: 4.99,
+        category: "salad",
+        rating: 4.6,
+        reviews: 8,
+        image: "imagens/img-acelga.jpg",
+        unit: "unidade",
+        description: "<b>Acelga</b> fresca, crocante e de folhas macias, perfeita para saladas, refogados ou pratos orientais. Vendida por unidade, colhida no ponto ideal para garantir sabor e qualidade."
     },
     {
         id: 6,
-        name: "Tomate Cereja Orgânico",
-        price: 12.90,
-        category: "vegetables",
-        rating: 5.0,
-        reviews: 42,
-        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-        description: "Tomates cereja cultivados sem agrotóxicos"
+        name: "Repolho",
+        price: 2.99,
+        category: "salad",
+        rating: 4.9,
+        reviews: 15,
+        image: "imagens/img-repolho.jpg",
+        unit: "kg",
+        description: "<b>Repolho</b> fresco, firme e de folhas crocantes, ideal para saladas, refogados e pratos tradicionais. Rico em nutrientes, é colhido diariamente para garantir sabor, qualidade e frescor na sua mesa. Vendido por quilo."
     },
     {
         id: 7,
-        name: "Queijo Minas Frescal",
-        price: 24.90,
-        category: "cheese",
-        rating: 4.5,
-        reviews: 19,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Queijo minas tradicional feito artesanalmente"
+        name: "Bananas",
+        price: 3.99,
+        category: "frutas",
+        rating: 4.4,
+        reviews: 11,
+        image: "imagens/img-bananas.jpg",
+        unit: "kg",
+        description: "<b>Bananas</b> frescas, docinhas e colhidas no ponto ideal de maturação. Perfeitas para consumo in natura, vitaminas, sobremesas ou receitas caseiras. Fonte natural de energia, potássio e fibras. Vendidas por quilo para garantir sempre o melhor sabor na sua mesa!"
     },
     {
         id: 8,
-        name: "Geleia de Pimenta",
-        price: 19.90,
-        category: "jam",
-        rating: 4.0,
-        reviews: 15,
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        description: "Geleia artesanal com um toque picante"
+        name: "Morangos",
+        price: 25.00,
+        category: "frutas",
+        rating: 4.2,
+        reviews: 7,
+        image: "imagens/img-morangos.jpg",
+        unit: "kg",
+        description: "<b>Morangos</b> frescos, colhidos diretamente da horta, selecionados um a um para garantir doçura, suculência e qualidade. Ideais para consumo in natura, sobremesas, geleias ou sucos. Rico em vitamina C e antioxidantes. Vendidos por quilo para você levar o melhor da produção local para sua casa!"
+    },
+    {
+        id: 9,
+        name: "Mangas",
+        price: 4.49,
+        category: "frutas",
+        rating: 4.8,
+        reviews: 13,
+        image: "imagens/img-mangas.jpg",
+        unit: "kg",
+        description: "<b>Mangas</b> frescas, suculentas e naturalmente doces, colhidas no auge da maturação para garantir sabor e aroma irresistíveis. Perfeitas para consumo in natura, sucos, sobremesas ou saladas de frutas. Fonte de vitaminas, fibras e energia. Vendidas por quilo para você aproveitar o melhor da estação!"
+    },
+    {
+        id: 10,
+        name: "Queijo Colonial",
+        price: 40.00,
+        category: "queijos",
+        rating: 4.7,
+        reviews: 14,
+        image: "imagens/img-queijocolonialum.jpg",
+        unit: "kg",
+        description: "<b>Queijo Colonial</b> artesanal, produzido com leite fresco e selecionado, maturado para garantir textura macia e sabor marcante. Ideal para degustar puro, em tábuas de frios, lanches ou receitas especiais. Uma tradição da roça que leva qualidade e autenticidade à sua mesa. Vendido por quilo."
+    },
+    {
+        id: 11,
+        name: "Queijo Colonial",
+        price: 35.00,
+        category: "queijos",
+        rating: 4.6,
+        reviews: 10,
+        image: "imagens/img-queijocolonialdois.jpg",
+        unit: "kg",
+        description: "<b>Queijo Colonial</b> tradicional, feito artesanalmente com leite fresco da fazenda. Sabor suave, textura macia e aroma irresistível, perfeito para acompanhar cafés, pães ou compor tábuas de frios. Uma opção deliciosa e versátil para todas as ocasiões. Vendido por quilo, direto do produtor para sua mesa!"
+    },
+    {
+        id: 12,
+        name: "Geleia de Goiaba",
+        price: 25.00,
+        category: "geleias",
+        rating: 4.9,
+        reviews: 16,
+        image: "imagens/img-geleiadegoiaba.jpg",
+        unit: "500ml",
+        description: "Descubra o sabor irresistível da nossa <b>Geleia de Goiaba</b> artesanal! Feita com goiabas frescas selecionadas, preparada lentamente para preservar o aroma e a textura da fruta, sem adição de conservantes. Ideal para acompanhar pães, torradas, queijos ou dar um toque especial em sobremesas. Cada pote de 500ml é puro carinho e tradição, trazendo o melhor da fruta direto para sua mesa. Experimente essa delícia e surpreenda-se com o verdadeiro sabor caseiro!"
+    },
+    {
+        id: 13,
+        name: "Doce de Mamão",
+        price: 25.00,
+        category: "geleias",
+        rating: 4.5,
+        reviews: 8,
+        image: "imagens/img-docedemamao.png",
+        unit: "1kg",
+        description: "Experimente o nosso <b>Doce de Mamão</b> artesanal, preparado com mamões frescos e selecionados, cozidos lentamente até atingir o ponto perfeito de sabor e textura. Sem conservantes, é uma verdadeira iguaria da culinária caseira, ideal para acompanhar pães, torradas, queijos ou ser apreciado puro. Cada pote de 1kg é feito com carinho, trazendo o gostinho da fazenda direto para sua mesa. Surpreenda-se com a doçura natural e a tradição em cada colherada!"
+    },
+    {
+        id: 14,
+        name: "Doce de Abóbora",
+        price: 22.00,
+        category: "geleias",
+        rating: 4.7,
+        reviews: 12,
+        image: "imagens/img-docedeabobora.jpg",
+        unit: "1kg",
+        description: "Delicie-se com o nosso <b>Doce de Abóbora</b> artesanal, feito com abóboras frescas e selecionadas, cozidas lentamente com açúcar na medida certa para realçar o sabor natural e a cremosidade. Sem conservantes, é perfeito para acompanhar pães, torradas, queijos ou ser saboreado puro. Cada pote de 1kg traz o verdadeiro gostinho da roça, preparado com carinho e tradição para adoçar seus melhores momentos!"
+    },
+    {
+        id: 15,
+        name: "Cenouras",
+        price: 2.99,
+        category: "verduras",
+        rating: 4.8,
+        reviews: 11,
+        image: "imagens/img-cenouras.jpg",
+        unit: "kg",
+        description: "Nossas <b>Cenouras</b> são fresquinhas, crocantes e cheias de sabor! Colhidas diretamente da horta, são perfeitas para saladas, sucos, refogados ou para dar aquele toque especial em suas receitas. Ricas em vitaminas e nutrientes, garantem mais saúde e cor no seu prato. Vendidas por quilo, sempre com a qualidade que você merece!"
+    },
+    {
+        id: 16,
+        name: "Beringelas",
+        price: 4.99,
+        category: "verduras",
+        rating: 4.6,
+        reviews: 9,
+        image: "imagens/img-beringelas.jpg",
+        unit: "kg",
+        description: "Nossas <b>Beringelas</b> são frescas, firmes e de cor vibrante! Perfeitas para grelhados, assados, refogados ou para preparar deliciosas receitas como caponata e lasanha. Ricas em fibras e nutrientes, trazem mais sabor e saúde para o seu dia a dia. Vendidas por quilo, sempre com a qualidade e o frescor que você merece!"
+    },
+    {
+        id: 17,
+        name: "Brócolis",
+        price: 4.99,
+        category: "verduras",
+        rating: 4.4,
+        reviews: 7,
+        image: "imagens/img-brocolis.jpg",
+        unit: "unidade",
+        description: "O <b>Brócolis</b> fresquinho é indispensável para quem busca sabor e saúde! Rico em fibras, vitaminas e minerais, é perfeito para saladas, refogados, tortas ou como acompanhamento de pratos variados. Com textura macia e sabor suave, vai conquistar toda a família. Vendido por unidade, sempre colhido no ponto certo para garantir qualidade e frescor na sua mesa!"
+    },
+    {
+        id: 18,
+        name: "Mandiocas",
+        price: 6.99,
+        category: "verduras",
+        rating: 4.3,
+        reviews: 6,
+        image: "imagens/img-mandioca.jpg",
+        unit: "kg",
+        description: "Nossas <b>Mandiocas</b> são selecionadas, macias e de excelente qualidade! Perfeitas para cozinhar, fritar, assar ou preparar aquele purê cremoso. Fonte de energia e muito sabor, são ideais para receitas tradicionais e para inovar na cozinha. Vendidas por quilo, sempre fresquinhas para garantir o melhor resultado nos seus pratos!"
     }
 ];
 
@@ -98,12 +216,12 @@ let sellerProducts = [
     {
         id: 1,
         name: "Tomates Frescos",
-        category: "hortalicas",
+        category: "tomates",
         price: 8.90,
         unit: "kg",
         quantity: 50,
         description: "Tomates frescos colhidos diariamente da nossa horta",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300",
+        image: "imagens/img-tomatefresco.png",
         organic: true,
         dateCreated: "2024-01-15",
         status: "ativo"
@@ -116,7 +234,7 @@ let sellerProducts = [
         unit: "kg",
         quantity: 10,
         description: "Queijo colonial artesanal feito com leite fresco",
-        image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=300",
+        image: "imagens/img-queijocolonialum.jpg",
         organic: false,
         dateCreated: "2024-01-10",
         status: "ativo"
@@ -142,12 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFileUploads(); // Configurar upload de arquivos
     
     // Inicializar efeitos 3D e animações
-    createParticles();
-    initParallax();
-    init3DHover();
-    animateOnScroll();
-    initNeonButtons();
-    initLogoRotation();
+    // Removidas todas as animações
     
     // Adicionar efeito de onda aos botões
     const buttons = document.querySelectorAll('.btn-neon, .action-btn');
@@ -718,7 +831,7 @@ function getCategoryName(category) {
         'verduras': 'Verduras',
         'hortalicas': 'Hortaliças',
         'queijos': 'Queijos',
-        'geleias': 'Geleias',
+        'geleias': 'Doces e Geleias',
         'outros': 'Outros'
     };
     return categories[category] || category;
@@ -751,9 +864,9 @@ function showProductForm() {
                             <option value="">Selecione</option>
                             <option value="frutas">Frutas</option>
                             <option value="verduras">Verduras</option>
-                            <option value="hortalicas">Hortaliças</option>
+                            <option value="hortalicas">Legumes</option>
                             <option value="queijos">Queijos</option>
-                            <option value="geleias">Geleias</option>
+                            <option value="geleias">Doces e Geleias</option>
                             <option value="outros">Outros</option>
                         </select>
                     </div>
@@ -1017,167 +1130,7 @@ window.validateCPFInput = validateCPFInput;
 window.validateAllCPFs = validateAllCPFs;
 window.getCleanCPF = getCleanCPF;
 
-// Sistema de partículas para efeito 3D
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    if (!particlesContainer) return;
-    
-    const particleCount = 20;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Posição aleatória
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        
-        // Tamanho aleatório
-        const size = Math.random() * 3 + 2;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Opacidade aleatória
-        particle.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Efeito de parallax suave
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.floating');
-        
-        parallaxElements.forEach((element, index) => {
-            const speed = 0.5 + (index * 0.1);
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
-    });
-}
-
-// Efeito de hover 3D para cards
-function init3DHover() {
-    const cards = document.querySelectorAll('.product-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        });
-    });
-}
-
-// Efeito de digitação para títulos
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Animação de entrada para elementos
-function animateOnScroll() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-    
-    const elements = document.querySelectorAll('.product-card, .floating');
-    elements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Efeito de brilho nos botões neon
-function initNeonButtons() {
-    const neonButtons = document.querySelectorAll('.btn-neon');
-    
-    neonButtons.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            button.style.boxShadow = `
-                0 0 10px #22c55e,
-                0 0 20px #22c55e,
-                0 0 30px #22c55e,
-                0 0 40px #22c55e
-            `;
-        });
-        
-        button.addEventListener('mouseleave', () => {
-            button.style.boxShadow = '';
-        });
-    });
-}
-
-// Efeito de rotação suave da logo
-function initLogoRotation() {
-    const logo = document.querySelector('.logo-rotating');
-    if (!logo) return;
-    
-    let isHovered = false;
-    
-    logo.addEventListener('mouseenter', () => {
-        isHovered = true;
-        logo.style.animationDuration = '2s';
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-        isHovered = false;
-        logo.style.animationDuration = '8s';
-    });
-}
-
-// Efeito de onda nos botões
-function createRippleEffect(event) {
-    const button = event.currentTarget;
-    const ripple = document.createElement('span');
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-    
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-    ripple.classList.add('ripple');
-    
-    button.appendChild(ripple);
-    
-    setTimeout(() => {
-        ripple.remove();
-    }, 600);
-}
+// Todas as animações foram removidas para criar uma experiência estática
 
 // ========================================
 // VALIDAÇÃO DE CEP

@@ -449,37 +449,10 @@ function loadFeaturedProducts() {
     const selectedProducts = shuffledProducts.slice(0, 4);
     
     selectedProducts.forEach(product => {
-        const productCard = createFeaturedProductCard(product);
+        // Usar a mesma função de card dos produtos normais
+        const productCard = createProductCard(product);
         featuredContainer.appendChild(productCard);
     });
-}
-
-function createFeaturedProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'product-card card floating';
-    
-    const stars = generateStars(product.rating);
-    
-    card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-        <div class="p-4">
-            <h3 class="font-bold text-lg mb-2">${product.name}</h3>
-            <div class="flex items-center mb-2">
-                <div class="rating-stars">
-                    ${stars}
-                </div>
-                <span class="text-gray-600 text-sm ml-2">(${product.reviews})</span>
-            </div>
-            <p class="text-gray-700 mb-3">${product.description}</p>
-            ${product.producer ? `<p class="text-sm text-gray-500 mb-2"><strong>Produtor:</strong> ${product.producer}</p>` : ''}
-            <div class="flex justify-between items-center">
-                <span class="font-bold text-success-color">R$ ${product.price.toFixed(2).replace('.', ',')}/${product.unit}</span>
-                <button class="add-to-cart btn btn-success text-sm" data-product-id="${product.id}">+ Carrinho</button>
-            </div>
-        </div>
-    `;
-    
-    return card;
 }
 
 function createProductCard(product) {

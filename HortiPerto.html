@@ -340,6 +340,20 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full relative flex flex-col items-center">
+            <button id="close-login-modal" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl" aria-label="Fechar">&times;</button>
+            <h2 class="text-xl font-bold mb-4 text-center text-gray-800">Entrar</h2>
+            <form id="login-form" autocomplete="on" class="w-full flex flex-col items-center">
+                <label for="login-usuario" class="block text-gray-700 mb-1 w-full">Usuário ou E-mail</label>
+                <input id="login-usuario" name="usuario" type="text" class="form-input mb-3 w-full" required autofocus autocomplete="username">
+                <label for="login-senha" class="block text-gray-700 mb-1 w-full">Senha</label>
+                <input id="login-senha" name="senha" type="password" class="form-input mb-4 w-full" required autocomplete="current-password">
+                <button type="submit" class="btn btn-primary w-full">Entrar</button>
+            </form>
+            <div id="login-error" class="validation-message error mt-2 hidden"></div>
+        </div>
+    </div>
     <!-- Header/Navigation -->
     <header class="header-3d text-white shadow-lg">
         <div class="particles" id="particles"></div>
@@ -362,21 +376,6 @@
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        <!-- Modal de Login -->
-        <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs w-full relative">
-                <button id="close-login-modal" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl" aria-label="Fechar">&times;</button>
-                <h2 class="text-xl font-bold mb-4 text-center text-gray-800">Entrar</h2>
-                <form id="login-form" autocomplete="on">
-                    <label for="login-usuario" class="block text-gray-700 mb-1">Usuário ou E-mail</label>
-                    <input id="login-usuario" name="usuario" type="text" class="form-input mb-3" required autofocus autocomplete="username">
-                    <label for="login-senha" class="block text-gray-700 mb-1">Senha</label>
-                    <input id="login-senha" name="senha" type="password" class="form-input mb-4" required autocomplete="current-password">
-                    <button type="submit" class="btn btn-primary w-full">Entrar</button>
-                </form>
-                <div id="login-error" class="validation-message error mt-2 hidden"></div>
-            </div>
-        </div>
     </header>
 
     <!-- Main Content Area -->
@@ -456,7 +455,7 @@
                 <h2 class="text-2xl font-bold mb-6 text-gradient">Cadastro de Vendedor</h2>
                 
                 <div class="card mb-8">
-                    <h3 class="text-xl font-semibold mb-4 text-success-color">Requisitos para o cadastro:</h3>
+                    <h3 class="text-xl font-bold mb-4 text-gradient">Requisitos para o cadastro:</h3>
                     <ul class="list-disc pl-5 space-y-2 text-gray-700">
                         <li>Cadastro de Produtor Rural (CPP - Cadastro de Produtor Primário);</li>
                         <li>Inscrição Estadual;</li>
@@ -593,7 +592,7 @@
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Hortaliças</span>
+                                            <span class="ml-2">Legumes</span>
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
@@ -601,11 +600,7 @@
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Geleias</span>
-                                        </label>
-                                        <label class="flex items-center">
-                                            <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Saladas Prontas</span>
+                                            <span class="ml-2">Doces e Geleias</span>
                                         </label>
                                     </div>
                                 </div>
@@ -670,7 +665,7 @@
                                 <i class="fas fa-camera text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2">1. Adicione Fotos dos Produtos</h3>
+                                <h3 class="font-semibold text-lg mb-2">1. Adicione fotos dos produtos</h3>
                                 <p class="text-gray-700">Tire fotos de qualidade dos seus produtos para atrair mais clientes.</p>
                             </div>
                         </div>
@@ -679,7 +674,7 @@
                                 <i class="fas fa-edit text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2">2. Descreva Seus Produtos</h3>
+                                <h3 class="font-semibold text-lg mb-2">2. Descreva seus produtos</h3>
                                 <p class="text-gray-700">Informe detalhes como tipo, variedade, método de cultivo, peso aproximado, etc.</p>
                             </div>
                         </div>
@@ -688,7 +683,7 @@
                                 <i class="fas fa-tag text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2">3. Defina os Preços</h3>
+                                <h3 class="font-semibold text-lg mb-2">3. Defina os preços</h3>
                                 <p class="text-gray-700">Estabeleça preços justos considerando seus custos e o mercado.</p>
                             </div>
                         </div>
@@ -697,7 +692,7 @@
                                 <i class="fas fa-box-open text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-lg mb-2">4. Informe a Quantidade Disponível</h3>
+                                <h3 class="font-semibold text-lg mb-2">4. Informe a quantidade disponível</h3>
                                 <p class="text-gray-700">Atualize regularmente o estoque para evitar frustrações dos clientes.</p>
                             </div>
                         </div>
@@ -1076,7 +1071,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex justify-end mt-6">
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="1">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="3">Próximo</button>
                             </div>
                         </div>
@@ -1101,7 +1097,7 @@
                                     <input type="text" id="user-card-cvv" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
                                 </div>
                             </div>
-                            <div class="flex justify-end mt-6">
+                            <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
@@ -1167,19 +1163,3 @@
     </main>
 </body>
 </html>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const loginBtn = document.getElementById('login-btn');
-  const loginModal = document.getElementById('login-modal');
-  if (loginBtn && loginModal) {
-    loginBtn.addEventListener('click', function() {
-      console.log('Botão Entrar clicado!');
-      loginModal.classList.remove('hidden');
-      loginModal.classList.add('active');
-    });
-  } else {
-    console.log('login-btn ou login-modal não encontrado no DOM');
-  }
-});
-</script>

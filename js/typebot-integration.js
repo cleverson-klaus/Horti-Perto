@@ -250,11 +250,39 @@ class HortiPertoTypebot {
     // ========================================
 
     renderWidget(widget) {
-        // Simulação de renderização do widget
-        console.log(`Renderizando widget: ${widget.id}`);
-        
-        // Aqui você integraria com a API do Typebot
-        // Exemplo: Typebot.render(widget);
+        // Remove widget anterior se existir
+        const old = document.getElementById(widget.id);
+        if (old) old.remove();
+
+        // Cria o container do widget
+        const el = document.createElement('div');
+        el.id = widget.id;
+        el.className = 'fixed bottom-4 left-4 bg-white rounded-lg shadow-lg p-2 max-w-[16rem] z-50';
+        el.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+        el.style.width = '100%';
+
+        // Gera os botões corretamente
+        const options = (widget.config.messages?.[1]?.options || [])
+            .map(opt =>
+                `<button class='btn btn-neon m-1 text-xs px-2 py-1' data-action='${opt.action}'>${opt.text}</button>`
+            ).join('');
+
+        el.innerHTML = `
+            <div class="font-bold text-green-600 mb-2 text-base">🌱 HortiPerto</div>
+            <div class="mb-2 text-sm">${widget.config.messages?.[0]?.content || 'Bem-vindo!'}</div>
+            <div>${options}</div>
+            <button onclick="this.parentNode.remove()" class="absolute top-2 right-2 text-gray-400 hover:text-red-500 text-lg">&times;</button>
+        `;
+        document.body.appendChild(el);
+
+        // Adiciona o event listener para os botões
+        el.querySelectorAll('button[data-action]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                window.typebotWidgetAction && window.typebotWidgetAction(this.getAttribute('data-action'));
+                // Fecha o widget após ação
+                el.remove();
+            });
+        });
     }
 
     registerWidget(widget) {
@@ -549,4 +577,20 @@ window.startProductRecommendation = (userData) => {
     if (window.hortiPertoTypebot) {
         window.hortiPertoTypebot.startProductRecommendation(userData);
     }
+}; 
+
+// Adicionar função global para ações dos botões do widget
+window.typebotWidgetAction = function(action) {
+    if (action === 'navigate-to-products') {
+        if (window.showTab) window.showTab('products');
+    } else if (action === 'seller-onboarding') {
+        if (window.showTab) window.showTab('seller-register');
+    } else if (action === 'delivery-onboarding') {
+        if (window.showTab) window.showTab('delivery-register');
+    } else if (action === 'customer-support') {
+        alert('Em breve: suporte automatizado!');
+    }
+    // Fecha o widget após ação
+    const el = document.getElementById('welcome-widget');
+    if (el) el.remove();
 }; 

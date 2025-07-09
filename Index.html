@@ -391,31 +391,35 @@
         </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- Home Tab -->
-        <div id="home" class="tab-content active">
-            <section class="section-hero">
-                <div class="hero-content">
-                    <div class="logo-3d-container mb-8">
-                        <img src="imagens/img-logo.png" alt="Logo HortiPerto" class="h-[200px] w-auto" style="background:transparent;">
-                        <span class="logo-front">HortiPerto</span>
-                    </div>
-                    <h1 class="hero-title">Bem-vindo ao HortiPerto!</h1>
-                    <p class="hero-subtitle">Conectando produtores rurais diretamente aos consumidores, promovendo alimentos frescos e saudáveis enquanto valorizamos o pequeno produtor.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="btn btn-primary" data-tab="products">Comprar Agora</a>
-                        <a href="#" class="btn btn-secondary" data-tab="seller-register" onclick="showTab('seller-register'); return false;">Seja um Vendedor</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section section-products">
-                <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Produtos em Destaque</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Produtos serão carregados dinamicamente pelo JavaScript -->
-                </div>
-            </section>
+   <!-- Main Content Area -->
+   <main class="container mx-auto px-4 py-8">
+    <!-- Home Tab -->
+    <div id="home" class="tab-content active">
+        <section class="hortiperto-hero">
+          <div class="hero-content-hp">
+            <div class="hero-texts-hp">
+              <h1>Bem vindo ao HortiPerto!<br><span class="hero-destaque">Conectamos produtores locais aos seus clientes, facilitando os pedidos e entregas</span></h1>
+              <div class="hero-actions-hp">
+                <button class="btn-destaque-hp" onclick="showTab('products')">Ver produtos</button>
+                <button class="btn-outline-hp" onclick="showTab('seller-register')">Seja vendedor</button>
+              </div>
+              <div class="hero-info-hp">
+                <i class="fas fa-leaf"></i> Direto do campo para sua casa
+              </div>
+            </div>
+            <div class="hero-image-hp">
+              <img src="imagens/img-logo.png" alt="Logo HortiPerto">
+            </div>
+            <div class="hero-card-hp">
+              <h2>Cadastre-se</h2>
+              <form>
+                <input type="email" placeholder="Seu e-mail" required>
+                <button type="submit">Cadastrar agora</button>
+              </form>
+              <small>Ao continuar, você concorda com nossa política de privacidade.</small>
+            </div>
+          </div>
+        </section>
 
             <section class="section section-forms">
                 <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Como Funciona</h2>

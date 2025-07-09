@@ -1629,6 +1629,14 @@
 </html>
 
 <script>
+document.addEventListener('DOMContentLoaded', async function() {
+    await window.hortiPertoDB.init();
+    window.cartHandler.init();
+    // ... restante da inicialização ...
+});
+</script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const loginBtn = document.getElementById('login-btn');
   const loginModal = document.getElementById('login-modal');

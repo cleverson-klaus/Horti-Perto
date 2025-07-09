@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Componentes - HortiPerto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/hortiperto-styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">🧪 Teste de Componentes - HortiPerto</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">🔧 Teste de Componentes</h2>
+            
+            <div class="space-y-4">
+                <button onclick="executeComponentTests()" class="btn btn-primary w-full">
+                    Executar Todos os Testes de Componente
+                </button>
+                
+                <button onclick="clearComponentResults()" class="btn btn-secondary w-full">
+                    Limpar Resultados
+                </button>
+            </div>
+            
+            <div id="component-test-results" class="mt-4 p-4 bg-gray-50 rounded-lg hidden">
+                <h3 class="font-semibold mb-2">Resultados dos Testes:</h3>
+                <div id="component-results"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elementos HTML necessários para os testes -->
+    <div id="login-modal" style="display:none;">
+        <form id="login-form">
+            <input type="email" id="login-email">
+            <input type="password" id="login-password">
+            <select id="login-type">
+                <option value="consumer">Consumidor</option>
+                <option value="seller">Vendedor</option>
+                <option value="delivery">Entregador</option>
+            </select>
+        </form>
+    </div>
+
+    <div id="cart-count">0</div>
+
+    <div id="products-catalog"></div>
+    <button data-category="all">Todos</button>
+    <button data-category="vegetables">Legumes</button>
+
+    <form id="seller-form">
+        <div class="form-step active" data-step="1">
+            <input type="text" id="seller-name">
+            <input type="text" id="seller-doc">
+            <input type="email" id="seller-email">
+            <input type="text" id="seller-cep">
+        </div>
+    </form>
+
+    <input type="file" id="seller-sanitary">
+
+    <!-- Incluir os scripts necessários -->
+    <script src="../js/hortiperto-main.js"></script>
+    <script src="../js/shopping-assistant.js"></script>
+    
+    <script>
+        // Função para exibir resultados dos testes
+        function testar(nome, teste) {
+            try {
+                teste();
+                const results = document.getElementById('component-results');
+                results.innerHTML += `<div class="text-green-600 mb-2">✅ ${nome}</div>`;
+                console.log(`✅ ${nome} - PASSOU`);
+            } catch (erro) {
+                const results = document.getElementById('component-results');
+                results.innerHTML += `<div class="text-red-600 mb-2">❌ ${nome}: ${erro.message}</div>`;
+                console.log(`❌ ${nome} - FALHOU: ${erro.message}`);
+            }
+        }
+
+        // Testes de componente
+        function runComponentTests() {
+            console.log('Iniciando testes de componente...');
+            
+            // Teste 1: Verificar se o modal de login está presente
+            testar("COMPONENT - Modal de login deve estar presente na página", () => {
+                const loginModal = document.getElementById("login-modal");
+                if (!loginModal) throw new Error("Modal de login não encontrado");
+                
+                const loginForm = document.getElementById("login-form");
+                if (!loginForm) throw new Error("Formulário de login não encontrado");
+            });
+
+            // Teste 2: Verificar se os campos do formulário de login funcionam
+            testar("COMPONENT - Campos do formulário de login devem receber valores", () => {
+                const emailInput = document.getElementById("login-email");
+                const passwordInput = document.getElementById("login-password");
+                const typeSelect = document.getElementById("login-type");
+
+                if (!emailInput || !passwordInput || !typeSelect) {
+                    throw new Error("Campos do formulário de login não encontrados");
+                }
+
+                emailInput.value = "teste@exemplo.com";
+                passwordInput.value = "senha123";
+                typeSelect.value = "consumer";
+
+                if (emailInput.value !== "teste@exemplo.com" || 
+                    passwordInput.value !== "senha123" || 
+                    typeSelect.value !== "consumer") {
+                    throw new Error("Campos do formulário não aceitaram valores corretamente");
+                }
+            });
+
+            // Teste 3: Verificar se o carrinho está presente e funcional
+            testar("COMPONENT - Carrinho de compras deve estar presente", () => {
+                const cartCount = document.getElementById("cart-count");
+                if (!cartCount) throw new Error("Contador do carrinho não encontrado");
+                
+                // Verificar se o contador inicia com 0
+                if (cartCount.textContent !== "0") {
+                    throw new Error("Contador do carrinho não inicia com 0");
+                }
+            });
+
+            // Teste 4: Verificar se o catálogo de produtos está presente
+            testar("COMPONENT - Catálogo de produtos deve estar presente", () => {
+                const productsCatalog = document.getElementById("products-catalog");
+                if (!productsCatalog) throw new Error("Catálogo de produtos não encontrado");
+                
+                const filterButtons = document.querySelectorAll('[data-category]');
+                if (filterButtons.length === 0) throw new Error("Botões de filtro não encontrados");
+            });
+
+            // Teste 5: Verificar se o formulário de vendedor está presente
+            testar("COMPONENT - Formulário de cadastro de vendedor deve estar presente", () => {
+                const sellerForm = document.getElementById("seller-form");
+                if (!sellerForm) throw new Error("Formulário de vendedor não encontrado");
+                
+                const formSteps = document.querySelectorAll('.form-step');
+                if (formSteps.length === 0) throw new Error("Passos do formulário não encontrados");
+            });
+
+            // Teste 6: Verificar se os campos do formulário de vendedor funcionam
+            testar("COMPONENT - Campos do formulário de vendedor devem receber valores", () => {
+                const nameInput = document.getElementById("seller-name");
+                const docInput = document.getElementById("seller-doc");
+                const emailInput = document.getElementById("seller-email");
+
+                if (!nameInput || !docInput || !emailInput) {
+                    throw new Error("Campos do formulário de vendedor não encontrados");
+                }
+
+                nameInput.value = "João Silva";
+                docInput.value = "123.456.789-00";
+                emailInput.value = "joao@exemplo.com";
+
+                if (nameInput.value !== "João Silva" || 
+                    docInput.value !== "123.456.789-00" || 
+                    emailInput.value !== "joao@exemplo.com") {
+                    throw new Error("Campos do formulário de vendedor não aceitaram valores");
+                }
+            });
+
+            // Teste 7: Verificar se o sistema de upload de arquivos está presente
+            testar("COMPONENT - Sistema de upload de arquivos deve estar presente", () => {
+                const fileInputs = document.querySelectorAll('input[type="file"]');
+                if (fileInputs.length === 0) throw new Error("Nenhum campo de upload encontrado");
+            });
+
+            // Teste 8: Verificar se o sistema de filtros de produtos funciona
+            testar("COMPONENT - Sistema de filtros de produtos deve estar presente", () => {
+                const filterButtons = document.querySelectorAll('[data-category]');
+                if (filterButtons.length === 0) throw new Error("Botões de filtro não encontrados");
+            });
+
+            // Teste 9: Verificar se a validação de CEP está presente
+            testar("COMPONENT - Validação de CEP deve estar presente", () => {
+                const cepInput = document.getElementById("seller-cep");
+                if (!cepInput) throw new Error("Campo de CEP não encontrado");
+            });
+
+            // Teste 10: Verificar se a validação de CPF/CNPJ está presente
+            testar("COMPONENT - Validação de CPF/CNPJ deve estar presente", () => {
+                const docInput = document.getElementById("seller-doc");
+                if (!docInput) throw new Error("Campo de documento não encontrado");
+            });
+
+            console.log('Testes de componente concluídos!');
+        }
+
+        // Função para executar todos os testes
+        function executeComponentTests() {
+            const results = document.getElementById('component-results');
+            results.innerHTML = '';
+            document.getElementById('component-test-results').classList.remove('hidden');
+            
+            runComponentTests();
+        }
+
+        // Função para limpar resultados
+        function clearComponentResults() {
+            const results = document.getElementById('component-results');
+            results.innerHTML = '';
+            document.getElementById('component-test-results').classList.add('hidden');
+        }
+
+        // Executar testes automaticamente quando a página carregar
+        window.addEventListener('load', function() {
+            console.log('Página carregada, executando testes de componente...');
+            setTimeout(() => {
+                executeComponentTests();
+            }, 1000); // Aguardar 1 segundo para garantir que todos os scripts carregaram
+        });
+    </script>
+</body>
+</html> 

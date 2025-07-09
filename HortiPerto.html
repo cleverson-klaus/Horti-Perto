@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/hortiperto-styles.css">
     <script src="js/hortiperto-main.js" defer></script>
-    <script src="js/typebot-integration.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
         /* Custom CSS for elements that need more specific styling */
         .product-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         .rating-stars {
@@ -23,6 +22,11 @@
         }
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .cart-item:hover {
             background-color: #f8f9fa;
@@ -34,7 +38,7 @@
             display: block;
         }
 
-        /* === EFEITOS ESTÁTICOS === */
+        /* === EFEITOS 3D E ANIMAÇÕES === */
         
         /* Container para o nome da empresa */
         .logo-3d-container {
@@ -58,55 +62,141 @@
             white-space: nowrap;
         }
         
-        /* Botões de navegação estáticos */
+        /* Contornos neon nos botões de navegação */
         .nav-link {
             position: relative;
+            transition: all 0.3s ease;
             border-radius: 8px;
             overflow: hidden;
         }
         
-        .nav-link:hover {
-            box-shadow: 0 0 5px #00ff88;
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
         }
         
-        /* Cards de produtos estáticos */
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .nav-link:hover {
+            box-shadow: 
+                0 0 5px #00ff88,
+                0 0 10px #00ff88,
+                0 0 15px #00ff88,
+                0 0 20px #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        /* Efeito 3D nos cards de produtos */
         .product-card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
         }
         
         .product-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        /* Botões estáticos */
+        /* Botões com efeito neon */
         .btn-neon {
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
             border: 2px solid transparent;
         }
         
-        .btn-neon:hover {
-            box-shadow: 0 0 10px #22c55e;
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
         
+        .btn-neon:hover::before {
+            left: 100%;
+        }
         
-
+        .btn-neon:hover {
+            box-shadow: 
+                0 0 10px #22c55e,
+                0 0 20px #22c55e,
+                0 0 30px #22c55e;
+            transform: translateY(-3px);
+        }
         
-        /* Efeito de partículas removido */
+        /* Elementos flutuantes */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Efeito de partículas */
         .particles {
-            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
         }
         
         .particle {
-            display: none;
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: particleFloat 6s linear infinite;
         }
         
-        /* Efeito de brilho nos títulos estático */
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Efeito de brilho nos títulos */
         .glow-text {
             text-shadow: 
                 0 0 5px #22c55e,
                 0 0 10px #22c55e,
                 0 0 15px #22c55e;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e, 0 0 15px #22c55e; }
+            to { text-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 30px #22c55e; }
         }
         
         /* Efeito de profundidade no header */
@@ -197,13 +287,15 @@
             color: #16a34a;
         }
         
-        /* Efeito de brilho nos preços estático */
+        /* Efeito de brilho nos preços */
         .font-bold.text-green-700 {
             text-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
         }
         
         .product-card:hover .font-bold.text-green-700 {
             text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+            transform: scale(1.1);
         }
 
         /* Contorno nas palavras do topo */
@@ -219,7 +311,7 @@
                 0 0 8px #22c55e;
         }
 
-        /* Neon circular estático ao redor dos nav-links */
+        /* Neon circular ao redor dos nav-links */
         .nav-link-neon-outline {
             position: relative;
             z-index: 1;
@@ -237,12 +329,20 @@
             box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844;
             opacity: 0.7;
             pointer-events: none;
+            transition: box-shadow 0.3s, border-color 0.3s;
+            animation: neon-circular 2s linear infinite;
+        }
+        @keyframes neon-circular {
+            0% { box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844; }
+            50% { box-shadow: 0 0 32px 8px #00ff88, 0 0 64px 16px #00ff8844; }
+            100% { box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844; }
         }
     </style>
 </head>
-<body class="font-sans">
+<body class="bg-gray-50 font-sans">
     <!-- Header/Navigation -->
     <header class="header-3d text-white shadow-lg">
+        <div class="particles" id="particles"></div>
         <nav class="main-navbar w-full flex justify-center items-center py-3 px-4 gap-6 relative">
             <div class="flex flex-1 justify-center gap-6">
                 <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="home">Início</a>
@@ -278,128 +378,33 @@
             </div>
         </div>
     </header>
+
     <!-- Main Content Area -->
     <main class="container mx-auto px-4 py-8">
         <!-- Home Tab -->
         <div id="home" class="tab-content active">
-            <section class="hortiperto-hero">
-              <div class="hero-content-hp">
-                <div class="hero-texts-hp">
-                  <h1>Bem vindo ao HortiPerto!<br><span class="hero-destaque">Conectamos produtores locais aos seus clientes, facilitando os pedidos e entregas</span></h1>
-                  <div class="hero-actions-hp">
-                    <button class="btn-destaque-hp" onclick="showTab('products')">Ver produtos</button>
-                    <button class="btn-outline-hp" onclick="showTab('seller-register')">Seja vendedor</button>
-                  </div>
-                  <div class="hero-info-hp">
-                    <i class="fas fa-leaf"></i> Direto do campo para sua casa
-                  </div>
+            <section class="section-hero">
+                <div class="hero-content">
+                    <div class="logo-3d-container mb-8">
+                        <img src="imagens/img-logo.png" alt="Logo HortiPerto" class="h-[200px] w-auto" style="background:transparent;">
+                        <span class="logo-front">HortiPerto</span>
+                    </div>
+                    <h1 class="hero-title">Bem-vindo ao HortiPerto!</h1>
+                    <p class="hero-subtitle">Conectando produtores rurais diretamente aos consumidores, promovendo alimentos frescos e saudáveis enquanto valorizamos o pequeno produtor.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn btn-primary" data-tab="products">Comprar Agora</a>
+                        <a href="#" class="btn btn-secondary" data-tab="seller-register">Seja um Vendedor</a>
+                    </div>
                 </div>
-                <div class="hero-image-hp">
-                  <img src="imagens/img-logo.png" alt="Logo HortiPerto">
-                </div>
-                <div class="hero-card-hp">
-                  <h2>Cadastre-se</h2>
-                  <form>
-                    <input type="email" placeholder="Seu e-mail" required>
-                    <button type="submit">Cadastrar agora</button>
-                  </form>
-                  <small>Ao continuar, você concorda com nossa política de privacidade.</small>
-                </div>
-              </div>
             </section>
+
             <section class="section section-products">
-              <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Produtos em Destaque</h2>
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <img src="imagens/img-legumes.jpg" alt="Cesta de legumes" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Cesta de Legumes Orgânicos</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm ml-2">(24)</span>
-                        </div>
-                        <p class="text-gray-700 mb-3">Seleção de legumes frescos da fazenda familiar</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">R$ 25,90</span>
-                            <button class="btn btn-success text-sm" data-product-id="1">+ Carrinho</button>
-                        </div>
-                    </div>
+                <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Produtos em Destaque</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Produtos serão carregados dinamicamente pelo JavaScript -->
                 </div>
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <img src="imagens/img-queijo.jpg" alt="Queijo colonial" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Queijo Artesanal</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm ml-2">(18)</span>
-                        </div>
-                        <p class="text-gray-700 mb-3">Queijo colonial feito com leite fresco</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">R$ 32,50/kg</span>
-                            <button class="btn btn-success text-sm" data-product-id="2">+ Carrinho</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="imagens/img-folhas.jpg" alt="Mix de folhas" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Salada Pronta</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm ml-2">(36)</span>
-                        </div>
-                        <p class="text-gray-700 mb-3">Mix de folhas lavadas e prontas para consumo</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">R$ 15,90</span>
-                            <button class="btn btn-success text-sm" data-product-id="3">+ Carrinho</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 4 -->
-                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="imagens/img-geleia.jpg" alt="Geleia artesanal" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">Geleia Caseira de Morango</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-600 text-sm ml-2">(29)</span>
-                        </div>
-                        <p class="text-gray-700 mb-3">Geleia artesanal sem conservantes</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-green-700">R$ 18,50</span>
-                            <button class="btn btn-success text-sm" data-product-id="4">+ Carrinho</button>
-                        </div>
-                    </div>
-                </div>
-              </div>
             </section>
+
             <section class="section section-forms">
                 <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Como Funciona</h2>
                 <div class="grid md:grid-cols-3 gap-6">
@@ -429,10 +434,10 @@
         </div>
 
         <!-- Products Tab -->
-        <div id="products" class="tab-content">
+        <div id="products" class="tab-content active">
             <section class="section section-products">
                 <h2 class="text-2xl font-bold mb-6 text-gradient">Nossos Produtos</h2>
-                
+                <!-- Botões de filtro -->
                 <div class="flex flex-wrap mb-6">
                     <button class="btn btn-primary mr-2 mb-2" data-category="all">Todos</button>
                     <button class="btn btn-secondary mr-2 mb-2" data-category="vegetables">Legumes</button>
@@ -441,201 +446,23 @@
                     <button class="btn btn-secondary mr-2 mb-2" data-category="salad">Verduras</button>
                     <button class="btn btn-secondary mr-2 mb-2" data-category="geleias">Doces e Geleias</button>
                 </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Product items will be loaded here -->
-                    <div class="product-item card" data-category="vegetables">
-                        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cesta de legumes" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Cesta de Legumes Orgânicos</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(24)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Seleção de legumes frescos da fazenda familiar</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-success-color">R$ 25,90</span>
-                                <button class="btn btn-success text-sm" data-product-id="1">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="cheese">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Queijo artesanal" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Queijo Artesanal</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(18)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Queijo colonial feito com leite fresco</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 32,50/kg</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="2">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="salad">
-                        <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Salada pronta" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Salada Pronta</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(36)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Mix de folhas lavadas e prontas para consumo</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 15,90</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="3">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="jam">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geleia caseira" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Geleia Caseira de Morango</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(29)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Geleia artesanal sem conservantes</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 18,50</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="4">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="fruits">
-                        <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Frutas variadas" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Cesta de Frutas da Estação</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(21)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Seleção de frutas frescas colhidas no dia</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 28,90</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="5">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="vegetables">
-                        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Tomates" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Tomate Cereja Orgânico</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(42)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Tomates cereja cultivados sem agrotóxicos</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 12,90/kg</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="6">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="cheese">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Queijo minas" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Queijo Minas Frescal</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(19)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Queijo minas tradicional feito artesanalmente</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 24,90/kg</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="7">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="jam">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geleia de pimenta" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">Geleia de Pimenta</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="text-gray-600 text-sm ml-2">(15)</span>
-                            </div>
-                            <p class="text-gray-700 mb-3">Geleia artesanal com um toque picante</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-green-700">R$ 19,90</span>
-                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="8">+ Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="products-catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
             </section>
         </div>
 
         <!-- Seller Registration Tab -->
         <div id="seller-register" class="tab-content">
             <section class="section section-forms">
-                <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Cadastro de Vendedor</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gradient">Cadastro de Vendedor</h2>
                 
                 <div class="card mb-8">
-                    <h3 class="text-xl font-semibold mb-4 text-success-color">Requisitos para Cadastro</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-success-color">Requisitos para o cadastro:</h3>
                     <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>Cadastro de Produtor Rural (CPP - Cadastro de Produtor Primário)</li>
-                        <li>Inscrição Estadual</li>
-                        <li>Capacidade para emissão de Nota Fiscal de Produtor Rural</li>
-                        <li>Cadastro Ambiental Rural (CAR) para propriedades rurais</li>
-                        <li>Alvará Sanitário (apenas para produtos processados)</li>
+                        <li>Cadastro de Produtor Rural (CPP - Cadastro de Produtor Primário);</li>
+                        <li>Inscrição Estadual;</li>
+                        <li>Capacidade para emissão de Nota Fiscal de Produtor Rural;</li>
+                        <li>Cadastro Ambiental Rural (CAR) para propriedades rurais;</li>
+                        <li>Alvará Sanitário (apenas para produtos processados).</li>
                     </ul>
                 </div>
 
@@ -733,7 +560,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="1">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="1">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="3">Próximo</button>
                             </div>
                         </div>
@@ -784,7 +611,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="2">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="4">Próximo</button>
                             </div>
                         </div>
@@ -826,11 +653,55 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
                     </form>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Como cadastrar seus produtos</h2>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full p-3 mr-4">
+                                <i class="fas fa-camera text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">1. Adicione Fotos dos Produtos</h3>
+                                <p class="text-gray-700">Tire fotos de qualidade dos seus produtos para atrair mais clientes.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full p-3 mr-4">
+                                <i class="fas fa-edit text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">2. Descreva Seus Produtos</h3>
+                                <p class="text-gray-700">Informe detalhes como tipo, variedade, método de cultivo, peso aproximado, etc.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full p-3 mr-4">
+                                <i class="fas fa-tag text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">3. Defina os Preços</h3>
+                                <p class="text-gray-700">Estabeleça preços justos considerando seus custos e o mercado.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full p-3 mr-4">
+                                <i class="fas fa-box-open text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">4. Informe a Quantidade Disponível</h3>
+                                <p class="text-gray-700">Atualize regularmente o estoque para evitar frustrações dos clientes.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -950,7 +821,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="1">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="1">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="3">Próximo</button>
                             </div>
                         </div>
@@ -1058,7 +929,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="2">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="4">Próximo</button>
                             </div>
                         </div>
@@ -1100,7 +971,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -1231,7 +1102,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="2">Voltar</button>
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -1246,6 +1117,7 @@
         <div id="cart" class="tab-content">
             <section class="section section-products">
                 <h2 class="text-2xl font-bold mb-6 text-gradient">🛒 Carrinho de Compras</h2>
+                
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Lista de Itens -->
                     <div class="md:col-span-2">
@@ -1256,10 +1128,12 @@
                             </div>
                         </div>
                     </div>
+                    
                     <!-- Resumo do Pedido -->
                     <div class="md:col-span-1">
                         <div class="cart-container sticky top-4">
                             <h3 class="text-lg font-semibold mb-4">Resumo do Pedido</h3>
+                            
                             <div class="space-y-3 mb-6">
                                 <div class="flex justify-between">
                                     <span>Subtotal:</span>
@@ -1275,6 +1149,7 @@
                                     <span id="cart-total-with-shipping">R$ 5,00</span>
                                 </div>
                             </div>
+                            
                             <div class="space-y-3">
                                 <button class="btn btn-success w-full" onclick="proceedToCheckout()">
                                     Finalizar Compra
@@ -1283,218 +1158,13 @@
                                     Limpar Carrinho
                                 </button>
                             </div>
-                            <!-- Opções de Pagamento -->
-                            <div class="mt-8">
-                                <h3 class="text-lg font-semibold mb-4">Escolha a Forma de Pagamento</h3>
-                                <div class="space-y-4 mb-6">
-                                    <!-- Cartão de Crédito/Débito -->
-                                    <div class="payment-option">
-                                        <input type="radio" id="payment-card" name="payment-method" value="card" class="hidden">
-                                        <label for="payment-card" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
-                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
-                                            </div>
-                                            <div class="flex-1">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-credit-card text-2xl text-green-600 mr-3"></i>
-                                                    <div>
-                                                        <h4 class="font-semibold">Cartão de Crédito/Débito</h4>
-                                                        <p class="text-sm text-gray-600">Visa, Mastercard, Elo e outros</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <!-- Dinheiro -->
-                                    <div class="payment-option">
-                                        <input type="radio" id="payment-cash" name="payment-method" value="cash" class="hidden">
-                                        <label for="payment-cash" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
-                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
-                                            </div>
-                                            <div class="flex-1">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-money-bill-wave text-2xl text-green-600 mr-3"></i>
-                                                    <div>
-                                                        <h4 class="font-semibold">Dinheiro</h4>
-                                                        <p class="text-sm text-gray-600">Pagamento na entrega</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <!-- PIX -->
-                                    <div class="payment-option">
-                                        <input type="radio" id="payment-pix" name="payment-method" value="pix" class="hidden">
-                                        <label for="payment-pix" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
-                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
-                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
-                                            </div>
-                                            <div class="flex-1">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-qrcode text-2xl text-green-600 mr-3"></i>
-                                                    <div>
-                                                        <h4 class="font-semibold">PIX</h4>
-                                                        <p class="text-sm text-gray-600">Pagamento instantâneo</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- Formulários específicos para cada método -->
-                                <div id="payment-forms">
-                                    <!-- Formulário de Cartão -->
-                                    <div id="card-form" class="payment-form hidden">
-                                        <h4 class="font-semibold mb-4">Dados do Cartão</h4>
-                                        <div class="space-y-4">
-                                            <div>
-                                                <label for="card-number" class="block text-sm font-medium text-gray-700 mb-1">Número do Cartão</label>
-                                                <input type="text" id="card-number" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="0000 0000 0000 0000" maxlength="19">
-                                            </div>
-                                            <div class="grid grid-cols-2 gap-4">
-                                                <div>
-                                                    <label for="card-expiry" class="block text-sm font-medium text-gray-700 mb-1">Validade</label>
-                                                    <input type="text" id="card-expiry" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="MM/AA" maxlength="5">
-                                                </div>
-                                                <div>
-                                                    <label for="card-cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
-                                                    <input type="text" id="card-cvv" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="123" maxlength="4">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <label for="card-holder" class="block text-sm font-medium text-gray-700 mb-1">Nome do Titular</label>
-                                                <input type="text" id="card-holder" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Como está no cartão">
-                                            </div>
-                                            <div>
-                                                <label for="card-installments" class="block text-sm font-medium text-gray-700 mb-1">Parcelas</label>
-                                                <select id="card-installments" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
-                                                    <option value="1">1x sem juros</option>
-                                                    <option value="2">2x sem juros</option>
-                                                    <option value="3">3x sem juros</option>
-                                                    <option value="4">4x sem juros</option>
-                                                    <option value="5">5x sem juros</option>
-                                                    <option value="6">6x sem juros</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Formulário de Dinheiro -->
-                                    <div id="cash-form" class="payment-form hidden">
-                                        <h4 class="font-semibold mb-4">Pagamento em Dinheiro</h4>
-                                        <div class="space-y-4">
-                                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
-                                                    <span class="text-sm text-yellow-800">O pagamento será realizado no momento da entrega</span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <label for="cash-change" class="block text-sm font-medium text-gray-700 mb-1">Troco para (opcional)</label>
-                                                <input type="text" id="cash-change" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ex: R$ 50,00">
-                                                <p class="text-xs text-gray-500 mt-1">Informe o valor para o qual precisa de troco</p>
-                                            </div>
-                                            <div>
-                                                <label for="cash-notes" class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
-                                                <textarea id="cash-notes" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" rows="3" placeholder="Alguma observação sobre o pagamento?"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Formulário de PIX -->
-                                    <div id="pix-form" class="payment-form hidden">
-                                        <h4 class="font-semibold mb-4">Pagamento via PIX</h4>
-                                        <div class="space-y-4">
-                                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
-                                                    <span class="text-sm text-green-800">Pagamento instantâneo e seguro</span>
-                                                </div>
-                                            </div>
-                                            <!-- QR Code -->
-                                            <div class="text-center">
-                                                <h5 class="font-medium mb-3">Escaneie o QR Code</h5>
-                                                <div id="pix-qr-code" class="bg-white border-2 border-gray-300 rounded-lg p-6 inline-block">
-                                                    <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
-                                                        <i class="fas fa-qrcode text-6xl text-gray-400"></i>
-                                                    </div>
-                                                </div>
-                                                <p class="text-xs text-gray-500 mt-2">Use o app do seu banco para escanear</p>
-                                            </div>
-                                            <!-- Chave PIX -->
-                                            <div class="border-t pt-4">
-                                                <h5 class="font-medium mb-3">Ou copie a chave PIX</h5>
-                                                <div class="flex items-center space-x-2">
-                                                    <input type="text" id="pix-key" value="hortiperto@email.com" class="flex-1 px-4 py-2 border rounded-lg bg-gray-50" readonly>
-                                                    <button onclick="copyPixKey()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-                                                        <i class="fas fa-copy"></i>
-                                                    </button>
-                                                </div>
-                                                <p class="text-xs text-gray-500 mt-1">Chave PIX: hortiperto@email.com</p>
-                                            </div>
-                                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                                <div class="flex items-start">
-                                                    <i class="fas fa-lightbulb text-blue-600 mr-2 mt-1"></i>
-                                                    <div class="text-sm text-blue-800">
-                                                        <p class="font-medium mb-1">Dica:</p>
-                                                        <p>Após o pagamento, o pedido será processado automaticamente. Você receberá uma confirmação por e-mail.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
+
     </main>
-    
-    <!-- Rodapé estilo Spotify -->
-    <footer class="bg-black text-white py-10 mt-12">
-      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-8 px-4">
-        <!-- Logo -->
-        <div class="flex-shrink-0 flex flex-col items-center md:items-start mb-6 md:mb-0">
-          <img src="imagens/img-logo.png" alt="Logo HortiPerto" class="w-32 mb-2">
-        </div>
-        <!-- Colunas de links -->
-        <div class="flex flex-1 justify-center md:justify-between gap-12 w-full">
-          <div>
-            <h4 class="uppercase text-gray-400 font-semibold mb-3 text-sm tracking-wider">Empresa</h4>
-            <ul class="space-y-1">
-              <li><a href="#" class="hover:underline">Sobre</a></li>
-              <li><a href="#" class="hover:underline">Equipe</a></li>
-              <li><a href="#" class="hover:underline">Imprensa</a></li>
-              <li><a href="#" class="hover:underline">Novidades</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="uppercase text-gray-400 font-semibold mb-3 text-sm tracking-wider">Comunidade</h4>
-            <ul class="space-y-1">
-              <li><a href="#" class="hover:underline">Produtores</a></li>
-              <li><a href="#" class="hover:underline">Entregadores</a></li>
-              <li><a href="#" class="hover:underline">Consumidores</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="uppercase text-gray-400 font-semibold mb-3 text-sm tracking-wider">Links Úteis</h4>
-            <ul class="space-y-1">
-              <li><a href="#" class="hover:underline">Ajuda</a></li>
-              <li><a href="#" class="hover:underline">Contato</a></li>
-              <li><a href="#" class="hover:underline">Política de Privacidade</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Ícones sociais -->
-        <div class="flex gap-4 mt-6 md:mt-0">
-          <a href="#" class="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-green-600 transition"><i class="fab fa-instagram text-xl"></i></a>
-          <a href="#" class="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-green-600 transition"><i class="fab fa-twitter text-xl"></i></a>
-          <a href="#" class="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-green-600 transition"><i class="fab fa-facebook-f text-xl"></i></a>
-        </div>
-      </div>
-    </footer>
-    
 </body>
 </html>
 

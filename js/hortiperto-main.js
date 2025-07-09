@@ -16,6 +16,7 @@ let products = [
         name: "Geleia de Maracujá",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 5.0,
         reviews: 0,
         image: "imagens/img-geleiademaracuja.jpg",
@@ -27,6 +28,7 @@ let products = [
         name: "Alfaces",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.5,
         reviews: 9,
         image: "imagens/img-alfaces.jpg",
@@ -38,6 +40,7 @@ let products = [
         name: "Rúculas",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.7,
         reviews: 12,
         image: "imagens/img-ruculas.jpg",
@@ -49,6 +52,7 @@ let products = [
         name: "Agrião",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.3,
         reviews: 6,
         image: "imagens/img-agriao.jpg",
@@ -60,6 +64,7 @@ let products = [
         name: "Acelga",
         price: 4.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.6,
         reviews: 8,
         image: "imagens/img-acelga.jpg",
@@ -71,6 +76,7 @@ let products = [
         name: "Repolho",
         price: 2.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.9,
         reviews: 15,
         image: "imagens/img-repolho.jpg",
@@ -82,6 +88,7 @@ let products = [
         name: "Bananas",
         price: 3.99,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.4,
         reviews: 11,
         image: "imagens/img-bananas.jpg",
@@ -93,6 +100,7 @@ let products = [
         name: "Morangos",
         price: 25.00,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.2,
         reviews: 7,
         image: "imagens/img-morangos.jpg",
@@ -104,6 +112,7 @@ let products = [
         name: "Mangas",
         price: 4.49,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.8,
         reviews: 13,
         image: "imagens/img-mangas.jpg",
@@ -115,6 +124,7 @@ let products = [
         name: "Queijo Colonial",
         price: 40.00,
         category: "queijos",
+        producer: "Laticínio Artesanal",
         rating: 4.7,
         reviews: 14,
         image: "imagens/img-queijocolonialum.jpg",
@@ -126,6 +136,7 @@ let products = [
         name: "Queijo Colonial",
         price: 35.00,
         category: "queijos",
+        producer: "Laticínio Artesanal",
         rating: 4.6,
         reviews: 10,
         image: "imagens/img-queijocolonialdois.jpg",
@@ -137,6 +148,7 @@ let products = [
         name: "Geleia de Goiaba",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.9,
         reviews: 16,
         image: "imagens/img-geleiadegoiaba.jpg",
@@ -148,10 +160,11 @@ let products = [
         name: "Doce de Mamão",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.5,
         reviews: 8,
         image: "imagens/img-docedemamao.png",
-        unit: "1kg",
+        unit: "kg",
         description: "Experimente o nosso <b>Doce de Mamão</b> artesanal, preparado com mamões frescos e selecionados, cozidos lentamente até atingir o ponto perfeito de sabor e textura. Sem conservantes, é uma verdadeira iguaria da culinária caseira, ideal para acompanhar pães, torradas, queijos ou ser apreciado puro. Cada pote de 1kg é feito com carinho, trazendo o gostinho da fazenda direto para sua mesa. Surpreenda-se com a doçura natural e a tradição em cada colherada!"
     },
     {
@@ -159,10 +172,11 @@ let products = [
         name: "Doce de Abóbora",
         price: 22.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.7,
         reviews: 12,
         image: "imagens/img-docedeabobora.jpg",
-        unit: "1kg",
+        unit: "kg",
         description: "Delicie-se com o nosso <b>Doce de Abóbora</b> artesanal, feito com abóboras frescas e selecionadas, cozidas lentamente com açúcar na medida certa para realçar o sabor natural e a cremosidade. Sem conservantes, é perfeito para acompanhar pães, torradas, queijos ou ser saboreado puro. Cada pote de 1kg traz o verdadeiro gostinho da roça, preparado com carinho e tradição para adoçar seus melhores momentos!"
     },
     {
@@ -170,6 +184,7 @@ let products = [
         name: "Cenouras",
         price: 2.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.8,
         reviews: 11,
         image: "imagens/img-cenouras.jpg",
@@ -181,6 +196,7 @@ let products = [
         name: "Beringelas",
         price: 4.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.6,
         reviews: 9,
         image: "imagens/img-beringelas.jpg",
@@ -192,6 +208,7 @@ let products = [
         name: "Brócolis",
         price: 4.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.4,
         reviews: 7,
         image: "imagens/img-brocolis.jpg",
@@ -203,41 +220,70 @@ let products = [
         name: "Mandiocas",
         price: 6.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.3,
         reviews: 6,
         image: "imagens/img-mandioca.jpg",
         unit: "kg",
         description: "Nossas <b>Mandiocas</b> são selecionadas, macias e de excelente qualidade! Perfeitas para cozinhar, fritar, assar ou preparar aquele purê cremoso. Fonte de energia e muito sabor, são ideais para receitas tradicionais e para inovar na cozinha. Vendidas por quilo, sempre fresquinhas para garantir o melhor resultado nos seus pratos!"
-    }
+    },
+    {
+        id: 19,
+        name: "Mel Puro",
+        price: 20.00,
+        category: "geleias",
+        producer: "Fazenda Feliz",
+        rating: 4.9,
+        reviews: 37,
+        image: "imagens/img-mel.jpg",
+        unit: "kg",
+        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo.",
+    
+    },
+    {
+        id: 20,
+        name: "Tomates",
+        price: 8.99,
+        category: "frutas",
+        producer: "Fazenda Feliz",
+        rating: 4.8,
+        reviews: 45,
+        image: "imagens/img-tomates.jpg",
+        unit: "kg",
+        description: "Nossos <b>Tomates</b> são vendidos por quilo e, absolutamente, frescos, uma vez que são colhidos diariamente, garantindo sabor, suculência e qualidade incomparáveis. Ideais para saladas, molhos ou consumo in natura, eles trazem o melhor da horta diretamente para a sua mesa. Experimente a diferença de um produto cultivado com cuidado e dedicação!"
+    
+    },
 ];
 
 // Produtos cadastrados pelos vendedores
 let sellerProducts = [
     {
         id: 1,
-        name: "Tomates Frescos",
-        category: "tomates",
-        price: 8.90,
+        name: "Tomates",
+        category: "frutas",
+        price: 8.99,
         unit: "kg",
         quantity: 50,
-        description: "Tomates frescos colhidos diariamente da nossa horta",
-        image: "imagens/img-tomatefresco.png",
+        description: "Nossos <b>Tomates</b> são vendidos por quilo e, absolutamente, frescos, uma vez que são colhidos diariamente, garantindo sabor, suculência e qualidade incomparáveis. Ideais para saladas, molhos ou consumo in natura, eles trazem o melhor da horta diretamente para a sua mesa. Experimente a diferença de um produto cultivado com cuidado e dedicação!",
+        image: "imagens/img-tomates.jpg",
         organic: true,
         dateCreated: "2024-01-15",
-        status: "ativo"
+        status: "ativo",
+        producer: "Fazenda Feliz"
     },
     {
         id: 2,
-        name: "Queijo Colonial",
-        category: "queijos",
-        price: 25.00,
+        name: "Mel Puro",
+        category: "Doces e Geleias",
+        price: 20.00,
         unit: "kg",
-        quantity: 10,
-        description: "Queijo colonial artesanal feito com leite fresco",
-        image: "imagens/img-queijocolonialum.jpg",
+        quantity: 60,
+        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo.",
+        image: "imagens/img-mel.jpg",
         organic: false,
         dateCreated: "2024-01-10",
-        status: "ativo"
+        status: "ativo",
+        producer: "Fazenda Feliz"
     }
 ];
 
@@ -254,13 +300,19 @@ let balances = {
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
     loadProducts();
+    loadFeaturedProducts(); // Carregar produtos em destaque aleatórios
     updateCartDisplay();
     setupCEPValidation();
     setupCPFValidation(); // Configurar validação de CPF
     setupFileUploads(); // Configurar upload de arquivos
     
     // Inicializar efeitos 3D e animações
-    // Removidas todas as animações
+    createParticles();
+    initParallax();
+    init3DHover();
+    animateOnScroll();
+    initNeonButtons();
+    initLogoRotation();
     
     // Adicionar efeito de onda aos botões
     const buttons = document.querySelectorAll('.btn-neon, .action-btn');
@@ -280,31 +332,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    console.log('🚀 Inicializando HortiPerto...');
-    
-    // Inicializar funcionalidades existentes
+    // Navegação entre abas
     setupTabNavigation();
+    
+    // Menu mobile
     setupMobileMenu();
-    loadProducts();
-    setupProductFilters();
-    setupCartHandlers();
+    
+    // Formulários
     setupFormHandlers();
+    
+    // Filtros de produtos
+    setupProductFilters();
+    
+    // Carrinho
+    setupCartHandlers();
+    
+    // Passos dos formulários
     setupFormSteps();
-    setupCEPValidation();
-    setupCPFValidation();
-    setupFileUploads();
-    setupLoginModal();
-    
-    // Inicializar novas funcionalidades
-    setupPaymentSystem();
-    
-    // Inicializar Typebot após um delay
-    setTimeout(() => {
-        initializeTypebot();
-    }, 3000);
-    
-    console.log('✅ HortiPerto inicializado com sucesso!');
-    setupRippleEffect();
 }
 
 // ========================================
@@ -393,6 +437,51 @@ function loadProducts() {
     });
 }
 
+function loadFeaturedProducts() {
+    const featuredContainer = document.querySelector('.section-products .grid');
+    if (!featuredContainer) return;
+    
+    // Limpar produtos existentes
+    featuredContainer.innerHTML = '';
+    
+    // Selecionar 4 produtos aleatórios do catálogo
+    const shuffledProducts = [...products].sort(() => Math.random() - 0.5);
+    const selectedProducts = shuffledProducts.slice(0, 4);
+    
+    selectedProducts.forEach(product => {
+        const productCard = createFeaturedProductCard(product);
+        featuredContainer.appendChild(productCard);
+    });
+}
+
+function createFeaturedProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'product-card card floating';
+    
+    const stars = generateStars(product.rating);
+    
+    card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+        <div class="p-4">
+            <h3 class="font-bold text-lg mb-2">${product.name}</h3>
+            <div class="flex items-center mb-2">
+                <div class="rating-stars">
+                    ${stars}
+                </div>
+                <span class="text-gray-600 text-sm ml-2">(${product.reviews})</span>
+            </div>
+            <p class="text-gray-700 mb-3">${product.description}</p>
+            ${product.producer ? `<p class="text-sm text-gray-500 mb-2"><strong>Produtor:</strong> ${product.producer}</p>` : ''}
+            <div class="flex justify-between items-center">
+                <span class="font-bold text-success-color">R$ ${product.price.toFixed(2).replace('.', ',')}/${product.unit}</span>
+                <button class="add-to-cart btn btn-success text-sm" data-product-id="${product.id}">+ Carrinho</button>
+            </div>
+        </div>
+    `;
+    
+    return card;
+}
+
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300';
@@ -411,6 +500,7 @@ function createProductCard(product) {
                 <span class="text-gray-600 text-sm ml-2">(${product.reviews})</span>
             </div>
             <p class="text-gray-700 mb-3">${product.description}</p>
+            ${product.producer ? `<p class="text-sm text-gray-500 mb-2"><strong>Produtor:</strong> ${product.producer}</p>` : ''}
             <div class="flex justify-between items-center">
                 <span class="font-bold text-green-700">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
                 <button class="add-to-cart bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="${product.id}">+ Carrinho</button>
@@ -599,12 +689,13 @@ function clearCart() {
 
 function proceedToCheckout() {
     if (cart.length === 0) {
-        showNotification('Seu carrinho está vazio', 'error');
+        showNotification('Adicione itens ao carrinho antes de finalizar a compra', 'error');
         return;
     }
     
-    showTab('payment');
-    updatePaymentSummary();
+    showNotification('Redirecionando para o checkout...', 'success');
+    // Aqui você pode adicionar a lógica para ir para a página de checkout
+    // Por enquanto, apenas mostra uma notificação
 }
 
 // ========================================
@@ -797,10 +888,8 @@ function loadSellerProducts() {
 function createSellerProductCard(product) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-lg shadow-md overflow-hidden';
-    
     const statusClass = product.status === 'ativo' ? 'bg-green-500' : 'bg-gray-500';
     const statusText = product.status === 'ativo' ? 'Ativo' : 'Inativo';
-    
     card.innerHTML = `
         <div class="relative">
             <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
@@ -811,8 +900,10 @@ function createSellerProductCard(product) {
         <div class="p-4">
             <h3 class="font-bold text-lg mb-2">${product.name}</h3>
             <p class="text-gray-600 text-sm mb-2">${getCategoryName(product.category)}</p>
+            <div class="font-extrabold text-black text-lg mb-2">${product.name}</div>
             <p class="font-bold text-green-700 mb-2">R$ ${product.price.toFixed(2).replace('.', ',')}/${product.unit}</p>
             <p class="text-gray-600 text-sm mb-2">Quantidade: ${product.quantity} ${product.unit}</p>
+            <p class="text-gray-600 text-sm mb-2">Produtor: ${product.producer || ''}</p>
             <p class="text-gray-700 text-sm mb-3">${product.description}</p>
             ${product.organic ? '<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mb-3">🌱 Orgânico</span>' : ''}
             <div class="flex space-x-2">
@@ -823,12 +914,11 @@ function createSellerProductCard(product) {
                     <i class="fas fa-trash mr-1"></i> Excluir
                 </button>
                 <button class="flex-1 ${product.status === 'ativo' ? 'bg-yellow-600' : 'bg-green-600'} text-white py-1 px-3 rounded text-sm hover:${product.status === 'ativo' ? 'bg-yellow-700' : 'bg-green-700'}" onclick="toggleProductStatus(${product.id})">
-                    <i class="fas ${product.status === 'ativo' ? 'fa-pause' : 'fa-play'} mr-1"></i> ${product.status === 'ativo' ? 'Pausar' : 'Ativar'}
+                    ${product.status === 'ativo' ? '<i class=\'fas fa-pause mr-1\'></i> Pausar' : '<i class=\'fas fa-play mr-1\'></i> Ativar'}
                 </button>
             </div>
         </div>
     `;
-    
     return card;
 }
 
@@ -1137,7 +1227,167 @@ window.validateCPFInput = validateCPFInput;
 window.validateAllCPFs = validateAllCPFs;
 window.getCleanCPF = getCleanCPF;
 
-// Todas as animações foram removidas para criar uma experiência estática
+// Sistema de partículas para efeito 3D
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Posição aleatória
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        
+        // Tamanho aleatório
+        const size = Math.random() * 3 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // Opacidade aleatória
+        particle.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Efeito de parallax suave
+function initParallax() {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.floating');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.5 + (index * 0.1);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
+// Efeito de hover 3D para cards
+function init3DHover() {
+    const cards = document.querySelectorAll('.product-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+    });
+}
+
+// Efeito de digitação para títulos
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
+
+// Animação de entrada para elementos
+function animateOnScroll() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+    
+    const elements = document.querySelectorAll('.product-card, .floating');
+    elements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(50px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// Efeito de brilho nos botões neon
+function initNeonButtons() {
+    const neonButtons = document.querySelectorAll('.btn-neon');
+    
+    neonButtons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            button.style.boxShadow = `
+                0 0 10px #22c55e,
+                0 0 20px #22c55e,
+                0 0 30px #22c55e,
+                0 0 40px #22c55e
+            `;
+        });
+        
+        button.addEventListener('mouseleave', () => {
+            button.style.boxShadow = '';
+        });
+    });
+}
+
+// Efeito de rotação suave da logo
+function initLogoRotation() {
+    const logo = document.querySelector('.logo-rotating');
+    if (!logo) return;
+    
+    let isHovered = false;
+    
+    logo.addEventListener('mouseenter', () => {
+        isHovered = true;
+        logo.style.animationDuration = '2s';
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+        isHovered = false;
+        logo.style.animationDuration = '8s';
+    });
+}
+
+// Efeito de onda nos botões
+function createRippleEffect(event) {
+    const button = event.currentTarget;
+    const ripple = document.createElement('span');
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.classList.add('ripple');
+    
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
 
 // ========================================
 // VALIDAÇÃO DE CEP
@@ -2069,478 +2319,6 @@ function updateLoginButton() {
         const dropdown = document.getElementById('logout-btn');
         if (dropdown) dropdown.remove();
     }
-}
-
-// ========================================
-// SISTEMA DE PAGAMENTO
-// ========================================
-
-function setupPaymentSystem() {
-    setupPaymentMethodSelection();
-    setupCardFormValidation();
-    setupPixCopy();
-    setupPixQRCode();
-    updatePaymentSummary();
-}
-
-function setupPaymentMethodSelection() {
-    const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
-    const paymentForms = document.querySelectorAll('.payment-form');
-    
-    paymentOptions.forEach(option => {
-        option.addEventListener('change', function() {
-            // Esconder todos os formulários
-            paymentForms.forEach(form => {
-                form.classList.add('hidden');
-            });
-            
-            // Mostrar o formulário selecionado
-            const selectedForm = document.getElementById(this.value + '-form');
-            if (selectedForm) {
-                selectedForm.classList.remove('hidden');
-            }
-            
-            // Atualizar resumo do pagamento
-            updatePaymentSummary();
-            
-            // Atualizar visual dos botões de opção
-            updatePaymentOptionVisuals();
-        });
-    });
-}
-
-function updatePaymentOptionVisuals() {
-    const paymentOptions = document.querySelectorAll('.payment-option');
-    
-    paymentOptions.forEach(option => {
-        const radio = option.querySelector('input[type="radio"]');
-        const circle = option.querySelector('.w-3.h-3');
-        const label = option.querySelector('label');
-        
-        if (radio.checked) {
-            circle.classList.remove('hidden');
-            label.classList.add('border-green-500', 'bg-green-50');
-        } else {
-            circle.classList.add('hidden');
-            label.classList.remove('border-green-500', 'bg-green-50');
-        }
-    });
-}
-
-function setupCardFormValidation() {
-    const cardNumber = document.getElementById('card-number');
-    const cardExpiry = document.getElementById('card-expiry');
-    const cardCvv = document.getElementById('card-cvv');
-    
-    if (cardNumber) {
-        cardNumber.addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '');
-            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-            this.value = value;
-        });
-    }
-    
-    if (cardExpiry) {
-        cardExpiry.addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            this.value = value;
-        });
-    }
-    
-    if (cardCvv) {
-        cardCvv.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '');
-        });
-    }
-}
-
-function setupPixCopy() {
-    const pixKey = document.getElementById('pix-key');
-    if (pixKey) {
-        pixKey.addEventListener('click', function() {
-            this.select();
-        });
-    }
-}
-
-function copyPixKey() {
-    const pixKey = document.getElementById('pix-key');
-    if (pixKey) {
-        pixKey.select();
-        document.execCommand('copy');
-        
-        // Mostrar feedback visual
-        const copyBtn = document.querySelector('button[onclick="copyPixKey()"]');
-        const originalText = copyBtn.innerHTML;
-        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-        copyBtn.classList.add('bg-green-700');
-        
-        setTimeout(() => {
-            copyBtn.innerHTML = originalText;
-            copyBtn.classList.remove('bg-green-700');
-        }, 2000);
-        
-        showNotification('Chave PIX copiada!', 'success');
-    }
-}
-
-function updatePaymentSummary() {
-    const subtotal = cartTotal;
-    const shipping = 5.00;
-    let paymentFee = 0.00;
-    
-    // Calcular taxa baseada no método de pagamento
-    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
-    if (selectedMethod) {
-        switch (selectedMethod.value) {
-            case 'card':
-                paymentFee = subtotal * 0.029; // 2.9% para cartão
-                break;
-            case 'pix':
-                paymentFee = 0; // PIX sem taxa
-                break;
-            case 'cash':
-                paymentFee = 0; // Dinheiro sem taxa
-                break;
-        }
-    }
-    
-    const total = subtotal + shipping + paymentFee;
-    
-    // Atualizar valores na interface
-    const subtotalElement = document.getElementById('payment-subtotal');
-    const feeElement = document.getElementById('payment-fee');
-    const totalElement = document.getElementById('payment-total');
-    
-    if (subtotalElement) subtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-    if (feeElement) feeElement.textContent = `R$ ${paymentFee.toFixed(2).replace('.', ',')}`;
-    if (totalElement) totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-}
-
-function confirmPayment() {
-    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
-    
-    if (!selectedMethod) {
-        showNotification('Selecione uma forma de pagamento', 'error');
-        return;
-    }
-    
-    // Validar formulário baseado no método selecionado
-    if (!validatePaymentForm(selectedMethod.value)) {
-        return;
-    }
-    
-    // Simular processamento de pagamento
-    const confirmBtn = document.getElementById('confirm-payment');
-    const originalText = confirmBtn.textContent;
-    confirmBtn.textContent = 'Processando...';
-    confirmBtn.disabled = true;
-    
-    setTimeout(() => {
-        // Simular sucesso do pagamento
-        showNotification('Pagamento processado com sucesso!', 'success');
-        
-        // Limpar carrinho
-        cart = [];
-        cartTotal = 0;
-        updateCartDisplay();
-        
-        // Redirecionar para página de sucesso ou home
-        showTab('home');
-        
-        // Resetar botão
-        confirmBtn.textContent = originalText;
-        confirmBtn.disabled = false;
-        
-    }, 2000);
-}
-
-function validatePaymentForm(method) {
-    switch (method) {
-        case 'card':
-            return validateCardForm();
-        case 'cash':
-            return validateCashForm();
-        case 'pix':
-            return true; // PIX não precisa de validação específica
-        default:
-            return false;
-    }
-}
-
-function validateCardForm() {
-    const cardNumber = document.getElementById('card-number');
-    const cardExpiry = document.getElementById('card-expiry');
-    const cardCvv = document.getElementById('card-cvv');
-    const cardHolder = document.getElementById('card-holder');
-    
-    if (!cardNumber.value.replace(/\s/g, '').match(/^\d{16}$/)) {
-        showNotification('Número do cartão inválido', 'error');
-        return false;
-    }
-    
-    if (!cardExpiry.value.match(/^\d{2}\/\d{2}$/)) {
-        showNotification('Data de validade inválida', 'error');
-        return false;
-    }
-    
-    if (!cardCvv.value.match(/^\d{3,4}$/)) {
-        showNotification('CVV inválido', 'error');
-        return false;
-    }
-    
-    if (!cardHolder.value.trim()) {
-        showNotification('Nome do titular é obrigatório', 'error');
-        return false;
-    }
-    
-    return true;
-}
-
-function validateCashForm() {
-    // Validação básica para dinheiro (opcional)
-    return true;
-}
-
-// Modificar a função proceedToCheckout para redirecionar para a aba de pagamento
-function proceedToCheckout() {
-    if (cart.length === 0) {
-        showNotification('Seu carrinho está vazio', 'error');
-        return;
-    }
-    
-    showTab('payment');
-    updatePaymentSummary();
-}
-
-// ========================================
-// TYPEBOT INTEGRATION
-// ========================================
-
-function initializeTypebot() {
-    try {
-        if (typeof HortiPertoTypebot !== 'undefined') {
-            console.log('[Typebot] Avançado detectado. Inicializando HortiPertoTypebot...');
-            const typebot = new HortiPertoTypebot();
-            if (typebot && typebot.showWelcomeMessage) {
-                typebot.showWelcomeMessage();
-            }
-            return typebot;
-        } else {
-            console.warn('[Typebot] HortiPertoTypebot não encontrado. Usando fallback básico.');
-            const fallback = createBasicTypebot();
-            fallback.showWelcomeMessage();
-            return fallback;
-        }
-    } catch (e) {
-        console.error('[Typebot] Erro ao inicializar:', e);
-        const fallback = createBasicTypebot();
-        fallback.showWelcomeMessage();
-        return fallback;
-    }
-}
-
-function createBasicTypebot() {
-    return {
-        showWelcomeMessage: function() {
-            const welcomeMessage = `
-                <div id="typebot-welcome" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-green-600">🌱 HortiPerto</h3>
-                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-3">Olá! Bem-vindo ao HortiPerto! Como posso te ajudar hoje?</p>
-                    <div class="space-y-2">
-                        <button onclick="typebotAction('products')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            🛒 Quero comprar produtos
-                        </button>
-                        <button onclick="typebotAction('seller')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            👨‍🌾 Quero vender produtos
-                        </button>
-                        <button onclick="typebotAction('delivery')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            🚚 Quero ser entregador
-                        </button>
-                        <button onclick="typebotAction('help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            ❓ Preciso de ajuda
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            // Remover mensagem anterior se existir
-            const existingMessage = document.getElementById('typebot-welcome');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            // Adicionar nova mensagem
-            document.body.insertAdjacentHTML('beforeend', welcomeMessage);
-            
-            // Auto-remover após 30 segundos
-            setTimeout(() => {
-                closeTypebot();
-            }, 30000);
-        },
-        
-        showHelpMessage: function() {
-            const helpMessage = `
-                <div id="typebot-help" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-green-600">🤝 Suporte</h3>
-                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-3">Como posso te ajudar?</p>
-                    <div class="space-y-2">
-                        <button onclick="typebotAction('shopping-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            ❓ Dúvidas sobre compras
-                        </button>
-                        <button onclick="typebotAction('delivery-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            📦 Problemas com entrega
-                        </button>
-                        <button onclick="typebotAction('payment-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            💳 Problemas com pagamento
-                        </button>
-                        <button onclick="typebotAction('human-support')" class="w-full text-left p-2 rounded bg-blue-50 hover:bg-blue-100 text-sm">
-                            📞 Falar com atendente
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', helpMessage);
-        }
-    };
-}
-
-function closeTypebot() {
-    const typebotElements = document.querySelectorAll('#typebot-welcome, #typebot-help');
-    typebotElements.forEach(element => element.remove());
-}
-
-function typebotAction(action) {
-    closeTypebot();
-    
-    switch (action) {
-        case 'products':
-            showTab('products');
-            showNotification('Navegando para produtos...', 'info');
-            break;
-        case 'seller':
-            showTab('seller-register');
-            showNotification('Navegando para cadastro de vendedor...', 'info');
-            break;
-        case 'delivery':
-            showTab('delivery-register');
-            showNotification('Navegando para cadastro de entregador...', 'info');
-            break;
-        case 'help':
-            // Mostrar mensagem de ajuda
-            const basicTypebot = createBasicTypebot();
-            basicTypebot.showHelpMessage();
-            break;
-        case 'shopping-help':
-            showNotification('Para dúvidas sobre compras, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'delivery-help':
-            showNotification('Para problemas com entrega, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'payment-help':
-            showNotification('Para problemas com pagamento, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'human-support':
-            showNotification('Redirecionando para atendente humano...', 'info');
-            // Aqui você pode integrar com um sistema de chat real
-            break;
-    }
-}
-
-// ========================================
-// INICIALIZAÇÃO DO SISTEMA
-// ========================================
-
-// Modificar a função initializeApp para incluir as novas funcionalidades
-function initializeApp() {
-    console.log('🚀 Inicializando HortiPerto...');
-    
-    // Inicializar funcionalidades existentes
-    setupTabNavigation();
-    setupMobileMenu();
-    loadProducts();
-    setupProductFilters();
-    setupCartHandlers();
-    setupFormHandlers();
-    setupFormSteps();
-    setupCEPValidation();
-    setupCPFValidation();
-    setupFileUploads();
-    setupLoginModal();
-    
-    // Inicializar novas funcionalidades
-    setupPaymentSystem();
-    
-    // Inicializar Typebot após um delay
-    setTimeout(() => {
-        initializeTypebot();
-    }, 3000);
-    
-    console.log('✅ HortiPerto inicializado com sucesso!');
-    setupRippleEffect();
-}
-
-// Chamar inicialização quando o DOM estiver pronto
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-    initializeApp();
-}
-
-function setupPixQRCode() {
-    const qrContainer = document.getElementById('pix-qr-code');
-    if (qrContainer) {
-        // Limpa o conteúdo anterior
-        qrContainer.innerHTML = '';
-        // Gera o QR Code real
-        const qr = new QRious({
-            element: document.createElement('canvas'),
-            value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F', // Exemplo de payload PIX fake
-            size: 180
-        });
-        qrContainer.appendChild(qr.element);
-    }
-}
-
-// Efeito visual de ripple para botões
-function createRippleEffect(event) {
-    const button = event.currentTarget;
-    const circle = document.createElement('span');
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
-    circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
-    circle.classList.add('ripple');
-    // Remove ripples antigos
-    const rippleOld = button.querySelector('.ripple');
-    if (rippleOld) rippleOld.remove();
-    button.appendChild(circle);
-    setTimeout(() => {
-        circle.remove();
-    }, 600);
-}
-
-// Adicionar ripple a todos os botões com classe .btn-neon ou .action-btn
-function setupRippleEffect() {
-    const rippleButtons = document.querySelectorAll('.btn-neon, .action-btn');
-    rippleButtons.forEach(btn => {
-        btn.addEventListener('click', createRippleEffect);
-    });
 }
 
  

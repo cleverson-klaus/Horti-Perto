@@ -637,14 +637,15 @@ nav.hidden.md\\:flex {
   display: flex;
   flex-direction: column;
 }
-
 .product-card:hover {
-  box-shadow: var(--shadow-xl);
+  /* Combinação possível dos efeitos */
+  box-shadow: var(--shadow-xl); /* Pode trocar para --shadow-md se quiser menos sombra */
+  transform: none;
 }
 
 .product-card img {
   width: 100%;
-  height: 12rem;
+  height: 12rem; /* Mantido do branch main; ajuste conforme necessidade */
   object-fit: cover;
   display: block;
   margin-left: 0 !important;
@@ -654,6 +655,12 @@ nav.hidden.md\\:flex {
   margin-top: 0 !important;
   vertical-align: top;
   box-sizing: border-box;
+  transition: none; /* Este estava no branch Cleverson */
+}
+
+.product-card:hover img {
+  transform: none;
+  /* Escala foi removida como nos dois lados */
 }
 
 .product-item img {
@@ -670,16 +677,13 @@ nav.hidden.md\\:flex {
   box-sizing: border-box;
 }
 
-.product-card:hover img {
-  /* Removido efeito de escala */
+.product-item:hover img {
+  /* Escala removida */
 }
 
-.product-item:hover img {
-  /* Removido efeito de escala */
-}
 
 .product-card .card-content {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 .product-card .p-4 {

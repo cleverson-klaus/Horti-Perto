@@ -293,6 +293,22 @@ let balances = {
     delivery: 320.75
 };
 
+// Arrays globais para usuários cadastrados
+let sellers = [];
+let deliveries = [];
+let consumers = [];
+
+// Função utilitária para validar senha (apenas letras e números)
+function isValidPassword(pw) {
+    return /^[A-Za-z0-9]{6,20}$/.test(pw);
+}
+
+// Função de autenticação
+function authenticateUser(email, password, type) {
+    let arr = type === 'seller' ? sellers : type === 'delivery' ? deliveries : consumers;
+    return arr.find(u => u.email === email && u.password === password) || null;
+}
+
 // ========================================
 // INICIALIZAÇÃO DA APLICAÇÃO
 // ========================================
@@ -349,6 +365,8 @@ function initializeApp() {
     
     // Passos dos formulários
     setupFormSteps();
+    setupLoginEmailAutofill();
+    setupShowPasswordButtons();
 }
 
 // ========================================
@@ -715,108 +733,147 @@ function setupFormSteps() {
 function goToFormStep(currentStep, targetStepNum) {
     // Esconder passo atual
     currentStep.classList.remove('active');
-    
     // Mostrar passo alvo
     const targetStep = currentStep.parentElement.querySelector(`[data-step="${targetStepNum}"]`);
     if (targetStep) {
         targetStep.classList.add('active');
+        // Se for o passo de login, preencher o e-mail
+        if (targetStep.querySelector('#seller-login-email')) {
+            document.getElementById('seller-login-email').value = document.getElementById('seller-email').value;
+        }
+        if (targetStep.querySelector('#delivery-login-email')) {
+            document.getElementById('delivery-login-email').value = document.getElementById('delivery-email').value;
+        }
+        if (targetStep.querySelector('#user-login-email')) {
+            document.getElementById('user-login-email').value = document.getElementById('user-email').value;
+        }
     }
 }
 
 function handleSellerSubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    // Se não está no último passo, avança
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '5') {
+        return;
+    }
+    // Validação dos campos obrigatórios
     const requiredFields = ['seller-name', 'seller-doc', 'seller-email', 'seller-phone', 'seller-cpp'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
     // Validar CPF/CNPJ
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique o CPF/CNPJ informado', 'error');
         return;
     }
-    
-    showNotification('Cadastro de vendedor enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    // Validação de senha
+    const email = document.getElementById('seller-email').value;
+    const pw = document.getElementById('seller-password').value;
+    const pw2 = document.getElementById('seller-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    // Salvar vendedor
+    sellers.push({
+        name: document.getElementById('seller-name').value,
+        doc: document.getElementById('seller-doc').value,
+        email,
+        phone: document.getElementById('seller-phone').value,
+        cpp: document.getElementById('seller-cpp').value,
+        password: pw
     });
+    showNotification('Cadastro de vendedor enviado com sucesso! Aguarde nossa análise.', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function handleDeliverySubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '5') {
+        return;
+    }
     const requiredFields = ['delivery-name', 'delivery-cpf', 'delivery-email', 'delivery-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
-    // Validar CPF
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique os CPFs informados', 'error');
         return;
     }
-    
-    showNotification('Cadastro de entregador enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    const email = document.getElementById('delivery-email').value;
+    const pw = document.getElementById('delivery-password').value;
+    const pw2 = document.getElementById('delivery-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    deliveries.push({
+        name: document.getElementById('delivery-name').value,
+        cpf: document.getElementById('delivery-cpf').value,
+        email,
+        phone: document.getElementById('delivery-phone').value,
+        password: pw
     });
+    showNotification('Cadastro de entregador enviado com sucesso! Aguarde nossa análise.', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function handleUserSubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '4') {
+        return;
+    }
     const requiredFields = ['user-name', 'user-cpf', 'user-email', 'user-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
-    // Validar CPF
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique os CPFs informados', 'error');
         return;
     }
-    
-    showNotification('Cadastro realizado com sucesso! Bem-vindo ao HortiPerto!', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    const email = document.getElementById('user-email').value;
+    const pw = document.getElementById('user-password').value;
+    const pw2 = document.getElementById('user-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    consumers.push({
+        name: document.getElementById('user-name').value,
+        cpf: document.getElementById('user-cpf').value,
+        email,
+        phone: document.getElementById('user-phone').value,
+        password: pw
     });
+    showNotification('Cadastro realizado com sucesso! Bem-vindo ao HortiPerto!', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function validateRequiredFields(fieldIds) {
@@ -1437,24 +1494,23 @@ async function validateCEP(cepInput) {
 // Função para preencher campos de endereço automaticamente
 function fillAddressFields(cepData) {
     const formType = getCurrentFormType();
-    
     if (!formType) return;
-    
     const fields = {
         address: `${cepData.logradouro}`,
         neighborhood: cepData.bairro,
         city: cepData.localidade,
         state: cepData.uf
     };
-    
-    // Preencher campos baseado no tipo de formulário
     Object.keys(fields).forEach(field => {
         const element = document.getElementById(`${formType}-${field}`);
         if (element) {
-            element.value = fields[field];
+            if (field === 'state' && element.tagName === 'SELECT') {
+                element.value = fields[field];
+                element.dispatchEvent(new Event('change'));
+            } else {
+                element.value = fields[field];
+            }
             element.classList.add('auto-filled');
-            
-            // Remover classe após 3 segundos
             setTimeout(() => {
                 element.classList.remove('auto-filled');
             }, 3000);
@@ -2294,4 +2350,135 @@ function updateLoginButton() {
     }
 }
 
- 
+// Preencher automaticamente o campo de e-mail no passo de senha
+function setupLoginEmailAutofill() {
+    // Vendedor
+    const sellerEmail = document.getElementById('seller-email');
+    const sellerLoginEmail = document.getElementById('seller-login-email');
+    if (sellerEmail && sellerLoginEmail) {
+        sellerEmail.addEventListener('input', () => {
+            sellerLoginEmail.value = sellerEmail.value;
+        });
+        sellerLoginEmail.value = sellerEmail.value;
+    }
+    // Entregador
+    const deliveryEmail = document.getElementById('delivery-email');
+    const deliveryLoginEmail = document.getElementById('delivery-login-email');
+    if (deliveryEmail && deliveryLoginEmail) {
+        deliveryEmail.addEventListener('input', () => {
+            deliveryLoginEmail.value = deliveryEmail.value;
+        });
+        deliveryLoginEmail.value = deliveryEmail.value;
+    }
+    // Usuário
+    const userEmail = document.getElementById('user-email');
+    const userLoginEmail = document.getElementById('user-login-email');
+    if (userEmail && userLoginEmail) {
+        userEmail.addEventListener('input', () => {
+            userLoginEmail.value = userEmail.value;
+        });
+        userLoginEmail.value = userEmail.value;
+    }
+}
+
+// Botão de visualizar senha
+function setupShowPasswordButtons() {
+    document.querySelectorAll('input[type="password"]').forEach(input => {
+        if (input.nextElementSibling && input.nextElementSibling.classList.contains('show-password-btn')) return;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'show-password-btn';
+        btn.innerHTML = '<i class="fas fa-eye"></i>';
+        btn.style.position = 'absolute';
+        btn.style.right = '12px';
+        btn.style.top = '50%';
+        btn.style.transform = 'translateY(-50%)';
+        btn.style.background = 'none';
+        btn.style.border = 'none';
+        btn.style.cursor = 'pointer';
+        btn.style.padding = '0';
+        btn.style.zIndex = '10';
+        btn.addEventListener('click', function() {
+            input.type = input.type === 'password' ? 'text' : 'password';
+            btn.innerHTML = input.type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        // Wrapper para posicionar
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+        wrapper.appendChild(btn);
+    });
+}
+
+// Chamar na inicialização
+function initializeApp() {
+    setupFormHandlers();
+    setupFormSteps();
+    setupLoginEmailAutofill();
+    setupShowPasswordButtons();
+    // ... outras inits ...
+}
+
+// ... existente ...
+// Função para abrir o modal de login
+function openLoginModal() {
+    document.getElementById('login-modal').style.display = 'flex';
+    document.getElementById('login-error').style.display = 'none';
+    document.getElementById('login-form').reset();
+}
+// Função para fechar o modal de login
+function closeLoginModal() {
+    document.getElementById('login-modal').style.display = 'none';
+}
+// Handler do botão do menu
+const loginBtn = document.getElementById('login-btn');
+if (loginBtn) {
+    loginBtn.addEventListener('click', openLoginModal);
+}
+// Handler do formulário de login
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const type = document.getElementById('login-type').value;
+            const user = authenticateUser(email, password, type);
+            const errorDiv = document.getElementById('login-error');
+            if (user) {
+                errorDiv.style.display = 'none';
+                closeLoginModal();
+                showNotification('Login realizado com sucesso!', 'success');
+                // Aqui você pode redirecionar ou atualizar a UI conforme o tipo de usuário
+            } else {
+                errorDiv.textContent = 'E-mail, senha ou tipo de usuário inválido.';
+                errorDiv.style.display = 'block';
+            }
+        });
+    }
+    // Botão de mostrar/ocultar senha
+    const pwInput = document.getElementById('login-password');
+    if (pwInput && !document.getElementById('show-login-password-btn')) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'show-login-password-btn';
+        btn.innerHTML = '<i class="fas fa-eye"></i>';
+        btn.style.position = 'absolute';
+        btn.style.right = '12px';
+        btn.style.top = '50%';
+        btn.style.transform = 'translateY(-50%)';
+        btn.style.background = 'none';
+        btn.style.border = 'none';
+        btn.style.cursor = 'pointer';
+        btn.style.padding = '0';
+        btn.style.zIndex = '10';
+        btn.addEventListener('click', function() {
+            pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+            btn.innerHTML = pwInput.type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        pwInput.parentNode.appendChild(btn);
+    }
+});
+// ... existente ...

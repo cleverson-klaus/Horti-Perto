@@ -340,31 +340,44 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
-    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full relative flex flex-col items-center">
-            <button id="close-login-modal" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl" aria-label="Fechar">&times;</button>
-            <h2 class="text-xl font-bold mb-4 text-center text-gray-800">Entrar</h2>
-            <form id="login-form" autocomplete="on" class="w-full flex flex-col items-center">
-                <label for="login-usuario" class="block text-gray-700 mb-1 w-full">Usuário ou E-mail</label>
-                <input id="login-usuario" name="usuario" type="text" class="form-input mb-3 w-full" required autofocus autocomplete="username">
-                <label for="login-senha" class="block text-gray-700 mb-1 w-full">Senha</label>
-                <input id="login-senha" name="senha" type="password" class="form-input mb-4 w-full" required autocomplete="current-password">
-                <button type="submit" class="btn btn-primary w-full">Entrar</button>
-            </form>
-            <div id="login-error" class="validation-message error mt-2 hidden"></div>
-        </div>
+    <!-- Modal de Login -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50" style="display:none;">
+      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <button onclick="closeLoginModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+        <h2 class="text-2xl font-bold mb-6 text-center text-gradient">Entrar na Plataforma</h2>
+        <form id="login-form" autocomplete="off">
+          <div class="mb-4">
+            <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+            <input type="email" id="login-email" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+          </div>
+          <div class="mb-4" style="position:relative;">
+            <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+            <input type="password" id="login-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required minlength="6" maxlength="20" pattern="^[A-Za-z0-9]+$">
+          </div>
+          <div class="mb-4">
+            <label for="login-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Usuário</label>
+            <select id="login-type" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+              <option value="consumer">Consumidor</option>
+              <option value="seller">Vendedor</option>
+              <option value="delivery">Entregador</option>
+            </select>
+          </div>
+          <div id="login-error" class="text-red-600 text-sm mb-2" style="display:none;"></div>
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Entrar</button>
+        </form>
+      </div>
     </div>
     <!-- Header/Navigation -->
     <header class="header-3d text-white shadow-lg">
         <div class="particles" id="particles"></div>
         <nav class="main-navbar w-full flex justify-center items-center py-3 px-4 gap-6 relative">
             <div class="flex flex-1 justify-center gap-6">
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="home">Início</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="products">Produtos</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="seller-register">Seja Vendedor</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="delivery-register">Seja Entregador</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="user-register">Cadastre-se</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="cart">
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="home" onclick="showTab('home'); return false;">Início</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="products" onclick="showTab('products'); return false;">Produtos</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="seller-register" onclick="showTab('seller-register'); return false;">Seja Vendedor</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="delivery-register" onclick="showTab('delivery-register'); return false;">Seja Entregador</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="user-register" onclick="showTab('user-register'); return false;">Cadastre-se</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="cart" onclick="showTab('cart'); return false;">
                     <i class="fas fa-shopping-cart"></i> Carrinho
                     <span id="cart-count" class="bg-yellow-500 text-xs text-white rounded-full px-2 py-1 ml-1">0</span>
                 </a>
@@ -392,7 +405,7 @@
                     <p class="hero-subtitle">Conectando produtores rurais diretamente aos consumidores, promovendo alimentos frescos e saudáveis enquanto valorizamos o pequeno produtor.</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#" class="btn btn-primary" data-tab="products">Comprar Agora</a>
-                        <a href="#" class="btn btn-secondary" data-tab="seller-register">Seja um Vendedor</a>
+                        <a href="#" class="btn btn-secondary" data-tab="seller-register" onclick="showTab('seller-register'); return false;">Seja um Vendedor</a>
                     </div>
                 </div>
             </section>
@@ -649,6 +662,31 @@
                             </div>
                             <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="5">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="5">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="seller-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="seller-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="seller-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="seller-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="seller-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="4">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -967,6 +1005,31 @@
                             </div>
                             <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="5">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="5">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="delivery-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="delivery-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="delivery-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="delivery-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="delivery-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="4">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -1099,6 +1162,31 @@
                             </div>
                             <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="4">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="4">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="user-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="user-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="user-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="user-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="user-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>

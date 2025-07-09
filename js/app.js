@@ -1,72 +1,233 @@
 // Dados da aplicação
 let cart = [];
+// Produtos disponíveis
 let products = [
   {
-    id: 1,
-    name: "Tomates Frescos",
-    price: 8.90,
-    unit: "kg",
-    category: "hortalicas",
-    producer: "João Silva",
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300",
-    description: "Tomates frescos colhidos diariamente"
+      id: 1,
+      name: "Geleia de Maracujá",
+      price: 25.00,
+      category: "geleias",
+      producer: "Doce Sabor",
+rating: 5.0,
+      reviews: 0,
+      image: "imagens/img-geleiademaracuja.jpg",
+      unit: "500ml",
+      description: "Descubra o sabor tropical da nossa <b>Geleia de Maracujá</b> artesanal! Preparada com maracujás frescos e selecionados, ela traz o equilíbrio perfeito entre o doce e o azedinho da fruta. Sem conservantes, é ideal para acompanhar pães, torradas, queijos ou dar um toque especial em sobremesas. Cada pote de 500ml é feito com carinho, levando o frescor e a tradição do campo direto para sua mesa. Experimente e surpreenda-se com essa explosão de sabor!"
   },
   {
-    id: 2,
-    name: "Alface Orgânica",
-    price: 3.50,
-    unit: "un",
-    category: "verduras",
-    producer: "Maria Santos",
-    rating: 4.2,
-    image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300",
-    description: "Alface orgânica cultivada sem agrotóxicos"
+      id: 2,
+      name: "Alfaces",
+      price: 3.99,
+      category: "salad",
+producer: "Horta Verde",
+      rating: 4.5,
+      reviews: 9,
+      image: "imagens/img-alfaces.jpg",
+      unit: "unidade",
+      description: "Nossas <b>Alfaces</b> são cultivadas com todo cuidado para garantir folhas frescas, crocantes e cheias de sabor. Perfeitas para saladas, sanduíches ou como acompanhamento, trazem leveza e saúde para o seu dia a dia. Vendidas por unidade, são colhidas no ponto ideal para você levar o melhor da horta para sua mesa!"
   },
   {
-    id: 3,
-    name: "Queijo Colonial",
-    price: 25.00,
-    unit: "kg",
-    category: "queijos",
-    producer: "Fazenda Santa Clara",
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=300",
-    description: "Queijo colonial artesanal"
+      id: 3,
+      name: "Rúculas",
+      price: 3.99,
+      category: "salad",
+producer: "Horta Verde",
+      rating: 4.7,
+      reviews: 12,
+      image: "imagens/img-ruculas.jpg",
+      unit: "unidade",
+      description: "Aproveite a delicadeza e o sabor marcante das nossas <b>Rúculas</b> frescas! Colhidas diariamente, são ideais para saladas, pizzas, sanduíches ou para dar um toque especial em pratos quentes. Fonte de nutrientes e com aquele leve amargor característico, nossas rúculas vão conquistar seu paladar. Vendidas por unidade, sempre fresquinhas para você!"
   },
   {
-    id: 4,
-    name: "Bananas Prata",
-    price: 4.50,
-    unit: "kg",
-    category: "frutas",
-    producer: "Sítio Boa Vista",
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300",
-    description: "Bananas prata frescas"
+      id: 4,
+      name: "Agrião",
+      price: 3.99,
+      category: "salad",
+producer: "Fazenda Feliz",
+      rating: 4.3,
+      reviews: 6,
+      image: "imagens/img-agriao.jpg",
+      unit: "unidade",
+      description: "O <b>Agrião</b> fresco é perfeito para quem busca sabor e saúde na mesma folha! Rico em vitaminas e minerais, tem sabor levemente picante e textura crocante. Ideal para saladas, sucos verdes ou como acompanhamento de pratos quentes. Vendido por unidade, sempre colhido no ponto certo para garantir frescor e qualidade na sua mesa!"
   },
   {
-    id: 5,
-    name: "Cenouras Orgânicas",
-    price: 6.80,
-    unit: "kg",
-    category: "hortalicas",
-    producer: "Horta Verde",
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300",
-    description: "Cenouras orgânicas frescas"
+      id: 5,
+      name: "Acelga",
+      price: 4.99,
+      category: "salad",
+producer: "Sítio Boa Vista",
+      rating: 4.6,
+      reviews: 8,
+      image: "imagens/img-acelga.jpg",
+      unit: "unidade",
+      description: "<b>Acelga</b> fresca, crocante e de folhas macias, perfeita para saladas, refogados ou pratos orientais. Vendida por unidade, colhida no ponto ideal para garantir sabor e qualidade."
   },
   {
-    id: 6,
-    name: "Geleia de Morango",
-    price: 12.00,
-    unit: "pote",
+      id: 6,
+      name: "Repolho",
+      price: 2.99,
+      category: "salad",
+      producer: "Sítio Boa Vista",
+rating: 4.9,
+      reviews: 15,
+      image: "imagens/img-repolho.jpg",
+      unit: "kg",
+      description: "<b>Repolho</b> fresco, firme e de folhas crocantes, ideal para saladas, refogados e pratos tradicionais. Rico em nutrientes, é colhido diariamente para garantir sabor, qualidade e frescor na sua mesa. Vendido por quilo."
+  },
+  {
+      id: 7,
+      name: "Bananas",
+      price: 3.99,
+      category: "frutas",
+      producer: "Fazenda Santa Clara",
+rating: 4.4,
+      reviews: 11,
+      image: "imagens/img-bananas.jpg",
+      unit: "kg",
+      description: "<b>Bananas</b> frescas, docinhas e colhidas no ponto ideal de maturação. Perfeitas para consumo in natura, vitaminas, sobremesas ou receitas caseiras. Fonte natural de energia, potássio e fibras. Vendidas por quilo para garantir sempre o melhor sabor na sua mesa!"
+  },
+  {
+      id: 8,
+      name: "Morangos",
+      price: 25.00,
+      category: "frutas",
+      producer: "Sítio Boa Vista",
+rating: 4.2,
+      reviews: 7,
+      image: "imagens/img-morangos.jpg",
+      unit: "kg",
+      description: "<b>Morangos</b> frescos, colhidos diretamente da horta, selecionados um a um para garantir doçura, suculência e qualidade. Ideais para consumo in natura, sobremesas, geleias ou sucos. Rico em vitamina C e antioxidantes. Vendidos por quilo para você levar o melhor da produção local para sua casa!"
+  },
+  {
+      id: 9,
+      name: "Mangas",
+      price: 4.49,
+      category: "frutas",
+      producer: "Chácara do Pedrinho",
+rating: 4.8,
+      reviews: 13,
+      image: "imagens/img-mangas.jpg",
+      unit: "kg",
+      description: "<b>Mangas</b> frescas, suculentas e naturalmente doces, colhidas no auge da maturação para garantir sabor e aroma irresistíveis. Perfeitas para consumo in natura, sucos, sobremesas ou saladas de frutas. Fonte de vitaminas, fibras e energia. Vendidas por quilo para você aproveitar o melhor da estação!"
+  },
+  {
+      id: 10,
+      name: "Queijo Colonial",
+      price: 40.00,
+      category: "queijos",
+      producer: "Propriedade Dona Ana",
+rating: 4.7,
+      reviews: 14,
+      image: "imagens/img-queijocolonialum.jpg",
+      unit: "kg",
+      description: "<b>Queijo Colonial</b> artesanal, produzido com leite fresco e selecionado, maturado para garantir textura macia e sabor marcante. Ideal para degustar puro, em tábuas de frios, lanches ou receitas especiais. Uma tradição da roça que leva qualidade e autenticidade à sua mesa. Vendido por quilo."
+  },
+  {
+      id: 11,
+      name: "Queijo Colonial",
+      price: 35.00,
+      category: "queijos",
+producer: "Chácara do Pedrinho",
+      rating: 4.6,
+      reviews: 10,
+      image: "imagens/img-queijocolonialdois.jpg",
+      unit: "kg",
+      description: "<b>Queijo Colonial</b> tradicional, feito artesanalmente com leite fresco da fazenda. Sabor suave, textura macia e aroma irresistível, perfeito para acompanhar cafés, pães ou compor tábuas de frios. Uma opção deliciosa e versátil para todas as ocasiões. Vendido por quilo, direto do produtor para sua mesa!"
+  },
+  {
+      id: 12,
+      name: "Geleia de Goiaba",
+      price: 25.00,
+      category: "geleias",
+      producer: "Doce Sabor",
+rating: 4.9,
+      reviews: 16,
+      image: "imagens/img-geleiadegoiaba.jpg",
+      unit: "500ml",
+      description: "Descubra o sabor irresistível da nossa <b>Geleia de Goiaba</b> artesanal! Feita com goiabas frescas selecionadas, preparada lentamente para preservar o aroma e a textura da fruta, sem adição de conservantes. Ideal para acompanhar pães, torradas, queijos ou dar um toque especial em sobremesas. Cada pote de 500ml é puro carinho e tradição, trazendo o melhor da fruta direto para sua mesa. Experimente essa delícia e surpreenda-se com o verdadeiro sabor caseiro!"
+  },
+  {
+      id: 13,
+      name: "Doce de Mamão",
+      price: 25.00,
+      category: "geleias",
+      producer: "Doces da Vovó",
+rating: 4.5,
+      reviews: 8,
+      image: "imagens/img-docedemamao.png",
+      unit: "1kg",
+      description: "Experimente o nosso <b>Doce de Mamão</b> artesanal, preparado com mamões frescos e selecionados, cozidos lentamente até atingir o ponto perfeito de sabor e textura. Sem conservantes, é uma verdadeira iguaria da culinária caseira, ideal para acompanhar pães, torradas, queijos ou ser apreciado puro. Cada pote de 1kg é feito com carinho, trazendo o gostinho da fazenda direto para sua mesa. Surpreenda-se com a doçura natural e a tradição em cada colherada!"
+  },
+  {
+      id: 14,
+      name: "Doce de Abóbora",
+      price: 22.00,
+      producer: "Doces da Vovó",
+category: "geleias",
+      rating: 4.7,
+      reviews: 12,
+      image: "imagens/img-docedeabobora.jpg",
+      unit: "1kg",
+      description: "Delicie-se com o nosso <b>Doce de Abóbora</b> artesanal, feito com abóboras frescas e selecionadas, cozidas lentamente com açúcar na medida certa para realçar o sabor natural e a cremosidade. Sem conservantes, é perfeito para acompanhar pães, torradas, queijos ou ser saboreado puro. Cada pote de 1kg traz o verdadeiro gostinho da roça, preparado com carinho e tradição para adoçar seus melhores momentos!"
+  },
+  {
+      id: 15,
+      name: "Cenouras",
+      price: 2.99,
+      category: "verduras",
+      rating: 4.8,
+      reviews: 11,
+      image: "imagens/img-cenouras.jpg",
+      unit: "kg",
+      description: "Nossas <b>Cenouras</b> são fresquinhas, crocantes e cheias de sabor! Colhidas diretamente da horta, são perfeitas para saladas, sucos, refogados ou para dar aquele toque especial em suas receitas. Ricas em vitaminas e nutrientes, garantem mais saúde e cor no seu prato. Vendidas por quilo, sempre com a qualidade que você merece!"
+  },
+  {
+      id: 16,
+      name: "Beringelas",
+      price: 4.99,
+      category: "verduras",
+producer: "Chácara do Pedrinho",
+      rating: 4.6,
+      reviews: 9,
+      image: "imagens/img-beringelas.jpg",
+      unit: "kg",
+      description: "Nossas <b>Beringelas</b> são frescas, firmes e de cor vibrante! Perfeitas para grelhados, assados, refogados ou para preparar deliciosas receitas como caponata e lasanha. Ricas em fibras e nutrientes, trazem mais sabor e saúde para o seu dia a dia. Vendidas por quilo, sempre com a qualidade e o frescor que você merece!"
+  },
+  {
+      id: 17,
+      name: "Brócolis",
+      price: 4.99,
+      category: "verduras",
+      producer: "Horta Verde",
+rating: 4.4,
+      reviews: 7,
+      image: "imagens/img-brocolis.jpg",
+      unit: "unidade",
+      description: "O <b>Brócolis</b> fresquinho é indispensável para quem busca sabor e saúde! Rico em fibras, vitaminas e minerais, é perfeito para saladas, refogados, tortas ou como acompanhamento de pratos variados. Com textura macia e sabor suave, vai conquistar toda a família. Vendido por unidade, sempre colhido no ponto certo para garantir qualidade e frescor na sua mesa!"
+  },
+  {
+      id: 18,
+      name: "Mandiocas",
+      price: 6.99,
+      category: "verduras",
+producer: "Fazenda Feliz",
+      rating: 4.3,
+      reviews: 6,
+      image: "imagens/img-mandioca.jpg",
+      unit: "kg",
+      description: "Nossas <b>Mandiocas</b> são selecionadas, macias e de excelente qualidade! Perfeitas para cozinhar, fritar, assar ou preparar aquele purê cremoso. Fonte de energia e muito sabor, são ideais para receitas tradicionais e para inovar na cozinha. Vendidas por quilo, sempre fresquinhas para garantir o melhor resultado nos seus pratos!"
+  },
+  {
+    id: 19,
+    name: "Mel Puro",
+    price: 20.00,
     category: "geleias",
-    producer: "Doce Sabor",
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300",
-    description: "Geleia artesanal de morango"
-  }
+    rating: 4.9,
+    reviews: 37,
+    image: "imagens/img-mel.jpg",
+    unit: "kg",
+    description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo."
+}
 ];
 
 let saldos = {
@@ -80,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
   loadProducts();
   updateCartDisplay();
   updateSaldoDisplay();
+  setupProductFilters();
 });
 
 // Função de inicialização
@@ -162,13 +324,14 @@ function createProductCard(product) {
   card.innerHTML = `
     <img src="${product.image}" alt="${product.name}">
     <div class="product-info">
-      <h3>${product.name}</h3>
+      <h3 class="text-black font-extrabold text-lg mb-2">${product.name}</h3>
+      <p class="text-gray-600 text-sm mb-2">${getCategoryName(product.category)}</p>
       <div class="rating">
         ${stars}
-        <span>(${product.rating})</span>
+        <span>(${product.reviews || 0})</span>
       </div>
       <p class="price">R$ ${product.price.toFixed(2).replace('.', ',')}/${product.unit}</p>
-      <p class="producer">Produtor: ${product.producer}</p>
+      <p class="text-gray-600 text-sm mb-2">Produtor: ${product.producer || ''}</p>
       <p class="description">${product.description}</p>
       <button class="btn btn-primary" onclick="addToCart('${product.name}', ${product.price}, '${product.unit}')">
         Adicionar ao Carrinho
@@ -396,18 +559,36 @@ function handleUsuarioSubmit() {
   document.getElementById('usuario-form').reset();
 }
 
-// Configurar filtros de produtos
+// Substituir setupProductFilters por uma versão que usa os botões de categoria
 function setupProductFilters() {
-  const searchInput = document.getElementById('search-products');
-  const categoryFilter = document.getElementById('category-filter');
-  
-  if (searchInput) {
-    searchInput.addEventListener('input', filterProducts);
+  const categoryButtons = document.querySelectorAll('[data-category]');
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const selected = this.getAttribute('data-category');
+      filterProductsByCategory(selected);
+    });
+  });
+}
+
+function filterProductsByCategory(category) {
+  console.log('Filtro funcionando!', category);
+  let filteredProducts;
+  if (category === 'all') {
+    filteredProducts = products;
+  } else if (category === 'vegetables') {
+    filteredProducts = products.filter(p => p.category === 'hortalicas');
+  } else if (category === 'fruits') {
+    filteredProducts = products.filter(p => p.category === 'frutas');
+  } else if (category === 'cheese') {
+    filteredProducts = products.filter(p => p.category === 'queijos');
+  } else if (category === 'salad') {
+    filteredProducts = products.filter(p => p.category === 'verduras');
+  } else if (category === 'geleias') {
+    filteredProducts = products.filter(p => p.category === 'geleias');
+  } else {
+    filteredProducts = products;
   }
-  
-  if (categoryFilter) {
-    categoryFilter.addEventListener('change', filterProducts);
-  }
+  displayFilteredProducts(filteredProducts);
 }
 
 // Filtrar produtos
@@ -582,7 +763,7 @@ function showNotification(message, type = 'info') {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
     max-width: 300px;
-            /* Removida animação */
+    animation: slideIn 0.3s ease;
   `;
   
   notification.querySelector('.notification-content').style.cssText = `
@@ -606,11 +787,11 @@ function showNotification(message, type = 'info') {
   style.textContent = `
     @keyframes slideIn {
       from {
-        /* Removida transformação */
+        transform: translateX(100%);
         opacity: 0;
       }
       to {
-        /* Removida transformação */
+        transform: translateX(0);
         opacity: 1;
       }
     }

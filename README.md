@@ -19,12 +19,6 @@ O HortiPerto é uma plataforma web inovadora que conecta produtores rurais diret
 - **Validação em Tempo Real**: Formatação automática e validação de dados
 - **Taxas Dinâmicas**: Cálculo automático baseado no método de pagamento
 
-### 🤖 Typebot Integrado
-- **Saudação Automática**: Mensagem de boas-vindas personalizada
-- **Atendimento 24h**: Respostas automáticas para dúvidas comuns
-- **Navegação Inteligente**: Direcionamento automático para seções relevantes
-- **Suporte Humano**: Redirecionamento para atendente quando necessário
-
 ### 🔐 Sistema de Autenticação
 - **Login Simples**: Acesso por e-mail/senha
 - **Gestão de Conta**: Interface para usuários logados
@@ -55,7 +49,7 @@ Horti-Perto/
 │   └── shopping-assistant.css    # Estilos do assistente
 ├── js/
 │   ├── hortiperto-main.js        # JavaScript principal
-│   ├── typebot-integration.js    # Integração Typebot
+│   ├─
 │   └── shopping-assistant.js     # Assistente de compras
 ├── imagens/                      # Assets de imagem
 ├── docs/                         # Documentação

@@ -298,11 +298,6 @@ function initializeApp() {
     // Inicializar novas funcionalidades
     setupPaymentSystem();
     
-    // Inicializar Typebot após um delay
-    setTimeout(() => {
-        initializeTypebot();
-    }, 3000);
-    
     console.log('✅ HortiPerto inicializado com sucesso!');
     setupRippleEffect();
 }
@@ -2210,14 +2205,18 @@ function updatePaymentSummary() {
     
     const total = subtotal + shipping + paymentFee;
     
-    // Atualizar valores na interface
-    const subtotalElement = document.getElementById('payment-subtotal');
-    const feeElement = document.getElementById('payment-fee');
-    const totalElement = document.getElementById('payment-total');
+    // Atualizar valores na interface usando os elementos existentes
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartTotalWithShippingElement = document.getElementById('cart-total-with-shipping');
     
-    if (subtotalElement) subtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-    if (feeElement) feeElement.textContent = `R$ ${paymentFee.toFixed(2).replace('.', ',')}`;
-    if (totalElement) totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    if (cartTotalWithShippingElement) {
+        const totalWithShipping = subtotal + shipping + paymentFee;
+        cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
+    }
 }
 
 function confirmPayment() {
@@ -2305,161 +2304,21 @@ function validateCashForm() {
     return true;
 }
 
-// Modificar a função proceedToCheckout para redirecionar para a aba de pagamento
+// Modificar a função proceedToCheckout para atualizar o resumo do pagamento
 function proceedToCheckout() {
     if (cart.length === 0) {
         showNotification('Seu carrinho está vazio', 'error');
         return;
     }
     
-    showTab('payment');
+    // Atualizar resumo do pagamento
     updatePaymentSummary();
+    showNotification('Carrinho atualizado! Escolha sua forma de pagamento.', 'success');
 }
 
 // ========================================
-// TYPEBOT INTEGRATION
+// INICIALIZAÇÃO DO SISTEMA
 // ========================================
-
-function initializeTypebot() {
-    try {
-        if (typeof HortiPertoTypebot !== 'undefined') {
-            console.log('[Typebot] Avançado detectado. Inicializando HortiPertoTypebot...');
-            const typebot = new HortiPertoTypebot();
-            if (typebot && typebot.showWelcomeMessage) {
-                typebot.showWelcomeMessage();
-            }
-            return typebot;
-        } else {
-            console.warn('[Typebot] HortiPertoTypebot não encontrado. Usando fallback básico.');
-            const fallback = createBasicTypebot();
-            fallback.showWelcomeMessage();
-            return fallback;
-        }
-    } catch (e) {
-        console.error('[Typebot] Erro ao inicializar:', e);
-        const fallback = createBasicTypebot();
-        fallback.showWelcomeMessage();
-        return fallback;
-    }
-}
-
-function createBasicTypebot() {
-    return {
-        showWelcomeMessage: function() {
-            const welcomeMessage = `
-                <div id="typebot-welcome" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-green-600">🌱 HortiPerto</h3>
-                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-3">Olá! Bem-vindo ao HortiPerto! Como posso te ajudar hoje?</p>
-                    <div class="space-y-2">
-                        <button onclick="typebotAction('products')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            🛒 Quero comprar produtos
-                        </button>
-                        <button onclick="typebotAction('seller')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            👨‍🌾 Quero vender produtos
-                        </button>
-                        <button onclick="typebotAction('delivery')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            🚚 Quero ser entregador
-                        </button>
-                        <button onclick="typebotAction('help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            ❓ Preciso de ajuda
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            // Remover mensagem anterior se existir
-            const existingMessage = document.getElementById('typebot-welcome');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            // Adicionar nova mensagem
-            document.body.insertAdjacentHTML('beforeend', welcomeMessage);
-            
-            // Auto-remover após 30 segundos
-            setTimeout(() => {
-                closeTypebot();
-            }, 30000);
-        },
-        
-        showHelpMessage: function() {
-            const helpMessage = `
-                <div id="typebot-help" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm z-50">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-green-600">🤝 Suporte</h3>
-                        <button onclick="closeTypebot()" class="text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-3">Como posso te ajudar?</p>
-                    <div class="space-y-2">
-                        <button onclick="typebotAction('shopping-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            ❓ Dúvidas sobre compras
-                        </button>
-                        <button onclick="typebotAction('delivery-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            📦 Problemas com entrega
-                        </button>
-                        <button onclick="typebotAction('payment-help')" class="w-full text-left p-2 rounded bg-green-50 hover:bg-green-100 text-sm">
-                            💳 Problemas com pagamento
-                        </button>
-                        <button onclick="typebotAction('human-support')" class="w-full text-left p-2 rounded bg-blue-50 hover:bg-blue-100 text-sm">
-                            📞 Falar com atendente
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', helpMessage);
-        }
-    };
-}
-
-function closeTypebot() {
-    const typebotElements = document.querySelectorAll('#typebot-welcome, #typebot-help');
-    typebotElements.forEach(element => element.remove());
-}
-
-function typebotAction(action) {
-    closeTypebot();
-    
-    switch (action) {
-        case 'products':
-            showTab('products');
-            showNotification('Navegando para produtos...', 'info');
-            break;
-        case 'seller':
-            showTab('seller-register');
-            showNotification('Navegando para cadastro de vendedor...', 'info');
-            break;
-        case 'delivery':
-            showTab('delivery-register');
-            showNotification('Navegando para cadastro de entregador...', 'info');
-            break;
-        case 'help':
-            // Mostrar mensagem de ajuda
-            const basicTypebot = createBasicTypebot();
-            basicTypebot.showHelpMessage();
-            break;
-        case 'shopping-help':
-            showNotification('Para dúvidas sobre compras, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'delivery-help':
-            showNotification('Para problemas com entrega, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'payment-help':
-            showNotification('Para problemas com pagamento, entre em contato pelo WhatsApp: (11) 99999-9999', 'info');
-            break;
-        case 'human-support':
-            showNotification('Redirecionando para atendente humano...', 'info');
-            // Aqui você pode integrar com um sistema de chat real
-            break;
-    }
-}
 
 // ========================================
 // INICIALIZAÇÃO DO SISTEMA
@@ -2485,11 +2344,6 @@ function initializeApp() {
     // Inicializar novas funcionalidades
     setupPaymentSystem();
     
-    // Inicializar Typebot após um delay
-    setTimeout(() => {
-        initializeTypebot();
-    }, 3000);
-    
     console.log('✅ HortiPerto inicializado com sucesso!');
     setupRippleEffect();
 }
@@ -2500,6 +2354,15 @@ if (document.readyState === 'loading') {
 } else {
     initializeApp();
 }
+
+// Exportar funções para o escopo global
+window.confirmPayment = confirmPayment;
+window.copyPixKey = copyPixKey;
+window.proceedToCheckout = proceedToCheckout;
+window.updateCartDisplay = updateCartDisplay;
+window.clearCart = clearCart;
+window.showTab = showTab;
+window.showNotification = showNotification;
 
 function setupPixQRCode() {
     const qrContainer = document.getElementById('pix-qr-code');

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/hortiperto-styles.css">
     <script src="js/hortiperto-main.js" defer></script>
-    <script src="js/typebot-integration.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
         /* Custom CSS for elements that need more specific styling */
@@ -433,15 +432,6 @@
             <section class="section section-products">
                 <h2 class="text-2xl font-bold mb-6 text-gradient">Nossos Produtos</h2>
                 
-                <div class="flex flex-wrap mb-6">
-                    <button class="btn btn-primary mr-2 mb-2" data-category="all">Todos</button>
-                    <button class="btn btn-secondary mr-2 mb-2" data-category="vegetables">Legumes</button>
-                    <button class="btn btn-secondary mr-2 mb-2" data-category="fruits">Frutas</button>
-                    <button class="btn btn-secondary mr-2 mb-2" data-category="cheese">Queijos</button>
-                    <button class="btn btn-secondary mr-2 mb-2" data-category="salad">Verduras</button>
-                    <button class="btn btn-secondary mr-2 mb-2" data-category="geleias">Doces e Geleias</button>
-                </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Product items will be loaded here -->
                     <div class="product-item card" data-category="vegetables">
@@ -1442,6 +1432,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <!-- Botão de Confirmar Pagamento -->
+                                <div class="mt-6">
+                                    <button id="confirm-payment" onclick="confirmPayment()" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-credit-card mr-2"></i>
+                                        Confirmar Pagamento
+                                    </button>
                                 </div>
                             </div>
                         </div>

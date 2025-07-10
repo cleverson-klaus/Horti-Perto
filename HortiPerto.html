@@ -238,8 +238,119 @@
             pointer-events: none;
         }
     </style>
+    
+    <style>
+/* === REDUÇÃO DA ALTURA DOS CARDS DE PRODUTOS === */
+.product-card {
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    height: 160px !important;
+    min-height: 160px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card .p-4 {
+    padding: 0.75rem !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card h3 {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 0.75rem !important;
+    line-height: 1rem;
+    margin-bottom: 0.5rem !important;
+    color: #6b7280;
+}
+
+.product-card .flex.items-center.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-card .rating-stars {
+    font-size: 0.75rem;
+}
+
+.product-card .text-gray-600.text-sm {
+    font-size: 0.625rem !important;
+}
+
+.product-card .flex.justify-between.items-center {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.product-card .font-bold.text-success-color,
+.product-card .font-bold.text-green-700 {
+    font-size: 0.875rem !important;
+}
+
+.product-card .btn,
+.product-card .add-to-cart {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    height: auto;
+    min-height: 28px;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 640px) {
+    .product-card {
+        min-height: 260px;
+    }
+    
+    .product-card img {
+        height: 140px !important;
+        min-height: 140px;
+    }
+    
+    .product-card h3 {
+        font-size: 0.8rem !important;
+    }
+    
+    .product-card p {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .product-card {
+        min-height: 300px;
+    }
+    
+    .product-card img {
+        height: 180px !important;
+        min-height: 180px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-card {
+        min-height: 320px;
+    }
+    
+    .product-card img {
+        height: 200px !important;
+        min-height: 200px;
+    }
+}
+</style>
 </head>
-<body class="font-sans">
+<body class="bg-gray-50 font-sans">
     <!-- Header/Navigation -->
     <header class="header-3d text-white shadow-lg">
         <nav class="main-navbar w-full flex justify-center items-center py-3 px-4 gap-6 relative">

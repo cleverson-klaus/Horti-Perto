@@ -115,7 +115,6 @@ Horti-Perto/
 3. **Teste as funcionalidades**:
    - Adicione produtos ao carrinho
    - Teste o sistema de pagamento
-   - Interaja com o Typebot
    - Faça login com demo/1234
 
 ## 📱 Responsividade

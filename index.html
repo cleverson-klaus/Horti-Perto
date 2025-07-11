@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="css/hortiperto-styles.css">
     <script src="js/hortiperto-main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+        // Verificar se QRious foi carregado
+        window.addEventListener('load', function() {
+            if (typeof QRious !== 'undefined') {
+                console.log('✅ QRious carregado com sucesso');
+            } else {
+                console.log('❌ QRious não foi carregado');
+            }
+        });
+    </script>
     <style>
         /* Custom CSS for elements que precisam de mais estilo */
         .product-card:hover {
@@ -32,6 +42,16 @@
         .form-step.active {
             display: block;
         }
+        
+        /* Garantir que os formulários de pagamento apareçam */
+        .payment-form {
+            display: none;
+        }
+        .payment-form:not(.hidden) {
+            display: block !important;
+        }
+        
+
 
         /* === EFEITOS 3D E ANIMAÇÕES === */
         .logo-3d-container {
@@ -76,7 +96,8 @@
             box-shadow: 0 0 10px #22c55e;
         }
         .floating {
-            /* Removido efeito de flutuação */
+            /* Efeito de flutuação removido para melhor performance */
+            transition: transform 0.3s ease;
         }
         .particles {
             display: none;
@@ -342,7 +363,7 @@
                 <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="user-register" onclick="showTab('user-register'); return false;">Cadastre-se</a>
                 <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="cart" onclick="showTab('cart'); return false;">
                     <i class="fas fa-shopping-cart"></i> Carrinho
-                    <span id="cart-count" class="bg-yellow-500 text-xs text-white rounded-full px-2 py-1 ml-1">0</span>
+                                            <span id="cart-count" class="bg-yellow-500 text-xs text-white rounded-full px-2 py-1 ml-1" data-cart-tooltip>0</span>
                 </a>
             </div>
             <div class="flex items-center gap-2">
@@ -1409,6 +1430,11 @@
                         <div class="cart-container sticky top-4">
                             <h3 class="text-lg font-semibold mb-4">Resumo do Pedido</h3>
                             
+                            <!-- Resumo detalhado do carrinho -->
+                            <div id="cart-summary" class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="text-gray-500 text-center">Carrinho vazio</p>
+                            </div>
+                            
                             <div class="space-y-3 mb-6">
                                 <div class="flex justify-between">
                                     <span>Subtotal:</span>
@@ -1433,6 +1459,9 @@
                                     Limpar Carrinho
                                 </button>
                             </div>
+                            
+                            <!-- Resumo detalhado do pagamento -->
+                            <div id="payment-summary" class="mt-6"></div>
                             <!-- Opções de Pagamento -->
                             <div class="mt-8">
                                 <h3 class="text-lg font-semibold mb-4">Escolha a Forma de Pagamento</h3>
@@ -1491,6 +1520,7 @@
                                             </div>
                                         </label>
                                     </div>
+
                                 </div>
                                 <!-- Formulários específicos para cada método -->
                                 <div id="payment-forms">
@@ -1592,6 +1622,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <!-- Botão de Confirmar Pagamento -->
                                 <div class="mt-6">
@@ -1600,6 +1631,8 @@
                                         Confirmar Pagamento
                                     </button>
                                 </div>
+                                
+
                             </div>
                         </div>
                     </div>

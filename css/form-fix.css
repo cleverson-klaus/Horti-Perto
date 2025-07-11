@@ -1,0 +1,289 @@
+/* ========================================
+   CORREÇÃO ESPECÍFICA PARA FORMULÁRIOS
+   ======================================== */
+
+/* Reset completo para todos os inputs nos formulários */
+#seller-register input,
+#seller-register select,
+#seller-register textarea,
+#delivery-register input,
+#delivery-register select,
+#delivery-register textarea,
+#user-register input,
+#user-register select,
+#user-register textarea {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  line-height: 1.5 !important;
+  transition: all 0.3s ease !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Estados de foco */
+#seller-register input:focus,
+#seller-register select:focus,
+#seller-register textarea:focus,
+#delivery-register input:focus,
+#delivery-register select:focus,
+#delivery-register textarea:focus,
+#user-register input:focus,
+#user-register select:focus,
+#user-register textarea:focus {
+  outline: none !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Placeholders */
+#seller-register input::placeholder,
+#seller-register textarea::placeholder,
+#delivery-register input::placeholder,
+#delivery-register textarea::placeholder,
+#user-register input::placeholder,
+#user-register textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-style: normal !important;
+  -webkit-text-fill-color: #9ca3af !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Inputs com texto digitado */
+#seller-register input:not(:placeholder-shown),
+#seller-register textarea:not(:placeholder-shown),
+#delivery-register input:not(:placeholder-shown),
+#delivery-register textarea:not(:placeholder-shown),
+#user-register input:not(:placeholder-shown),
+#user-register textarea:not(:placeholder-shown) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Inputs com valor */
+#seller-register input[value],
+#delivery-register input[value],
+#user-register input[value] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Sobrescrever qualquer estilo inline */
+#seller-register input[style],
+#delivery-register input[style],
+#user-register input[style] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  line-height: 1.5 !important;
+  transition: all 0.3s ease !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os containers tenham fundo branco */
+#seller-register,
+#delivery-register,
+#user-register {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+/* Garantir que os containers internos tenham fundo branco */
+#seller-register .bg-white,
+#delivery-register .bg-white,
+#user-register .bg-white,
+#seller-register .card,
+#delivery-register .card,
+#user-register .card {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  position: relative !important;
+  z-index: 1001 !important;
+}
+
+/* Garantir que os labels sejam visíveis */
+#seller-register label,
+#delivery-register label,
+#user-register label {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-bottom: 4px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os títulos sejam visíveis */
+#seller-register h1,
+#seller-register h2,
+#seller-register h3,
+#seller-register h4,
+#seller-register h5,
+#seller-register h6,
+#delivery-register h1,
+#delivery-register h2,
+#delivery-register h3,
+#delivery-register h4,
+#delivery-register h5,
+#delivery-register h6,
+#user-register h1,
+#user-register h2,
+#user-register h3,
+#user-register h4,
+#user-register h5,
+#user-register h6 {
+  color: #1f2937 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os parágrafos sejam visíveis */
+#seller-register p,
+#delivery-register p,
+#user-register p {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os spans sejam visíveis */
+#seller-register span,
+#delivery-register span,
+#user-register span {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os divs sejam visíveis */
+#seller-register div,
+#delivery-register div,
+#user-register div {
+  color: inherit !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os botões tenham texto visível */
+#seller-register button,
+#delivery-register button,
+#user-register button {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os botões de navegação tenham texto visível */
+#seller-register .next-step,
+#seller-register .prev-step,
+#delivery-register .next-step,
+#delivery-register .prev-step,
+#user-register .next-step,
+#user-register .prev-step {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os botões de submit tenham texto visível */
+#seller-register .btn-neon,
+#delivery-register .btn-neon,
+#user-register .btn-neon {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os checkboxes sejam visíveis */
+#seller-register input[type="checkbox"] + span,
+#delivery-register input[type="checkbox"] + span,
+#user-register input[type="checkbox"] + span {
+  color: #374151 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os textos de ajuda sejam visíveis */
+#seller-register .text-xs,
+#delivery-register .text-xs,
+#user-register .text-xs {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os textos de descrição sejam visíveis */
+#seller-register .text-sm,
+#delivery-register .text-sm,
+#user-register .text-sm {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os textos de erro sejam visíveis */
+#seller-register .validation-message,
+#delivery-register .validation-message,
+#user-register .validation-message {
+  color: #dc2626 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os textos de sucesso sejam visíveis */
+#seller-register .validation-message.success,
+#delivery-register .validation-message.success,
+#user-register .validation-message.success {
+  color: #059669 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+} 
+
+#login-modal {
+  z-index: 30000 !important;
+  position: fixed !important;
+}
+#login-modal > div {
+  z-index: 30001 !important;
+  position: relative;
+}
+.recommendation-widget,
+#faq-widget,
+#shopping-assistant-widget {
+  z-index: 20000 !important;
+} 

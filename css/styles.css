@@ -191,8 +191,8 @@ body {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
   padding: 0 2rem;
 }
 
@@ -204,17 +204,19 @@ body {
 }
 
 .product-card:hover {
+  transform: none;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
+
 .product-card img {
   width: 100%;
-  height: 200px;
+  height: 60px;
   object-fit: cover;
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 0.4rem;
 }
 
 .product-info h3 {

@@ -1,0 +1,1 @@
+// Arquivo esvaziado para remover integração typebot do front-end. 

@@ -3,15 +3,16 @@ let meusProdutos = [
   {
     id: 1,
     nome: "Tomates Frescos",
-    categoria: "hortalicas",
-    preco: 8.90,
+    categoria: "frutas",
+    preco: 8.99,
     unidade: "kg",
     quantidade: 50,
-    descricao: "Tomates frescos colhidos diariamente da nossa horta",
-    foto: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300",
+    descricao: "Tomates frescos colhidos diariamente da nossa horta.",
+    foto: "imagens/img-tomates.jpg",
     organico: true,
     dataCadastro: "2024-01-15",
-    status: "ativo"
+    status: "ativo",
+    produtor: "Fazenda Feliz"
   },
   {
     id: 2,
@@ -189,6 +190,7 @@ function createProdutoCard(produto) {
       <p class="category">${getCategoriaNome(produto.categoria)}</p>
       <p class="price">R$ ${produto.preco.toFixed(2).replace('.', ',')}/${produto.unidade}</p>
       <p class="quantity">Quantidade: ${produto.quantidade} ${produto.unidade}</p>
+      <p class="text-gray-600 text-sm mb-2">Produtor: ${produto.produtor || ''}</p>
       <p class="description">${produto.descricao}</p>
       ${produto.organico ? '<span class="badge-organic">🌱 Orgânico</span>' : ''}
       <div class="product-actions">
@@ -210,15 +212,20 @@ function createProdutoCard(produto) {
 
 // Obter nome da categoria
 function getCategoriaNome(categoria) {
-  const categorias = {
-    'frutas': 'Frutas',
-    'verduras': 'Verduras',
-    'hortalicas': 'Hortaliças',
-    'queijos': 'Queijos',
-    'geleias': 'Geleias',
-    'outros': 'Outros'
-  };
-  return categorias[categoria] || categoria;
+  switch (categoria) {
+    case "frutas":
+      return "Frutas";
+    case "hortalicas":
+      return "Hortaliças";
+    case "queijos":
+      return "Queijos";
+    case "geleias":
+      return "Doces e Geleias";
+    case "verduras":
+      return "Verduras";
+    default:
+      return "Outros";
+  }
 }
 
 // Editar produto

@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/hortiperto-styles.css">
     <script src="js/hortiperto-main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
-        /* Custom CSS for elements that need more specific styling */
+        /* Custom CSS for elements que precisam de mais estilo */
         .product-card:hover {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
@@ -32,16 +33,13 @@
             display: block;
         }
 
-        /* === EFEITOS ESTÁTICOS === */
-        
-        /* Container para o nome da empresa */
+        /* === EFEITOS 3D E ANIMAÇÕES === */
         .logo-3d-container {
             position: relative;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
         .logo-front {
             position: relative;
             font-size: 1.5rem;
@@ -55,112 +53,75 @@
                 0 0 8px #22c55e;
             white-space: nowrap;
         }
-        
-        /* Botões de navegação estáticos */
         .nav-link {
             position: relative;
             border-radius: 8px;
             overflow: hidden;
         }
-        
         .nav-link:hover {
             box-shadow: 0 0 5px #00ff88;
         }
-        
-        /* Cards de produtos estáticos */
         .product-card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
         .product-card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        
-        /* Botões estáticos */
         .btn-neon {
             position: relative;
             overflow: hidden;
             border: 2px solid transparent;
         }
-        
         .btn-neon:hover {
             box-shadow: 0 0 10px #22c55e;
         }
-        
-        /* Elementos estáticos */
         .floating {
             /* Removido efeito de flutuação */
         }
-        
-        /* Efeito de partículas removido */
         .particles {
             display: none;
         }
-        
         .particle {
             display: none;
         }
-        
-        /* Efeito de brilho nos títulos estático */
         .glow-text {
-            text-shadow: 
-                0 0 5px #22c55e,
-                0 0 10px #22c55e,
-                0 0 15px #22c55e;
+            text-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e, 0 0 15px #22c55e;
         }
-        
-        /* Efeito de profundidade no header */
         .header-3d {
             background: linear-gradient(135deg, #166534, #22c55e, #16a34a);
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transform-style: preserve-3d;
         }
-        
-        /* Efeito de hover 3D nos botões de ação */
         .action-btn {
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
         }
-        
         .action-btn:hover {
             transform: translateY(-5px) rotateX(10deg);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.2),
-                0 0 15px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(34, 197, 94, 0.4);
         }
-        
-        /* Efeito de pulso nos elementos importantes */
         .pulse {
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-        
-        /* Efeito de gradiente animado */
         .gradient-bg {
             background: linear-gradient(-45deg, #166534, #22c55e, #16a34a, #15803d);
             background-size: 400% 400%;
             animation: gradientShift 4s ease infinite;
         }
-        
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        /* Efeito de onda nos botões */
         .btn-neon, .action-btn {
             position: relative;
             overflow: hidden;
         }
-        
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -169,44 +130,32 @@
             animation: ripple-animation 0.6s linear;
             pointer-events: none;
         }
-        
         @keyframes ripple-animation {
             to {
                 transform: scale(4);
                 opacity: 0;
             }
         }
-        
-        /* Melhorias adicionais para efeitos 3D */
         .product-card img {
             transition: transform 0.3s ease;
         }
-        
         .product-card:hover img {
             transform: scale(1.05);
         }
-        
-        /* Efeito de profundidade nos ícones */
         .text-green-600 i {
             transition: all 0.3s ease;
             transform-style: preserve-3d;
         }
-        
         .floating:hover .text-green-600 i {
             transform: rotateY(180deg) scale(1.2);
             color: #16a34a;
         }
-        
-        /* Efeito de brilho nos preços estático */
         .font-bold.text-green-700 {
             text-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
         }
-        
         .product-card:hover .font-bold.text-green-700 {
             text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
         }
-
-        /* Contorno nas palavras do topo */
         .top-title-outline {
             color: #7C4A03;
             font-weight: bold;
@@ -218,8 +167,6 @@
                 2px 2px 0 #fff,
                 0 0 8px #22c55e;
         }
-
-        /* Neon circular estático ao redor dos nav-links */
         .nav-link-neon-outline {
             position: relative;
             z-index: 1;
@@ -237,20 +184,163 @@
             box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844;
             opacity: 0.7;
             pointer-events: none;
+            transition: box-shadow 0.3s, border-color 0.3s;
+            animation: neon-circular 2s linear infinite;
+        }
+        @keyframes neon-circular {
+            0% { box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844; }
+            50% { box-shadow: 0 0 32px 8px #00ff88, 0 0 64px 16px #00ff8844; }
+            100% { box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844; }
         }
     </style>
+    <style>
+/* === REDUÇÃO DA ALTURA DOS CARDS DE PRODUTOS === */
+.product-card {
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    height: 160px !important;
+    min-height: 160px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card .p-4 {
+    padding: 0.75rem !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card h3 {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 0.75rem !important;
+    line-height: 1rem;
+    margin-bottom: 0.5rem !important;
+    color: #6b7280;
+}
+
+.product-card .flex.items-center.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-card .rating-stars {
+    font-size: 0.75rem;
+}
+
+.product-card .text-gray-600.text-sm {
+    font-size: 0.625rem !important;
+}
+
+.product-card .flex.justify-between.items-center {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.product-card .font-bold.text-success-color,
+.product-card .font-bold.text-green-700 {
+    font-size: 0.875rem !important;
+}
+
+.product-card .btn,
+.product-card .add-to-cart {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    height: auto;
+    min-height: 28px;
+}
+
+@media (max-width: 640px) {
+    .product-card {
+        min-height: 260px;
+    }
+    
+    .product-card img {
+        height: 140px !important;
+        min-height: 140px;
+    }
+    
+    .product-card h3 {
+        font-size: 0.8rem !important;
+    }
+    
+    .product-card p {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .product-card {
+        min-height: 300px;
+    }
+    
+    .product-card img {
+        height: 180px !important;
+        min-height: 180px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-card {
+        min-height: 320px;
+    }
+    
+    .product-card img {
+        height: 200px !important;
+        min-height: 200px;
+    }
+}
+</style>
 </head>
-<body class="font-sans">
+<body class="bg-gray-50 font-sans">
+    <!-- Modal de Login -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50" style="display:none;">
+      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <button onclick="closeLoginModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+        <h2 class="text-2xl font-bold mb-6 text-center text-gradient">Entrar na Plataforma</h2>
+        <form id="login-form" autocomplete="off">
+          <div class="mb-4">
+            <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+            <input type="email" id="login-email" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+          </div>
+          <div class="mb-4" style="position:relative;">
+            <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+            <input type="password" id="login-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required minlength="6" maxlength="20" pattern="^[A-Za-z0-9]+$">
+          </div>
+          <div class="mb-4">
+            <label for="login-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Usuário</label>
+            <select id="login-type" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" required>
+              <option value="consumer">Consumidor</option>
+              <option value="seller">Vendedor</option>
+              <option value="delivery">Entregador</option>
+            </select>
+          </div>
+          <div id="login-error" class="text-red-600 text-sm mb-2" style="display:none;"></div>
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Entrar</button>
+        </form>
+      </div>
+    </div>
     <!-- Header/Navigation -->
     <header class="header-3d text-white shadow-lg">
         <nav class="main-navbar w-full flex justify-center items-center py-3 px-4 gap-6 relative">
             <div class="flex flex-1 justify-center gap-6">
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="home">Início</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="products">Produtos</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="seller-register">Seja Vendedor</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="delivery-register">Seja Entregador</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="user-register">Cadastre-se</a>
-                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="cart">
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="home" onclick="showTab('home'); return false;">Início</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="products" onclick="showTab('products'); return false;">Produtos</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="seller-register" onclick="showTab('seller-register'); return false;">Seja Vendedor</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="delivery-register" onclick="showTab('delivery-register'); return false;">Seja Entregador</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="user-register" onclick="showTab('user-register'); return false;">Cadastre-se</a>
+                <a href="#" class="nav-link nav-link-neon-outline hover:text-green-200" data-tab="cart" onclick="showTab('cart'); return false;">
                     <i class="fas fa-shopping-cart"></i> Carrinho
                     <span id="cart-count" class="bg-yellow-500 text-xs text-white rounded-full px-2 py-1 ml-1">0</span>
                 </a>
@@ -262,21 +352,6 @@
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        <!-- Modal de Login -->
-        <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs w-full relative">
-                <button id="close-login-modal" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl" aria-label="Fechar">&times;</button>
-                <h2 class="text-xl font-bold mb-4 text-center text-gray-800">Entrar</h2>
-                <form id="login-form" autocomplete="on">
-                    <label for="login-usuario" class="block text-gray-700 mb-1">Usuário ou E-mail</label>
-                    <input id="login-usuario" name="usuario" type="text" class="form-input mb-3" required autofocus autocomplete="username">
-                    <label for="login-senha" class="block text-gray-700 mb-1">Senha</label>
-                    <input id="login-senha" name="senha" type="password" class="form-input mb-4" required autocomplete="current-password">
-                    <button type="submit" class="btn btn-primary w-full">Entrar</button>
-                </form>
-                <div id="login-error" class="validation-message error mt-2 hidden"></div>
-            </div>
-        </div>
     </header>
     <!-- Main Content Area -->
     <main class="container mx-auto px-4 py-8">
@@ -429,10 +504,10 @@
         </div>
 
         <!-- Products Tab -->
-        <div id="products" class="tab-content">
+        <div id="products" class="tab-content active">
             <section class="section section-products">
                 <h2 class="text-2xl font-bold mb-6 text-gradient">Nossos Produtos</h2>
-                
+                <!-- Botões de filtro -->
                 <div class="flex flex-wrap mb-6">
                     <button class="btn btn-primary mr-2 mb-2" data-category="all">Todos</button>
                     <button class="btn btn-secondary mr-2 mb-2" data-category="vegetables">Legumes</button>
@@ -441,7 +516,7 @@
                     <button class="btn btn-secondary mr-2 mb-2" data-category="salad">Verduras</button>
                     <button class="btn btn-secondary mr-2 mb-2" data-category="geleias">Doces e Geleias</button>
                 </div>
-
+                
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Product items will be loaded here -->
                     <div class="product-item card" data-category="vegetables">
@@ -629,13 +704,13 @@
                 <h2 class="text-2xl font-bold mb-6 text-gradient border-b pb-2">Cadastro de Vendedor</h2>
                 
                 <div class="card mb-8">
-                    <h3 class="text-xl font-semibold mb-4 text-success-color">Requisitos para Cadastro</h3>
+                    <h3 class="text-xl font-bold mb-4 text-gradient">Requisitos para o cadastro:</h3>
                     <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>Cadastro de Produtor Rural (CPP - Cadastro de Produtor Primário)</li>
-                        <li>Inscrição Estadual</li>
-                        <li>Capacidade para emissão de Nota Fiscal de Produtor Rural</li>
-                        <li>Cadastro Ambiental Rural (CAR) para propriedades rurais</li>
-                        <li>Alvará Sanitário (apenas para produtos processados)</li>
+                        <li>Cadastro de Produtor Rural (CPP - Cadastro de Produtor Primário);</li>
+                        <li>Inscrição Estadual;</li>
+                        <li>Capacidade para emissão de Nota Fiscal de Produtor Rural;</li>
+                        <li>Cadastro Ambiental Rural (CAR) para propriedades rurais;</li>
+                        <li>Alvará Sanitário (apenas para produtos processados).</li>
                     </ul>
                 </div>
 
@@ -766,7 +841,7 @@
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Hortaliças</span>
+                                            <span class="ml-2">Legumes</span>
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
@@ -774,11 +849,7 @@
                                         </label>
                                         <label class="flex items-center">
                                             <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Geleias</span>
-                                        </label>
-                                        <label class="flex items-center">
-                                            <input type="checkbox" class="rounded text-green-600 focus:ring-green-500">
-                                            <span class="ml-2">Saladas Prontas</span>
+                                            <span class="ml-2">Doces e Geleias</span>
                                         </label>
                                     </div>
                                 </div>
@@ -827,6 +898,31 @@
                             </div>
                             <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="5">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="5">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="seller-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="seller-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="seller-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="seller-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="seller-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="4">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -849,7 +945,6 @@
                     </div>
                 </div>
             </section>
-
 
         </div>
 
@@ -1101,6 +1196,31 @@
                             </div>
                             <div class="flex justify-between mt-6">
                                 <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="3">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="5">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="5">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="delivery-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="delivery-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="delivery-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="delivery-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="delivery-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="4">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -1205,7 +1325,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex justify-end mt-6">
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="1">Voltar</button>
                                 <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="3">Próximo</button>
                             </div>
                         </div>
@@ -1230,8 +1351,33 @@
                                     <input type="text" id="user-card-cvv" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
                                 </div>
                             </div>
-                            <div class="flex justify-end mt-6">
-                                <button type="button" class="prev-step bg-white text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition" data-prev="2">Voltar</button>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="2">Voltar</button>
+                                <button type="button" class="next-step bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition" data-next="4">Próximo</button>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step="4">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Informações de Login</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                    <input type="email" id="user-login-email" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="user-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="user-password" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="user-password-confirm" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="user-password-confirm" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" pattern="^[A-Za-z0-9]+$" minlength="6" maxlength="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="prev-step bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition" data-prev="3">Voltar</button>
                                 <button type="submit" class="btn-neon bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Finalizar Cadastro</button>
                             </div>
                         </div>
@@ -1287,6 +1433,174 @@
                                     Limpar Carrinho
                                 </button>
                             </div>
+                            <!-- Opções de Pagamento -->
+                            <div class="mt-8">
+                                <h3 class="text-lg font-semibold mb-4">Escolha a Forma de Pagamento</h3>
+                                <div class="space-y-4 mb-6">
+                                    <!-- Cartão de Crédito/Débito -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-card" name="payment-method" value="card" class="hidden">
+                                        <label for="payment-card" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-credit-card text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">Cartão de Crédito/Débito</h4>
+                                                        <p class="text-sm text-gray-600">Visa, Mastercard, Elo e outros</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <!-- Dinheiro -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-cash" name="payment-method" value="cash" class="hidden">
+                                        <label for="payment-cash" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-money-bill-wave text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">Dinheiro</h4>
+                                                        <p class="text-sm text-gray-600">Pagamento na entrega</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <!-- PIX -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-pix" name="payment-method" value="pix" class="hidden">
+                                        <label for="payment-pix" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-qrcode text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">PIX</h4>
+                                                        <p class="text-sm text-gray-600">Pagamento instantâneo</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Formulários específicos para cada método -->
+                                <div id="payment-forms">
+                                    <!-- Formulário de Cartão -->
+                                    <div id="card-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Dados do Cartão</h4>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label for="card-number" class="block text-sm font-medium text-gray-700 mb-1">Número do Cartão</label>
+                                                <input type="text" id="card-number" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="0000 0000 0000 0000" maxlength="19">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label for="card-expiry" class="block text-sm font-medium text-gray-700 mb-1">Validade</label>
+                                                    <input type="text" id="card-expiry" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="MM/AA" maxlength="5">
+                                                </div>
+                                                <div>
+                                                    <label for="card-cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                                                    <input type="text" id="card-cvv" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="123" maxlength="4">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="card-holder" class="block text-sm font-medium text-gray-700 mb-1">Nome do Titular</label>
+                                                <input type="text" id="card-holder" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Como está no cartão">
+                                            </div>
+                                            <div>
+                                                <label for="card-installments" class="block text-sm font-medium text-gray-700 mb-1">Parcelas</label>
+                                                <select id="card-installments" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                                                    <option value="1">1x sem juros</option>
+                                                    <option value="2">2x sem juros</option>
+                                                    <option value="3">3x sem juros</option>
+                                                    <option value="4">4x sem juros</option>
+                                                    <option value="5">5x sem juros</option>
+                                                    <option value="6">6x sem juros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Formulário de Dinheiro -->
+                                    <div id="cash-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Pagamento em Dinheiro</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+                                                    <span class="text-sm text-yellow-800">O pagamento será realizado no momento da entrega</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="cash-change" class="block text-sm font-medium text-gray-700 mb-1">Troco para (opcional)</label>
+                                                <input type="text" id="cash-change" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ex: R$ 50,00">
+                                                <p class="text-xs text-gray-500 mt-1">Informe o valor para o qual precisa de troco</p>
+                                            </div>
+                                            <div>
+                                                <label for="cash-notes" class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+                                                <textarea id="cash-notes" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" rows="3" placeholder="Alguma observação sobre o pagamento?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Formulário de PIX -->
+                                    <div id="pix-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Pagamento via PIX</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                                                    <span class="text-sm text-green-800">Pagamento instantâneo e seguro</span>
+                                                </div>
+                                            </div>
+                                            <!-- QR Code -->
+                                            <div class="text-center">
+                                                <h5 class="font-medium mb-3">Escaneie o QR Code</h5>
+                                                <div id="pix-qr-code" class="bg-white border-2 border-gray-300 rounded-lg p-6 inline-block">
+                                                    <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                        <i class="fas fa-qrcode text-6xl text-gray-400"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-2">Use o app do seu banco para escanear</p>
+                                            </div>
+                                            <!-- Chave PIX -->
+                                            <div class="border-t pt-4">
+                                                <h5 class="font-medium mb-3">Ou copie a chave PIX</h5>
+                                                <div class="flex items-center space-x-2">
+                                                    <input type="text" id="pix-key" value="hortiperto@email.com" class="flex-1 px-4 py-2 border rounded-lg bg-gray-50" readonly>
+                                                    <button onclick="copyPixKey()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-1">Chave PIX: hortiperto@email.com</p>
+                                            </div>
+                                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                                <div class="flex items-start">
+                                                    <i class="fas fa-lightbulb text-blue-600 mr-2 mt-1"></i>
+                                                    <div class="text-sm text-blue-800">
+                                                        <p class="font-medium mb-1">Dica:</p>
+                                                        <p>Após o pagamento, o pedido será processado automaticamente. Você receberá uma confirmação por e-mail.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Botão de Confirmar Pagamento -->
+                                <div class="mt-6">
+                                    <button id="confirm-payment" onclick="confirmPayment()" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-credit-card mr-2"></i>
+                                        Confirmar Pagamento
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1296,19 +1610,3 @@
     </main>
 </body>
 </html>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const loginBtn = document.getElementById('login-btn');
-  const loginModal = document.getElementById('login-modal');
-  if (loginBtn && loginModal) {
-    loginBtn.addEventListener('click', function() {
-      console.log('Botão Entrar clicado!');
-      loginModal.classList.remove('hidden');
-      loginModal.classList.add('active');
-    });
-  } else {
-    console.log('login-btn ou login-modal não encontrado no DOM');
-  }
-});
-</script>

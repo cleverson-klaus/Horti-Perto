@@ -16,6 +16,7 @@ let products = [
         name: "Geleia de Maracujá",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 5.0,
         reviews: 0,
         image: "imagens/img-geleiademaracuja.jpg",
@@ -27,6 +28,7 @@ let products = [
         name: "Alfaces",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.5,
         reviews: 9,
         image: "imagens/img-alfaces.jpg",
@@ -38,6 +40,7 @@ let products = [
         name: "Rúculas",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.7,
         reviews: 12,
         image: "imagens/img-ruculas.jpg",
@@ -49,6 +52,7 @@ let products = [
         name: "Agrião",
         price: 3.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.3,
         reviews: 6,
         image: "imagens/img-agriao.jpg",
@@ -60,6 +64,7 @@ let products = [
         name: "Acelga",
         price: 4.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.6,
         reviews: 8,
         image: "imagens/img-acelga.jpg",
@@ -71,6 +76,7 @@ let products = [
         name: "Repolho",
         price: 2.99,
         category: "salad",
+        producer: "Horta Verde",
         rating: 4.9,
         reviews: 15,
         image: "imagens/img-repolho.jpg",
@@ -82,6 +88,7 @@ let products = [
         name: "Bananas",
         price: 3.99,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.4,
         reviews: 11,
         image: "imagens/img-bananas.jpg",
@@ -93,6 +100,7 @@ let products = [
         name: "Morangos",
         price: 25.00,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.2,
         reviews: 7,
         image: "imagens/img-morangos.jpg",
@@ -104,6 +112,7 @@ let products = [
         name: "Mangas",
         price: 4.49,
         category: "frutas",
+        producer: "Fazenda Feliz",
         rating: 4.8,
         reviews: 13,
         image: "imagens/img-mangas.jpg",
@@ -115,6 +124,7 @@ let products = [
         name: "Queijo Colonial",
         price: 40.00,
         category: "queijos",
+        producer: "Laticínio Artesanal",
         rating: 4.7,
         reviews: 14,
         image: "imagens/img-queijocolonialum.jpg",
@@ -126,6 +136,7 @@ let products = [
         name: "Queijo Colonial",
         price: 35.00,
         category: "queijos",
+        producer: "Laticínio Artesanal",
         rating: 4.6,
         reviews: 10,
         image: "imagens/img-queijocolonialdois.jpg",
@@ -137,6 +148,7 @@ let products = [
         name: "Geleia de Goiaba",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.9,
         reviews: 16,
         image: "imagens/img-geleiadegoiaba.jpg",
@@ -148,10 +160,11 @@ let products = [
         name: "Doce de Mamão",
         price: 25.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.5,
         reviews: 8,
         image: "imagens/img-docedemamao.png",
-        unit: "1kg",
+        unit: "kg",
         description: "Experimente o nosso <b>Doce de Mamão</b> artesanal, preparado com mamões frescos e selecionados, cozidos lentamente até atingir o ponto perfeito de sabor e textura. Sem conservantes, é uma verdadeira iguaria da culinária caseira, ideal para acompanhar pães, torradas, queijos ou ser apreciado puro. Cada pote de 1kg é feito com carinho, trazendo o gostinho da fazenda direto para sua mesa. Surpreenda-se com a doçura natural e a tradição em cada colherada!"
     },
     {
@@ -159,10 +172,11 @@ let products = [
         name: "Doce de Abóbora",
         price: 22.00,
         category: "geleias",
+        producer: "Doce Sabor",
         rating: 4.7,
         reviews: 12,
         image: "imagens/img-docedeabobora.jpg",
-        unit: "1kg",
+        unit: "kg",
         description: "Delicie-se com o nosso <b>Doce de Abóbora</b> artesanal, feito com abóboras frescas e selecionadas, cozidas lentamente com açúcar na medida certa para realçar o sabor natural e a cremosidade. Sem conservantes, é perfeito para acompanhar pães, torradas, queijos ou ser saboreado puro. Cada pote de 1kg traz o verdadeiro gostinho da roça, preparado com carinho e tradição para adoçar seus melhores momentos!"
     },
     {
@@ -170,6 +184,7 @@ let products = [
         name: "Cenouras",
         price: 2.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.8,
         reviews: 11,
         image: "imagens/img-cenouras.jpg",
@@ -181,6 +196,7 @@ let products = [
         name: "Beringelas",
         price: 4.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.6,
         reviews: 9,
         image: "imagens/img-beringelas.jpg",
@@ -192,6 +208,7 @@ let products = [
         name: "Brócolis",
         price: 4.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.4,
         reviews: 7,
         image: "imagens/img-brocolis.jpg",
@@ -203,11 +220,36 @@ let products = [
         name: "Mandiocas",
         price: 6.99,
         category: "verduras",
+        producer: "Horta Verde",
         rating: 4.3,
         reviews: 6,
         image: "imagens/img-mandioca.jpg",
         unit: "kg",
         description: "Nossas <b>Mandiocas</b> são selecionadas, macias e de excelente qualidade! Perfeitas para cozinhar, fritar, assar ou preparar aquele purê cremoso. Fonte de energia e muito sabor, são ideais para receitas tradicionais e para inovar na cozinha. Vendidas por quilo, sempre fresquinhas para garantir o melhor resultado nos seus pratos!"
+    },
+    {
+        id: 19,
+        name: "Mel Puro",
+        price: 20.00,
+        category: "geleias",
+        producer: "Fazenda Feliz",
+        rating: 4.9,
+        reviews: 37,
+        image: "imagens/img-mel.jpg",
+        unit: "kg",
+        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo."
+    },
+    {
+        id: 20,
+        name: "Tomates",
+        price: 8.99,
+        category: "frutas",
+        producer: "Fazenda Feliz",
+        rating: 4.8,
+        reviews: 45,
+        image: "imagens/img-tomates.jpg",
+        unit: "kg",
+        description: "Nossos <b>Tomates</b> são vendidos por quilo e, absolutamente, frescos, uma vez que são colhidos diariamente, garantindo sabor, suculência e qualidade incomparáveis. Ideais para saladas, molhos ou consumo in natura, eles trazem o melhor da horta diretamente para a sua mesa. Experimente a diferença de um produto cultivado com cuidado e dedicação!"
     }
 ];
 
@@ -215,29 +257,31 @@ let products = [
 let sellerProducts = [
     {
         id: 1,
-        name: "Tomates Frescos",
-        category: "tomates",
-        price: 8.90,
+        name: "Tomates",
+        category: "frutas",
+        price: 8.99,
         unit: "kg",
         quantity: 50,
-        description: "Tomates frescos colhidos diariamente da nossa horta",
-        image: "imagens/img-tomatefresco.png",
+        description: "Nossos <b>Tomates</b> são vendidos por quilo e, absolutamente, frescos, uma vez que são colhidos diariamente, garantindo sabor, suculência e qualidade incomparáveis. Ideais para saladas, molhos ou consumo in natura, eles trazem o melhor da horta diretamente para a sua mesa. Experimente a diferença de um produto cultivado com cuidado e dedicação!",
+        image: "imagens/img-tomates.jpg",
         organic: true,
         dateCreated: "2024-01-15",
-        status: "ativo"
+        status: "ativo",
+        producer: "Fazenda Feliz"
     },
     {
         id: 2,
-        name: "Queijo Colonial",
-        category: "queijos",
-        price: 25.00,
+        name: "Mel Puro",
+        category: "Doces e Geleias",
+        price: 20.00,
         unit: "kg",
-        quantity: 10,
-        description: "Queijo colonial artesanal feito com leite fresco",
-        image: "imagens/img-queijocolonialum.jpg",
+        quantity: 60,
+        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo.",
+        image: "imagens/img-mel.jpg",
         organic: false,
         dateCreated: "2024-01-10",
-        status: "ativo"
+        status: "ativo",
+        producer: "Fazenda Feliz"
     }
 ];
 
@@ -247,6 +291,22 @@ let balances = {
     delivery: 320.75
 };
 
+// Arrays globais para usuários cadastrados
+let sellers = [];
+let deliveries = [];
+let consumers = [];
+
+// Função utilitária para validar senha (apenas letras e números)
+function isValidPassword(pw) {
+    return /^[A-Za-z0-9]{6,20}$/.test(pw);
+}
+
+// Função de autenticação
+function authenticateUser(email, password, type) {
+    let arr = type === 'seller' ? sellers : type === 'delivery' ? deliveries : consumers;
+    return arr.find(u => u.email === email && u.password === password) || null;
+}
+
 // ========================================
 // INICIALIZAÇÃO DA APLICAÇÃO
 // ========================================
@@ -254,6 +314,7 @@ let balances = {
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
     loadProducts();
+    loadFeaturedProducts(); // Carregar produtos em destaque aleatórios
     updateCartDisplay();
     setupCEPValidation();
     setupCPFValidation(); // Configurar validação de CPF
@@ -297,6 +358,18 @@ function initializeApp() {
     
     // Passos dos formulários
     setupFormSteps();
+    setupLoginEmailAutofill();
+    setupShowPasswordButtons();
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
 }
 
 // ========================================
@@ -385,6 +458,24 @@ function loadProducts() {
     });
 }
 
+function loadFeaturedProducts() {
+    const featuredContainer = document.querySelector('.section-products .grid');
+    if (!featuredContainer) return;
+    
+    // Limpar produtos existentes
+    featuredContainer.innerHTML = '';
+    
+    // Selecionar 4 produtos aleatórios do catálogo
+    const shuffledProducts = [...products].sort(() => Math.random() - 0.5);
+    const selectedProducts = shuffledProducts.slice(0, 4);
+    
+    selectedProducts.forEach(product => {
+        // Usar a mesma função de card dos produtos normais
+        const productCard = createProductCard(product);
+        featuredContainer.appendChild(productCard);
+    });
+}
+
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300';
@@ -403,6 +494,7 @@ function createProductCard(product) {
                 <span class="text-gray-600 text-sm ml-2">(${product.reviews})</span>
             </div>
             <p class="text-gray-700 mb-3">${product.description}</p>
+            ${product.producer ? `<p class="text-sm text-gray-500 mb-2"><strong>Produtor:</strong> ${product.producer}</p>` : ''}
             <div class="flex justify-between items-center">
                 <span class="font-bold text-green-700">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
                 <button class="add-to-cart bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="${product.id}">+ Carrinho</button>
@@ -644,108 +736,147 @@ function setupFormSteps() {
 function goToFormStep(currentStep, targetStepNum) {
     // Esconder passo atual
     currentStep.classList.remove('active');
-    
     // Mostrar passo alvo
     const targetStep = currentStep.parentElement.querySelector(`[data-step="${targetStepNum}"]`);
     if (targetStep) {
         targetStep.classList.add('active');
+        // Se for o passo de login, preencher o e-mail
+        if (targetStep.querySelector('#seller-login-email')) {
+            document.getElementById('seller-login-email').value = document.getElementById('seller-email').value;
+        }
+        if (targetStep.querySelector('#delivery-login-email')) {
+            document.getElementById('delivery-login-email').value = document.getElementById('delivery-email').value;
+        }
+        if (targetStep.querySelector('#user-login-email')) {
+            document.getElementById('user-login-email').value = document.getElementById('user-email').value;
+        }
     }
 }
 
 function handleSellerSubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    // Se não está no último passo, avança
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '5') {
+        return;
+    }
+    // Validação dos campos obrigatórios
     const requiredFields = ['seller-name', 'seller-doc', 'seller-email', 'seller-phone', 'seller-cpp'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
     // Validar CPF/CNPJ
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique o CPF/CNPJ informado', 'error');
         return;
     }
-    
-    showNotification('Cadastro de vendedor enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    // Validação de senha
+    const email = document.getElementById('seller-email').value;
+    const pw = document.getElementById('seller-password').value;
+    const pw2 = document.getElementById('seller-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    // Salvar vendedor
+    sellers.push({
+        name: document.getElementById('seller-name').value,
+        doc: document.getElementById('seller-doc').value,
+        email,
+        phone: document.getElementById('seller-phone').value,
+        cpp: document.getElementById('seller-cpp').value,
+        password: pw
     });
+    showNotification('Cadastro de vendedor enviado com sucesso! Aguarde nossa análise.', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function handleDeliverySubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '5') {
+        return;
+    }
     const requiredFields = ['delivery-name', 'delivery-cpf', 'delivery-email', 'delivery-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
-    // Validar CPF
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique os CPFs informados', 'error');
         return;
     }
-    
-    showNotification('Cadastro de entregador enviado com sucesso! Aguarde nossa análise.', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    const email = document.getElementById('delivery-email').value;
+    const pw = document.getElementById('delivery-password').value;
+    const pw2 = document.getElementById('delivery-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    deliveries.push({
+        name: document.getElementById('delivery-name').value,
+        cpf: document.getElementById('delivery-cpf').value,
+        email,
+        phone: document.getElementById('delivery-phone').value,
+        password: pw
     });
+    showNotification('Cadastro de entregador enviado com sucesso! Aguarde nossa análise.', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function handleUserSubmit(e) {
     e.preventDefault();
-    
-    // Validação básica
+    const form = e.target;
+    const steps = form.querySelectorAll('.form-step');
+    const activeStep = form.querySelector('.form-step.active');
+    if (activeStep && activeStep.getAttribute('data-step') !== '4') {
+        return;
+    }
     const requiredFields = ['user-name', 'user-cpf', 'user-email', 'user-phone'];
-    const isValid = validateRequiredFields(requiredFields);
-    
-    if (!isValid) {
+    if (!validateRequiredFields(requiredFields)) {
         showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
         return;
     }
-    
-    // Validar CPF
     if (!validateAllCPFs()) {
         showNotification('Por favor, verifique os CPFs informados', 'error');
         return;
     }
-    
-    showNotification('Cadastro realizado com sucesso! Bem-vindo ao HortiPerto!', 'success');
-    e.target.reset();
-    
-    // Resetar para primeiro passo
-    const formSteps = e.target.querySelectorAll('.form-step');
-    formSteps.forEach((step, index) => {
-        if (index === 0) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+    const email = document.getElementById('user-email').value;
+    const pw = document.getElementById('user-password').value;
+    const pw2 = document.getElementById('user-password-confirm').value;
+    if (!isValidPassword(pw)) {
+        showNotification('A senha deve conter apenas letras e números (6-20 caracteres)', 'error');
+        return;
+    }
+    if (pw !== pw2) {
+        showNotification('As senhas não coincidem', 'error');
+        return;
+    }
+    consumers.push({
+        name: document.getElementById('user-name').value,
+        cpf: document.getElementById('user-cpf').value,
+        email,
+        phone: document.getElementById('user-phone').value,
+        password: pw
     });
+    showNotification('Cadastro realizado com sucesso! Bem-vindo ao HortiPerto!', 'success');
+    form.reset();
+    steps.forEach((step, idx) => step.classList.toggle('active', idx === 0));
 }
 
 function validateRequiredFields(fieldIds) {
@@ -790,10 +921,8 @@ function loadSellerProducts() {
 function createSellerProductCard(product) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-lg shadow-md overflow-hidden';
-    
     const statusClass = product.status === 'ativo' ? 'bg-green-500' : 'bg-gray-500';
     const statusText = product.status === 'ativo' ? 'Ativo' : 'Inativo';
-    
     card.innerHTML = `
         <div class="relative">
             <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
@@ -804,8 +933,10 @@ function createSellerProductCard(product) {
         <div class="p-4">
             <h3 class="font-bold text-lg mb-2">${product.name}</h3>
             <p class="text-gray-600 text-sm mb-2">${getCategoryName(product.category)}</p>
+            <div class="font-extrabold text-black text-lg mb-2">${product.name}</div>
             <p class="font-bold text-green-700 mb-2">R$ ${product.price.toFixed(2).replace('.', ',')}/${product.unit}</p>
             <p class="text-gray-600 text-sm mb-2">Quantidade: ${product.quantity} ${product.unit}</p>
+            <p class="text-gray-600 text-sm mb-2">Produtor: ${product.producer || ''}</p>
             <p class="text-gray-700 text-sm mb-3">${product.description}</p>
             ${product.organic ? '<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mb-3">🌱 Orgânico</span>' : ''}
             <div class="flex space-x-2">
@@ -816,12 +947,11 @@ function createSellerProductCard(product) {
                     <i class="fas fa-trash mr-1"></i> Excluir
                 </button>
                 <button class="flex-1 ${product.status === 'ativo' ? 'bg-yellow-600' : 'bg-green-600'} text-white py-1 px-3 rounded text-sm hover:${product.status === 'ativo' ? 'bg-yellow-700' : 'bg-green-700'}" onclick="toggleProductStatus(${product.id})">
-                    <i class="fas ${product.status === 'ativo' ? 'fa-pause' : 'fa-play'} mr-1"></i> ${product.status === 'ativo' ? 'Pausar' : 'Ativar'}
+                    ${product.status === 'ativo' ? '<i class=\'fas fa-pause mr-1\'></i> Pausar' : '<i class=\'fas fa-play mr-1\'></i> Ativar'}
                 </button>
             </div>
         </div>
     `;
-    
     return card;
 }
 
@@ -1207,24 +1337,23 @@ async function validateCEP(cepInput) {
 // Função para preencher campos de endereço automaticamente
 function fillAddressFields(cepData) {
     const formType = getCurrentFormType();
-    
     if (!formType) return;
-    
     const fields = {
         address: `${cepData.logradouro}`,
         neighborhood: cepData.bairro,
         city: cepData.localidade,
         state: cepData.uf
     };
-    
-    // Preencher campos baseado no tipo de formulário
     Object.keys(fields).forEach(field => {
         const element = document.getElementById(`${formType}-${field}`);
         if (element) {
-            element.value = fields[field];
+            if (field === 'state' && element.tagName === 'SELECT') {
+                element.value = fields[field];
+                element.dispatchEvent(new Event('change'));
+            } else {
+                element.value = fields[field];
+            }
             element.classList.add('auto-filled');
-            
-            // Remover classe após 3 segundos
             setTimeout(() => {
                 element.classList.remove('auto-filled');
             }, 3000);
@@ -2064,4 +2193,384 @@ function updateLoginButton() {
     }
 }
 
- 
+// Preencher automaticamente o campo de e-mail no passo de senha
+function setupLoginEmailAutofill() {
+    // Vendedor
+    const sellerEmail = document.getElementById('seller-email');
+    const sellerLoginEmail = document.getElementById('seller-login-email');
+    if (sellerEmail && sellerLoginEmail) {
+        sellerEmail.addEventListener('input', () => {
+            sellerLoginEmail.value = sellerEmail.value;
+        });
+        sellerLoginEmail.value = sellerEmail.value;
+    }
+    // Entregador
+    const deliveryEmail = document.getElementById('delivery-email');
+    const deliveryLoginEmail = document.getElementById('delivery-login-email');
+    if (deliveryEmail && deliveryLoginEmail) {
+        deliveryEmail.addEventListener('input', () => {
+            deliveryLoginEmail.value = deliveryEmail.value;
+        });
+        deliveryLoginEmail.value = deliveryEmail.value;
+    }
+    // Usuário
+    const userEmail = document.getElementById('user-email');
+    const userLoginEmail = document.getElementById('user-login-email');
+    if (userEmail && userLoginEmail) {
+        userEmail.addEventListener('input', () => {
+            userLoginEmail.value = userEmail.value;
+        });
+        userLoginEmail.value = userEmail.value;
+    }
+}
+
+// Botão de visualizar senha
+function setupShowPasswordButtons() {
+    document.querySelectorAll('input[type="password"]').forEach(input => {
+        if (input.nextElementSibling && input.nextElementSibling.classList.contains('show-password-btn')) return;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'show-password-btn';
+        btn.innerHTML = '<i class="fas fa-eye"></i>';
+        btn.style.position = 'absolute';
+        btn.style.right = '12px';
+        btn.style.top = '50%';
+        btn.style.transform = 'translateY(-50%)';
+        btn.style.background = 'none';
+        btn.style.border = 'none';
+        btn.style.cursor = 'pointer';
+        btn.style.padding = '0';
+        btn.style.zIndex = '10';
+        btn.addEventListener('click', function() {
+            input.type = input.type === 'password' ? 'text' : 'password';
+            btn.innerHTML = input.type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        // Wrapper para posicionar
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+        wrapper.appendChild(btn);
+    });
+}
+
+function updatePaymentOptionVisuals() {
+    const paymentOptions = document.querySelectorAll('.payment-option');
+    
+    paymentOptions.forEach(option => {
+        const radio = option.querySelector('input[type="radio"]');
+        const circle = option.querySelector('.w-3.h-3');
+        const label = option.querySelector('label');
+        
+        if (radio.checked) {
+            circle.classList.remove('hidden');
+            label.classList.add('border-green-500', 'bg-green-50');
+        } else {
+            circle.classList.add('hidden');
+            label.classList.remove('border-green-500', 'bg-green-50');
+        }
+    });
+}
+
+function setupCardFormValidation() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    
+    if (cardNumber) {
+        cardNumber.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            this.value = value;
+        });
+    }
+    
+    if (cardExpiry) {
+        cardExpiry.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            this.value = value;
+        });
+    }
+    
+    if (cardCvv) {
+        cardCvv.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+}
+
+function setupPixCopy() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.addEventListener('click', function() {
+            this.select();
+        });
+    }
+}
+
+function copyPixKey() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.select();
+        document.execCommand('copy');
+        
+        // Mostrar feedback visual
+        const copyBtn = document.querySelector('button[onclick="copyPixKey()"]');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        copyBtn.classList.add('bg-green-700');
+        
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.classList.remove('bg-green-700');
+        }, 2000);
+        
+        showNotification('Chave PIX copiada!', 'success');
+    }
+}
+
+function updatePaymentSummary() {
+    const subtotal = cartTotal;
+    const shipping = 5.00;
+    let paymentFee = 0.00;
+    
+    // Calcular taxa baseada no método de pagamento
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    if (selectedMethod) {
+        switch (selectedMethod.value) {
+            case 'card':
+                paymentFee = subtotal * 0.029; // 2.9% para cartão
+                break;
+            case 'pix':
+                paymentFee = 0; // PIX sem taxa
+                break;
+            case 'cash':
+                paymentFee = 0; // Dinheiro sem taxa
+                break;
+        }
+    }
+    
+    const total = subtotal + shipping + paymentFee;
+    
+    // Atualizar valores na interface usando os elementos existentes
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartTotalWithShippingElement = document.getElementById('cart-total-with-shipping');
+    
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    if (cartTotalWithShippingElement) {
+        const totalWithShipping = subtotal + shipping + paymentFee;
+        cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+function confirmPayment() {
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    
+    if (!selectedMethod) {
+        showNotification('Selecione uma forma de pagamento', 'error');
+        return;
+    }
+    
+    // Validar formulário baseado no método selecionado
+    if (!validatePaymentForm(selectedMethod.value)) {
+        return;
+    }
+    
+    // Simular processamento de pagamento
+    const confirmBtn = document.getElementById('confirm-payment');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Processando...';
+    confirmBtn.disabled = true;
+    
+    setTimeout(() => {
+        // Simular sucesso do pagamento
+        showNotification('Pagamento processado com sucesso!', 'success');
+        
+        // Limpar carrinho
+        cart = [];
+        cartTotal = 0;
+        updateCartDisplay();
+        
+        // Redirecionar para página de sucesso ou home
+        showTab('home');
+        
+        // Resetar botão
+        confirmBtn.textContent = originalText;
+        confirmBtn.disabled = false;
+        
+    }, 2000);
+}
+
+function validatePaymentForm(method) {
+    switch (method) {
+        case 'card':
+            return validateCardForm();
+        case 'cash':
+            return validateCashForm();
+        case 'pix':
+            return true; // PIX não precisa de validação específica
+        default:
+            return false;
+    }
+}
+
+function validateCardForm() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    const cardHolder = document.getElementById('card-holder');
+    
+    if (!cardNumber.value.replace(/\s/g, '').match(/^\d{16}$/)) {
+        showNotification('Número do cartão inválido', 'error');
+        return false;
+    }
+    
+    if (!cardExpiry.value.match(/^\d{2}\/\d{2}$/)) {
+        showNotification('Data de validade inválida', 'error');
+        return false;
+    }
+    
+    if (!cardCvv.value.match(/^\d{3,4}$/)) {
+        showNotification('CVV inválido', 'error');
+        return false;
+    }
+    
+    if (!cardHolder.value.trim()) {
+        showNotification('Nome do titular é obrigatório', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function validateCashForm() {
+    // Validação básica para dinheiro (opcional)
+    return true;
+}
+
+// Modificar a função proceedToCheckout para atualizar o resumo do pagamento
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        showNotification('Seu carrinho está vazio', 'error');
+        return;
+    }
+    
+    // Atualizar resumo do pagamento
+    updatePaymentSummary();
+    showNotification('Carrinho atualizado! Escolha sua forma de pagamento.', 'success');
+}
+
+// ========================================
+// INICIALIZAÇÃO DO SISTEMA
+// ========================================
+
+function initializeApp() {
+    setupFormHandlers();
+    setupFormSteps();
+    setupLoginEmailAutofill();
+    setupShowPasswordButtons();
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
+}
+
+// Função para abrir o modal de login
+function openLoginModal() {
+    document.getElementById('login-modal').style.display = 'flex';
+    document.getElementById('login-error').style.display = 'none';
+    document.getElementById('login-form').reset();
+}
+
+// Função para fechar o modal de login
+function closeLoginModal() {
+    document.getElementById('login-modal').style.display = 'none';
+}
+
+// Handler do botão do menu
+const loginBtn = document.getElementById('login-btn');
+if (loginBtn) {
+    loginBtn.addEventListener('click', openLoginModal);
+}
+
+// Handler do formulário de login
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const type = document.getElementById('login-type').value;
+            const user = authenticateUser(email, password, type);
+            const errorDiv = document.getElementById('login-error');
+            if (user) {
+                errorDiv.style.display = 'none';
+                closeLoginModal();
+                showNotification('Login realizado com sucesso!', 'success');
+                // Aqui você pode redirecionar ou atualizar a UI conforme o tipo de usuário
+            } else {
+                errorDiv.textContent = 'E-mail, senha ou tipo de usuário inválido.';
+                errorDiv.style.display = 'block';
+            }
+        });
+    }
+    
+    // Botão de mostrar/ocultar senha
+    const pwInput = document.getElementById('login-password');
+    if (pwInput && !document.getElementById('show-login-password-btn')) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'show-login-password-btn';
+        btn.innerHTML = '<i class="fas fa-eye"></i>';
+        btn.style.position = 'absolute';
+        btn.style.right = '12px';
+        btn.style.top = '50%';
+        btn.style.transform = 'translateY(-50%)';
+        btn.style.background = 'none';
+        btn.style.border = 'none';
+        btn.style.cursor = 'pointer';
+        btn.style.padding = '0';
+        btn.style.zIndex = '10';
+        btn.addEventListener('click', function() {
+            pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+            btn.innerHTML = pwInput.type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        pwInput.parentNode.appendChild(btn);
+    }
+});
+
+// Exportar funções para o escopo global
+window.confirmPayment = confirmPayment;
+window.copyPixKey = copyPixKey;
+window.proceedToCheckout = proceedToCheckout;
+window.updateCartDisplay = updateCartDisplay;
+window.clearCart = clearCart;
+window.showTab = showTab;
+window.showNotification = showNotification;
+
+function setupPixQRCode() {
+    const qrContainer = document.getElementById('pix-qr-code');
+    if (qrContainer) {
+        // Limpa o conteúdo anterior
+        qrContainer.innerHTML = '';
+        // Gera o QR Code real
+        const qr = new QRious({
+            element: document.createElement('canvas'),
+            value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F', // Exemplo de payload PIX fake
+            size: 180
+        });
+    }
+}

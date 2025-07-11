@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/hortiperto-styles.css">
     <script src="js/hortiperto-main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <style>
         /* Custom CSS for elements that need more specific styling */
         .product-card:hover {
@@ -338,6 +339,117 @@
             100% { box-shadow: 0 0 16px 4px #00ff88, 0 0 32px 8px #00ff8844; }
         }
     </style>
+    
+    <style>
+/* === REDUÇÃO DA ALTURA DOS CARDS DE PRODUTOS === */
+.product-card {
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    height: 160px !important;
+    min-height: 160px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card .p-4 {
+    padding: 0.75rem !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card h3 {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 0.75rem !important;
+    line-height: 1rem;
+    margin-bottom: 0.5rem !important;
+    color: #6b7280;
+}
+
+.product-card .flex.items-center.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.product-card .rating-stars {
+    font-size: 0.75rem;
+}
+
+.product-card .text-gray-600.text-sm {
+    font-size: 0.625rem !important;
+}
+
+.product-card .flex.justify-between.items-center {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.product-card .font-bold.text-success-color,
+.product-card .font-bold.text-green-700 {
+    font-size: 0.875rem !important;
+}
+
+.product-card .btn,
+.product-card .add-to-cart {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    height: auto;
+    min-height: 28px;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 640px) {
+    .product-card {
+        min-height: 260px;
+    }
+    
+    .product-card img {
+        height: 140px !important;
+        min-height: 140px;
+    }
+    
+    .product-card h3 {
+        font-size: 0.8rem !important;
+    }
+    
+    .product-card p {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .product-card {
+        min-height: 300px;
+    }
+    
+    .product-card img {
+        height: 180px !important;
+        min-height: 180px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-card {
+        min-height: 320px;
+    }
+    
+    .product-card img {
+        height: 200px !important;
+        min-height: 200px;
+    }
+}
+</style>
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Modal de Login -->
@@ -462,7 +574,185 @@
                     <button class="btn btn-secondary mr-2 mb-2" data-category="salad">Verduras</button>
                     <button class="btn btn-secondary mr-2 mb-2" data-category="geleias">Doces e Geleias</button>
                 </div>
-                <div id="products-catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product items will be loaded here -->
+                    <div class="product-item card" data-category="vegetables">
+                        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cesta de legumes" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Cesta de Legumes Orgânicos</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(24)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Seleção de legumes frescos da fazenda familiar</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-success-color">R$ 25,90</span>
+                                <button class="btn btn-success text-sm" data-product-id="1">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="cheese">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Queijo artesanal" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Queijo Artesanal</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(18)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Queijo colonial feito com leite fresco</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 32,50/kg</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="2">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="salad">
+                        <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Salada pronta" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Salada Pronta</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(36)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Mix de folhas lavadas e prontas para consumo</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 15,90</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="3">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="jam">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geleia caseira" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Geleia Caseira de Morango</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(29)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Geleia artesanal sem conservantes</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 18,50</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="4">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="fruits">
+                        <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Frutas variadas" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Cesta de Frutas da Estação</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(21)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Seleção de frutas frescas colhidas no dia</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 28,90</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="5">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="vegetables">
+                        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Tomates" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Tomate Cereja Orgânico</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(42)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Tomates cereja cultivados sem agrotóxicos</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 12,90/kg</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="6">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="cheese">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Queijo minas" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Queijo Minas Frescal</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(19)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Queijo minas tradicional feito artesanalmente</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 24,90/kg</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="7">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-item bg-white rounded-lg shadow-md overflow-hidden transition duration-300" data-category="jam">
+                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geleia de pimenta" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">Geleia de Pimenta</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(15)</span>
+                            </div>
+                            <p class="text-gray-700 mb-3">Geleia artesanal com um toque picante</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-green-700">R$ 19,90</span>
+                                <button class="add-to-cart btn-neon bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="8">+ Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -1245,6 +1535,174 @@
                                 <button class="btn btn-danger w-full" onclick="clearCart()">
                                     Limpar Carrinho
                                 </button>
+                            </div>
+                            <!-- Opções de Pagamento -->
+                            <div class="mt-8">
+                                <h3 class="text-lg font-semibold mb-4">Escolha a Forma de Pagamento</h3>
+                                <div class="space-y-4 mb-6">
+                                    <!-- Cartão de Crédito/Débito -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-card" name="payment-method" value="card" class="hidden">
+                                        <label for="payment-card" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-credit-card text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">Cartão de Crédito/Débito</h4>
+                                                        <p class="text-sm text-gray-600">Visa, Mastercard, Elo e outros</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <!-- Dinheiro -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-cash" name="payment-method" value="cash" class="hidden">
+                                        <label for="payment-cash" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-money-bill-wave text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">Dinheiro</h4>
+                                                        <p class="text-sm text-gray-600">Pagamento na entrega</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <!-- PIX -->
+                                    <div class="payment-option">
+                                        <input type="radio" id="payment-pix" name="payment-method" value="pix" class="hidden">
+                                        <label for="payment-pix" class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                                            <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-green-600 rounded-full hidden"></div>
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-qrcode text-2xl text-green-600 mr-3"></i>
+                                                    <div>
+                                                        <h4 class="font-semibold">PIX</h4>
+                                                        <p class="text-sm text-gray-600">Pagamento instantâneo</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Formulários específicos para cada método -->
+                                <div id="payment-forms">
+                                    <!-- Formulário de Cartão -->
+                                    <div id="card-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Dados do Cartão</h4>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label for="card-number" class="block text-sm font-medium text-gray-700 mb-1">Número do Cartão</label>
+                                                <input type="text" id="card-number" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="0000 0000 0000 0000" maxlength="19">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label for="card-expiry" class="block text-sm font-medium text-gray-700 mb-1">Validade</label>
+                                                    <input type="text" id="card-expiry" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="MM/AA" maxlength="5">
+                                                </div>
+                                                <div>
+                                                    <label for="card-cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                                                    <input type="text" id="card-cvv" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="123" maxlength="4">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="card-holder" class="block text-sm font-medium text-gray-700 mb-1">Nome do Titular</label>
+                                                <input type="text" id="card-holder" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Como está no cartão">
+                                            </div>
+                                            <div>
+                                                <label for="card-installments" class="block text-sm font-medium text-gray-700 mb-1">Parcelas</label>
+                                                <select id="card-installments" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500">
+                                                    <option value="1">1x sem juros</option>
+                                                    <option value="2">2x sem juros</option>
+                                                    <option value="3">3x sem juros</option>
+                                                    <option value="4">4x sem juros</option>
+                                                    <option value="5">5x sem juros</option>
+                                                    <option value="6">6x sem juros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Formulário de Dinheiro -->
+                                    <div id="cash-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Pagamento em Dinheiro</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+                                                    <span class="text-sm text-yellow-800">O pagamento será realizado no momento da entrega</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="cash-change" class="block text-sm font-medium text-gray-700 mb-1">Troco para (opcional)</label>
+                                                <input type="text" id="cash-change" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" placeholder="Ex: R$ 50,00">
+                                                <p class="text-xs text-gray-500 mt-1">Informe o valor para o qual precisa de troco</p>
+                                            </div>
+                                            <div>
+                                                <label for="cash-notes" class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+                                                <textarea id="cash-notes" class="w-full px-4 py-2 border rounded-lg focus:ring-green-500 focus:border-green-500" rows="3" placeholder="Alguma observação sobre o pagamento?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Formulário de PIX -->
+                                    <div id="pix-form" class="payment-form hidden">
+                                        <h4 class="font-semibold mb-4">Pagamento via PIX</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                                                    <span class="text-sm text-green-800">Pagamento instantâneo e seguro</span>
+                                                </div>
+                                            </div>
+                                            <!-- QR Code -->
+                                            <div class="text-center">
+                                                <h5 class="font-medium mb-3">Escaneie o QR Code</h5>
+                                                <div id="pix-qr-code" class="bg-white border-2 border-gray-300 rounded-lg p-6 inline-block">
+                                                    <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                        <i class="fas fa-qrcode text-6xl text-gray-400"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-2">Use o app do seu banco para escanear</p>
+                                            </div>
+                                            <!-- Chave PIX -->
+                                            <div class="border-t pt-4">
+                                                <h5 class="font-medium mb-3">Ou copie a chave PIX</h5>
+                                                <div class="flex items-center space-x-2">
+                                                    <input type="text" id="pix-key" value="hortiperto@email.com" class="flex-1 px-4 py-2 border rounded-lg bg-gray-50" readonly>
+                                                    <button onclick="copyPixKey()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-1">Chave PIX: hortiperto@email.com</p>
+                                            </div>
+                                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                                <div class="flex items-start">
+                                                    <i class="fas fa-lightbulb text-blue-600 mr-2 mt-1"></i>
+                                                    <div class="text-sm text-blue-800">
+                                                        <p class="font-medium mb-1">Dica:</p>
+                                                        <p>Após o pagamento, o pedido será processado automaticamente. Você receberá uma confirmação por e-mail.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Botão de Confirmar Pagamento -->
+                                <div class="mt-6">
+                                    <button id="confirm-payment" onclick="confirmPayment()" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-credit-card mr-2"></i>
+                                        Confirmar Pagamento
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

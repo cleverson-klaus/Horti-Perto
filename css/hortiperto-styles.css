@@ -1567,38 +1567,6 @@ button[onclick="copyPixKey()"]:hover {
 }
 
 /* ========================================
-   TYPEBOT STYLES
-   ======================================== */
-
-#typebot-welcome,
-#typebot-help {
-    animation: slideInFromBottom 0.5s ease-out;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e5e7eb;
-}
-
-@keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#typebot-welcome button,
-#typebot-help button {
-    transition: all 0.2s ease;
-}
-
-#typebot-welcome button:hover,
-#typebot-help button:hover {
-    transform: translateX(5px);
-}
-
-/* ========================================
    MELHORIAS GERAIS
    ======================================== */
 

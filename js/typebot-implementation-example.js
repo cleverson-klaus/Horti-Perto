@@ -1,17 +1,6 @@
 // ========================================
 // EXEMPLO DE IMPLEMENTAÇÃO TYPEBOT - HORTIPERTO
 // ========================================
-
-// Configuração inicial do Typebot
-const typebotConfig = {
-    // Configurações de tema
-    theme: {
-        primaryColor: '#22c55e', // Verde HortiPerto
-        secondaryColor: '#16a34a',
-        backgroundColor: '#ffffff',
-        textColor: '#1f2937',
-        fontFamily: 'Inter, system-ui, sans-serif'
-    },
     
     // Configurações do chat
     chatWindow: {
@@ -29,7 +18,6 @@ const typebotConfig = {
         size: '60px',
         borderRadius: '50%'
     }
-};
 
 // ========================================
 // WIDGETS ESPECÍFICOS PARA HORTIPERTO
@@ -338,35 +326,6 @@ const customerSupportWidget = {
 // ========================================
 // FUNÇÕES DE INTEGRAÇÃO
 // ========================================
-
-// Função para inicializar o Typebot
-function initializeTypebot() {
-    // Configurar tema global
-    Typebot.setTheme(typebotConfig.theme);
-    
-    // Registrar widgets
-    registerWidgets();
-    
-    // Configurar event listeners
-    setupEventListeners();
-    
-    console.log('Typebot HortiPerto inicializado com sucesso!');
-}
-
-// Função para registrar todos os widgets
-function registerWidgets() {
-    const widgets = [
-        welcomeWidget,
-        sellerOnboardingWidget,
-        productRecommendationWidget,
-        cartRecoveryWidget,
-        customerSupportWidget
-    ];
-    
-    widgets.forEach(widget => {
-        Typebot.registerWidget(widget);
-    });
-}
 
 // Função para configurar event listeners
 function setupEventListeners() {

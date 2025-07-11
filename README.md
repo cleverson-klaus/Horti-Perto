@@ -19,12 +19,6 @@ O HortiPerto é uma plataforma web inovadora que conecta produtores rurais diret
 - **Validação em Tempo Real**: Formatação automática e validação de dados
 - **Taxas Dinâmicas**: Cálculo automático baseado no método de pagamento
 
-### 🤖 Typebot Integrado
-- **Saudação Automática**: Mensagem de boas-vindas personalizada
-- **Atendimento 24h**: Respostas automáticas para dúvidas comuns
-- **Navegação Inteligente**: Direcionamento automático para seções relevantes
-- **Suporte Humano**: Redirecionamento para atendente quando necessário
-
 ### 🔐 Sistema de Autenticação
 - **Login Simples**: Acesso por e-mail/senha
 - **Gestão de Conta**: Interface para usuários logados
@@ -38,12 +32,14 @@ O HortiPerto é uma plataforma web inovadora que conecta produtores rurais diret
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Frontend**: HTML5, CSS3, JavaScript
 - **Estilização**: Tailwind CSS
 - **Ícones**: Font Awesome 6.4.0
 - **Validações**: JavaScript nativo com regex
 - **APIs**: ViaCEP para validação de endereços
 - **Armazenamento**: IndexedDB para dados locais
+- **Front-end**: Lorena,Raquel
+-**Back-end** :Cleverson,Bruna
 
 ## 📁 Estrutura do Projeto
 
@@ -55,7 +51,7 @@ Horti-Perto/
 │   └── shopping-assistant.css    # Estilos do assistente
 ├── js/
 │   ├── hortiperto-main.js        # JavaScript principal
-│   ├── typebot-integration.js    # Integração Typebot
+│   ├─
 │   └── shopping-assistant.js     # Assistente de compras
 ├── imagens/                      # Assets de imagem
 ├── docs/                         # Documentação
@@ -88,20 +84,6 @@ Horti-Perto/
 - Sem taxa de processamento
 - Feedback visual ao copiar chave
 
-### Typebot - Atendimento Inteligente
-
-#### 🌟 Mensagem de Boas-Vindas
-- Aparece automaticamente após 3 segundos
-- Opções de navegação rápida
-- Auto-remoção após 30 segundos
-- Design responsivo e moderno
-
-#### 🤝 Suporte Automatizado
-- Dúvidas sobre compras
-- Problemas com entrega
-- Questões de pagamento
-- Redirecionamento para atendente humano
-
 #### 🎯 Ações Contextuais
 - Navegação direta para produtos
 - Acesso rápido aos cadastros
@@ -115,20 +97,6 @@ Horti-Perto/
 - Feedback visual de erros
 - Persistência de sessão
 
-#### 👤 Gestão de Conta
-- Botão "Minha Conta" quando logado
-- Dropdown com opção de logout
-- Transições suaves entre estados
-
-## 🧪 Testes
-
-Execute o arquivo `tests/payment-test.html` para verificar todas as funcionalidades:
-
-- ✅ Teste de métodos de pagamento
-- ✅ Validação de cartão de crédito
-- ✅ Funcionalidade PIX
-- ✅ Sistema de login
-- ✅ Integração Typebot
 
 ## 🚀 Como Executar
 
@@ -166,18 +134,7 @@ A plataforma é totalmente responsiva e funciona em:
 - **Verde Escuro**: #166534
 - **Cinza**: #6b7280
 
-### Tipografia
-- **Fonte Principal**: Font Sans (Tailwind)
-- **Tamanhos**: Responsivos e escaláveis
-- **Hierarquia**: Clara e consistente
-
 ## 🔧 Configurações
-
-### Typebot
-- **Delay inicial**: 3 segundos
-- **Auto-remoção**: 30 segundos
-- **Posição**: Canto inferior direito
-- **Tema**: Verde HortiPerto
 
 ### Pagamento
 - **Taxa cartão**: 2.9%

@@ -1722,3 +1722,271 @@ footer .fab:hover {
 .bg-blue-50.border-blue-200.rounded-lg.p-4 .text-blue-800, .bg-blue-50.border-blue-200.rounded-lg.p-4 p, .bg-blue-50.border-blue-200.rounded-lg.p-4 {
   color: #1e293b !important;
 }
+
+/* ========================================
+   MODAL DE QUANTIDADE E CARRINHO MELHORADO
+   ======================================== */
+
+/* Modal de quantidade */
+#quantity-modal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+#quantity-modal .bg-white {
+    animation: slideInUp 0.3s ease-out;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Botões do modal */
+#quantity-modal .quantity-btn {
+    transition: all 0.2s ease;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#quantity-modal .quantity-btn:hover {
+    background-color: #e5e7eb;
+    transform: scale(1.05);
+}
+
+#quantity-modal .quantity-btn:active {
+    transform: scale(0.95);
+}
+
+/* Display de quantidade */
+#quantity-display {
+    min-width: 60px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Carrinho melhorado */
+.cart-item {
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.cart-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item .quantity-btn {
+    transition: all 0.2s ease;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.cart-item .quantity-btn:hover {
+    background-color: #e5e7eb;
+    transform: scale(1.1);
+}
+
+.cart-item .quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.cart-item .remove-item {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.cart-item .remove-item:hover {
+    background-color: #fef2f2;
+    transform: scale(1.1);
+}
+
+/* Resumo do carrinho */
+#cart-summary {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+#cart-summary:hover {
+    border-color: #22c55e;
+    background-color: #f0fdf4;
+}
+
+/* Botão de compra melhorado */
+.add-to-cart {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.add-to-cart:active {
+    transform: translateY(0);
+}
+
+.add-to-cart::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.add-to-cart:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Animação para notificações de carrinho */
+.notification.cart-notification {
+    animation: slideInFromRight 0.4s ease-out;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade para o modal */
+@media (max-width: 640px) {
+    #quantity-modal .bg-white {
+        margin: 16px;
+        max-width: calc(100vw - 32px);
+    }
+    
+    #quantity-modal .flex.space-x-4 {
+        gap: 16px;
+    }
+    
+    #quantity-display {
+        min-width: 50px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Melhorias para o carrinho em dispositivos móveis */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+    
+    .cart-item .flex-1 {
+        text-align: center;
+    }
+    
+    .cart-item .flex.items-center.space-x-2 {
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .cart-item .quantity-btn {
+        min-width: 36px;
+        height: 36px;
+    }
+}
+
+/* Efeito de destaque para produtos no carrinho */
+.product-item[data-in-cart="true"],
+.product-item.in-cart {
+    position: relative;
+    border: 2px solid #22c55e;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.product-item[data-in-cart="true"]::after,
+.product-item.in-cart::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #22c55e;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    animation: bounceIn 0.6s ease-out;
+    z-index: 10;
+}
+
+.product-item.in-cart .add-to-cart {
+    background-color: #16a34a;
+    pointer-events: none;
+}
+
+.product-item.in-cart .add-to-cart::before {
+    content: '✓ Adicionado';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-item.in-cart:hover .add-to-cart::before {
+    opacity: 1;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

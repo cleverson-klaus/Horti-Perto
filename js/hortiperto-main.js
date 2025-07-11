@@ -497,7 +497,10 @@ function createProductCard(product) {
             ${product.producer ? `<p class="text-sm text-gray-500 mb-2"><strong>Produtor:</strong> ${product.producer}</p>` : ''}
             <div class="flex justify-between items-center">
                 <span class="font-bold text-green-700">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
-                <button class="add-to-cart bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700 transition" data-product-id="${product.id}">+ Carrinho</button>
+                <button class="add-to-cart bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition flex items-center space-x-2" data-product-id="${product.id}" title="Adicionar ao carrinho">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Comprar</span>
+                </button>
             </div>
         </div>
     `;
@@ -567,43 +570,216 @@ function setupCartHandlers() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('add-to-cart')) {
             const productId = parseInt(e.target.getAttribute('data-product-id'));
-            addToCart(productId);
+            console.log('Botão de compra clicado para produto:', productId);
+            
+            // Adicionar diretamente ao carrinho (versão simplificada)
+            addProductToCart(productId, 1);
         }
     });
 }
 
-function addToCart(productId) {
+function addProductToCart(productId, quantity = 1) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
     
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += quantity;
     } else {
         cart.push({
             id: product.id,
             name: product.name,
             price: product.price,
-            quantity: 1
+            quantity: quantity,
+            unit: product.unit
         });
     }
     
+    // Atualizar display imediatamente
     updateCartDisplay();
-    showNotification(`${product.name} adicionado ao carrinho!`, 'success');
+    
+    // Mostrar notificação de forma assíncrona para não bloquear
+    setTimeout(() => {
+        showNotification(`${product.name} (${quantity}x) adicionado ao carrinho!`, 'success');
+    }, 100);
+}
+
+function showQuantityModal(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    // Criar modal de quantidade
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    modal.id = 'quantity-modal';
+    
+    modal.innerHTML = `
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">Escolher Quantidade</h3>
+                <button class="text-gray-500 hover:text-gray-700" onclick="closeQuantityModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-4">
+                <div class="flex items-center mb-3">
+                    <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded mr-3">
+                    <div>
+                        <h4 class="font-semibold">${product.name}</h4>
+                        <p class="text-green-600 font-bold">R$ ${product.price.toFixed(2).replace('.', ',')} / ${product.unit}</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-2 rounded text-lg font-bold hover:bg-gray-300" onclick="changeQuantity(-1)">-</button>
+                    <span id="quantity-display" class="text-2xl font-bold px-4">1</span>
+                    <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-2 rounded text-lg font-bold hover:bg-gray-300" onclick="changeQuantity(1)">+</button>
+                </div>
+                
+                <div class="text-center mb-4">
+                    <p class="text-gray-600">Total: <span id="total-price" class="font-bold text-green-600">R$ ${product.price.toFixed(2).replace('.', ',')}</span></p>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3">
+                <button class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400" onclick="closeQuantityModal()">
+                    Cancelar
+                </button>
+                <button class="flex-1 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700" onclick="confirmAddToCart(${productId})">
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Fechar modal ao clicar fora
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeQuantityModal();
+        }
+    });
+    
+    // Variáveis globais para o modal
+    window.currentQuantity = 1;
+    window.currentProductPrice = product.price;
+}
+
+function closeQuantityModal() {
+    const modal = document.getElementById('quantity-modal');
+    if (modal) {
+        modal.remove();
+    }
+    window.currentQuantity = 1;
+}
+
+function changeQuantity(change) {
+    const newQuantity = window.currentQuantity + change;
+    if (newQuantity >= 1) {
+        window.currentQuantity = newQuantity;
+        updateQuantityDisplay();
+    }
+}
+
+function updateQuantityDisplay() {
+    const quantityDisplay = document.getElementById('quantity-display');
+    const totalPrice = document.getElementById('total-price');
+    
+    if (quantityDisplay && totalPrice) {
+        quantityDisplay.textContent = window.currentQuantity;
+        const total = window.currentProductPrice * window.currentQuantity;
+        totalPrice.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+function confirmAddToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const quantity = window.currentQuantity || 1;
+    
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: quantity,
+            unit: product.unit
+        });
+    }
+    
+    closeQuantityModal();
+    updateCartDisplay();
+    
+    // Notificação mais detalhada
+    const totalPrice = (product.price * quantity).toFixed(2).replace('.', ',');
+    const notificationMessage = `${product.name} (${quantity}x) adicionado ao carrinho!<br><small>Total: R$ ${totalPrice}</small>`;
+    showNotification(notificationMessage, 'success');
+}
+
+function addToCart(productId) {
+    // Esta função agora é chamada pelo modal
+    showQuantityModal(productId);
+}
+
+// Funções auxiliares para o modal de quantidade
+window.closeQuantityModal = closeQuantityModal;
+window.changeQuantity = changeQuantity;
+window.confirmAddToCart = confirmAddToCart;
+
+function updateProductCartIndicators() {
+    // Obter IDs dos produtos no carrinho
+    const cartProductIds = cart.map(item => item.id);
+    
+    // Atualizar todos os cards de produtos
+    const productCards = document.querySelectorAll('.product-item');
+    productCards.forEach(card => {
+        const productId = parseInt(card.querySelector('.add-to-cart').getAttribute('data-product-id'));
+        const isInCart = cartProductIds.includes(productId);
+        
+        if (isInCart) {
+            card.setAttribute('data-in-cart', 'true');
+            // Adicionar classe visual
+            card.classList.add('in-cart');
+        } else {
+            card.removeAttribute('data-in-cart');
+            card.classList.remove('in-cart');
+        }
+    });
+}
+
+function updateCartTooltip() {
+    const cartButtons = document.querySelectorAll('[data-cart-tooltip]');
+    
+    cartButtons.forEach(button => {
+        if (cart.length === 0) {
+            button.title = 'Carrinho vazio';
+        } else {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const uniqueItems = cart.length;
+            
+            button.title = `${totalItems} item${totalItems > 1 ? 's' : ''} no carrinho\n${uniqueItems} produto${uniqueItems > 1 ? 's' : ''} diferente${uniqueItems > 1 ? 's' : ''}\nTotal: R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+        }
+    });
 }
 
 function updateCartDisplay() {
     const cartContainer = document.getElementById('cart-items');
     const cartCount = document.getElementById('cart-count');
-    const mobileCartCount = document.getElementById('mobile-cart-count');
     
     if (!cartContainer) return;
     
-    // Atualizar contador
+    // Atualizar contador rapidamente
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (cartCount) cartCount.textContent = totalItems;
-    if (mobileCartCount) mobileCartCount.textContent = totalItems;
     
     // Atualizar lista de itens
     if (cart.length === 0) {
@@ -611,7 +787,8 @@ function updateCartDisplay() {
         return;
     }
     
-    cartContainer.innerHTML = '';
+    // Usar DocumentFragment para melhor performance
+    const fragment = document.createDocumentFragment();
     cartTotal = 0;
     
     cart.forEach((item, index) => {
@@ -619,28 +796,38 @@ function updateCartDisplay() {
         cartTotal += itemTotal;
         
         const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item flex justify-between items-center p-4 border-b border-gray-200';
+        cartItem.className = 'cart-item flex justify-between items-center p-4 border-b border-gray-200 hover:bg-gray-50';
         cartItem.innerHTML = `
             <div class="flex-1">
-                <h4 class="font-semibold">${item.name}</h4>
-                <p class="text-gray-600">R$ ${item.price.toFixed(2).replace('.', ',')} x ${item.quantity}</p>
+                <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                <p class="text-gray-600 text-sm">R$ ${item.price.toFixed(2).replace('.', ',')} / ${item.unit || 'unidade'}</p>
+                <p class="text-green-600 font-bold">R$ ${itemTotal.toFixed(2).replace('.', ',')} (${item.quantity}x)</p>
             </div>
             <div class="flex items-center space-x-2">
-                <button class="quantity-btn bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="updateQuantity(${index}, -1)">-</button>
-                <span>${item.quantity}</span>
-                <button class="quantity-btn bg-gray-200 text-gray-700 px-2 py-1 rounded" onclick="updateQuantity(${index}, 1)">+</button>
-                <button class="remove-item text-red-500 hover:text-red-700" onclick="removeFromCart(${index})">
+                <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300 transition" onclick="updateQuantity(${index}, -1)" title="Diminuir quantidade">
+                    <i class="fas fa-minus text-xs"></i>
+                </button>
+                <span class="font-bold text-gray-800 min-w-[2rem] text-center">${item.quantity}</span>
+                <button class="quantity-btn bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300 transition" onclick="updateQuantity(${index}, 1)" title="Aumentar quantidade">
+                    <i class="fas fa-plus text-xs"></i>
+                </button>
+                <button class="remove-item text-red-500 hover:text-red-700 p-2 rounded hover:bg-red-50 transition" onclick="removeFromCart(${index})" title="Remover item">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
         `;
         
-        cartContainer.appendChild(cartItem);
+        fragment.appendChild(cartItem);
     });
     
-    // Atualizar total
+    // Limpar e adicionar tudo de uma vez
+    cartContainer.innerHTML = '';
+    cartContainer.appendChild(fragment);
+    
+    // Atualizar totais
     const cartTotalElement = document.getElementById('cart-total');
     const cartTotalWithShippingElement = document.getElementById('cart-total-with-shipping');
+    const cartSummaryElement = document.getElementById('cart-summary');
     
     if (cartTotalElement) {
         cartTotalElement.textContent = `R$ ${cartTotal.toFixed(2).replace('.', ',')}`;
@@ -651,19 +838,51 @@ function updateCartDisplay() {
         const totalWithShipping = cartTotal + shippingCost;
         cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
     }
+    
+    // Atualizar resumo do carrinho
+    if (cartSummaryElement) {
+        if (cart.length === 0) {
+            cartSummaryElement.innerHTML = '<p class="text-gray-500 text-center">Carrinho vazio</p>';
+        } else {
+            const uniqueItems = cart.length;
+            cartSummaryElement.innerHTML = `
+                <div class="text-center">
+                    <p class="text-sm text-gray-600">${totalItems} item${totalItems > 1 ? 's' : ''} no carrinho</p>
+                    <p class="text-sm text-gray-600">${uniqueItems} produto${uniqueItems > 1 ? 's' : ''} diferente${uniqueItems > 1 ? 's' : ''}</p>
+                    <p class="font-bold text-green-600 text-lg">Total: R$ ${cartTotal.toFixed(2).replace('.', ',')}</p>
+                </div>
+            `;
+        }
+    }
+    
+    // Atualizar indicadores visuais (de forma assíncrona para não bloquear)
+    setTimeout(() => {
+        updateProductCartIndicators();
+        updateCartTooltip();
+    }, 0);
 }
 
 function updateQuantity(index, change) {
     if (index < 0 || index >= cart.length) return;
     
-    cart[index].quantity += change;
+    const item = cart[index];
+    const newQuantity = item.quantity + change;
     
-    if (cart[index].quantity <= 0) {
+    if (newQuantity <= 0) {
+        const itemName = item.name;
         cart.splice(index, 1);
-        showNotification('Item removido do carrinho', 'info');
+        updateCartDisplay();
+        showNotification(`${itemName} removido do carrinho`, 'info');
+    } else {
+        item.quantity = newQuantity;
+        updateCartDisplay();
+        
+        if (change > 0) {
+            showNotification(`Quantidade de ${item.name} aumentada para ${newQuantity}`, 'success');
+        } else {
+            showNotification(`Quantidade de ${item.name} diminuída para ${newQuantity}`, 'info');
+        }
     }
-    
-    updateCartDisplay();
 }
 
 function removeFromCart(index) {
@@ -1192,21 +1411,19 @@ function toggleProductStatus(id) {
 // ========================================
 
 function showNotification(message, type = 'info') {
-    // Remover notificação existente
+    // Remover notificação existente rapidamente
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Criar nova notificação
+    // Criar nova notificação de forma otimizada
     const notification = document.createElement('div');
-    notification.className = `notification fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm`;
-    
     const bgColor = type === 'success' ? 'bg-green-500' : 
                    type === 'error' ? 'bg-red-500' : 
                    type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500';
     
-    notification.className += ` ${bgColor} text-white`;
+    notification.className = `notification fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${bgColor} text-white`;
     notification.innerHTML = `
         <div class="flex justify-between items-center">
             <span>${message}</span>
@@ -1216,14 +1433,15 @@ function showNotification(message, type = 'info') {
         </div>
     `;
     
+    // Adicionar ao DOM imediatamente
     document.body.appendChild(notification);
     
-    // Auto-remover após 5 segundos
+    // Auto-remover após 3 segundos (mais rápido)
     setTimeout(() => {
         if (notification.parentElement) {
             notification.remove();
         }
-    }, 5000);
+    }, 3000);
 }
 
 // ========================================
@@ -2122,13 +2340,20 @@ function setupLoginModal() {
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
 
+    // Verificar se os elementos existem antes de adicionar listeners
+    if (!loginBtn || !loginModal || !closeModalBtn || !loginForm || !loginError) {
+        console.log('⚠️ Elementos do modal de login não encontrados');
+        return;
+    }
+
     // Abrir modal
     loginBtn.addEventListener('click', function() {
         loginModal.classList.remove('hidden');
         loginModal.classList.add('active');
         loginModal.focus();
         document.body.style.overflow = 'hidden';
-        document.getElementById('login-usuario').focus();
+        const loginUsuario = document.getElementById('login-usuario');
+        if (loginUsuario) loginUsuario.focus();
     });
 
     // Fechar modal
@@ -2139,26 +2364,29 @@ function setupLoginModal() {
     document.addEventListener('keydown', function(e) {
         if (loginModal.classList.contains('active') && e.key === 'Escape') closeLoginModal();
     });
+    
     function closeLoginModal() {
         loginModal.classList.remove('active');
         loginModal.classList.add('hidden');
         document.body.style.overflow = '';
-        loginError.classList.add('hidden');
-        loginForm.reset();
+        if (loginError) loginError.classList.add('hidden');
+        if (loginForm) loginForm.reset();
     }
 
     // Simulação de login
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const usuario = loginForm.usuario.value.trim();
-        const senha = loginForm.senha.value;
+        const usuario = loginForm.usuario ? loginForm.usuario.value.trim() : '';
+        const senha = loginForm.senha ? loginForm.senha.value : '';
         if ((usuario === 'demo' || usuario === 'demo@email.com') && senha === '1234') {
             isLoggedIn = true;
             updateLoginButton();
             closeLoginModal();
         } else {
-            loginError.textContent = 'Usuário ou senha inválidos. Use demo/1234.';
-            loginError.classList.remove('hidden');
+            if (loginError) {
+                loginError.textContent = 'Usuário ou senha inválidos. Use demo/1234.';
+                loginError.classList.remove('hidden');
+            }
         }
     });
 
@@ -2167,7 +2395,11 @@ function setupLoginModal() {
 
 function updateLoginButton() {
     const loginBtn = document.getElementById('login-btn');
-    if (!loginBtn) return;
+    if (!loginBtn) {
+        console.log('⚠️ Botão de login não encontrado');
+        return;
+    }
+    
     if (isLoggedIn) {
         loginBtn.textContent = 'Minha Conta';
         loginBtn.classList.remove('btn-outline');
@@ -2177,11 +2409,16 @@ function updateLoginButton() {
             const dropdown = document.createElement('div');
             dropdown.id = 'logout-btn';
             dropdown.innerHTML = '<button class="btn btn-danger w-full mt-2">Sair</button>';
-            loginBtn.parentNode.appendChild(dropdown);
-            dropdown.querySelector('button').onclick = function() {
-                isLoggedIn = false;
-                updateLoginButton();
-            };
+            if (loginBtn.parentNode) {
+                loginBtn.parentNode.appendChild(dropdown);
+                const logoutBtn = dropdown.querySelector('button');
+                if (logoutBtn) {
+                    logoutBtn.onclick = function() {
+                        isLoggedIn = false;
+                        updateLoginButton();
+                    };
+                }
+            }
         }
     } else {
         loginBtn.textContent = 'Entrar';
@@ -2262,12 +2499,18 @@ function updatePaymentOptionVisuals() {
         const circle = option.querySelector('.w-3.h-3');
         const label = option.querySelector('label');
         
-        if (radio.checked) {
-            circle.classList.remove('hidden');
-            label.classList.add('border-green-500', 'bg-green-50');
+        if (radio && radio.checked) {
+            if (circle) circle.classList.remove('hidden');
+            if (label) {
+                label.classList.add('border-green-500', 'bg-green-50');
+                label.classList.remove('border-gray-300');
+            }
         } else {
-            circle.classList.add('hidden');
-            label.classList.remove('border-green-500', 'bg-green-50');
+            if (circle) circle.classList.add('hidden');
+            if (label) {
+                label.classList.remove('border-green-500', 'bg-green-50');
+                label.classList.add('border-gray-300');
+            }
         }
     });
 }
@@ -2336,6 +2579,7 @@ function updatePaymentSummary() {
     const subtotal = cartTotal;
     const shipping = 5.00;
     let paymentFee = 0.00;
+    let paymentMethodName = '';
     
     // Calcular taxa baseada no método de pagamento
     const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
@@ -2343,13 +2587,17 @@ function updatePaymentSummary() {
         switch (selectedMethod.value) {
             case 'card':
                 paymentFee = subtotal * 0.029; // 2.9% para cartão
+                paymentMethodName = 'Cartão de Crédito/Débito';
                 break;
             case 'pix':
                 paymentFee = 0; // PIX sem taxa
+                paymentMethodName = 'PIX';
                 break;
             case 'cash':
                 paymentFee = 0; // Dinheiro sem taxa
+                paymentMethodName = 'Dinheiro';
                 break;
+
         }
     }
     
@@ -2366,6 +2614,37 @@ function updatePaymentSummary() {
     if (cartTotalWithShippingElement) {
         const totalWithShipping = subtotal + shipping + paymentFee;
         cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
+    }
+    
+    // Atualizar resumo detalhado se existir
+    const paymentSummaryElement = document.getElementById('payment-summary');
+    if (paymentSummaryElement) {
+        paymentSummaryElement.innerHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h4 class="font-semibold text-green-800 mb-3">Resumo do Pagamento</h4>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span>Subtotal:</span>
+                        <span>R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Frete:</span>
+                        <span>R$ ${shipping.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    ${paymentFee > 0 ? `
+                    <div class="flex justify-between text-orange-600">
+                        <span>Taxa de ${paymentMethodName}:</span>
+                        <span>R$ ${paymentFee.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    ` : ''}
+                    <hr class="border-green-200">
+                    <div class="flex justify-between font-semibold text-lg">
+                        <span>Total:</span>
+                        <span class="text-green-700">R$ ${total.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 }
 
@@ -2479,6 +2758,7 @@ function initializeApp() {
     setupCPFValidation();
     setupFileUploads();
     setupLoginModal();
+    setupCartHandlers(); // Adicionar setup do carrinho
     
     // Inicializar novas funcionalidades
     setupPaymentSystem();
@@ -2561,16 +2841,129 @@ window.clearCart = clearCart;
 window.showTab = showTab;
 window.showNotification = showNotification;
 
+
+
 function setupPixQRCode() {
     const qrContainer = document.getElementById('pix-qr-code');
     if (qrContainer) {
         // Limpa o conteúdo anterior
         qrContainer.innerHTML = '';
-        // Gera o QR Code real
-        const qr = new QRious({
-            element: document.createElement('canvas'),
-            value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F', // Exemplo de payload PIX fake
-            size: 180
-        });
+        
+        try {
+            // Verificar se QRious está disponível
+            if (typeof QRious !== 'undefined') {
+                // Gera o QR Code real
+                const qr = new QRious({
+                    element: document.createElement('canvas'),
+                    value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F',
+                    size: 180
+                });
+                
+                // Adicionar o canvas ao container
+                qrContainer.appendChild(qr.element);
+            } else {
+                // Fallback se QRious não estiver disponível
+                qrContainer.innerHTML = `
+                    <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-qrcode text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-500">QR Code PIX</p>
+                            <p class="text-xs text-gray-400">hortiperto@email.com</p>
+                        </div>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            // Fallback em caso de erro
+            qrContainer.innerHTML = `
+                <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-qrcode text-6xl text-gray-400 mb-2"></i>
+                        <p class="text-sm text-gray-500">QR Code PIX</p>
+                        <p class="text-xs text-gray-400">hortiperto@email.com</p>
+                    </div>
+                </div>
+            `;
+        }
     }
 }
+
+// ========================================
+// SISTEMA DE PAGAMENTO MELHORADO
+// ========================================
+
+function setupPaymentSystem() {
+    // Aguardar um pouco para garantir que os elementos estejam no DOM
+    setTimeout(() => {
+        // Configurar listeners para opções de pagamento
+        const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
+        
+        paymentOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                // Esconder todos os formulários primeiro
+                const paymentForms = document.querySelectorAll('.payment-form');
+                paymentForms.forEach(form => {
+                    form.style.display = 'none';
+                    form.classList.add('hidden');
+                });
+                
+                // Mostrar apenas o formulário correspondente
+                const selectedMethod = this.value;
+                const targetForm = document.getElementById(`${selectedMethod}-form`);
+                if (targetForm) {
+                    targetForm.style.display = 'block';
+                    targetForm.classList.remove('hidden');
+                    
+                    // Se for PIX, gerar QR Code
+                    if (selectedMethod === 'pix') {
+                        setTimeout(() => setupPixQRCode(), 100);
+                    }
+                }
+                
+                // Atualizar visuais das opções
+                updatePaymentOptionVisuals();
+                
+                // Atualizar resumo do pagamento
+                updatePaymentSummary();
+            });
+        });
+        
+        // Configurar validação de cartão
+        setupCardFormValidation();
+        
+        // Configurar cópia do PIX
+        setupPixCopy();
+        
+        // Configurar QR Code do PIX
+        setupPixQRCode();
+        
+        // Configurar listeners para atualização automática do resumo
+        const cartItems = document.querySelectorAll('.cart-item');
+        cartItems.forEach(item => {
+            const quantityInput = item.querySelector('.quantity-input');
+            if (quantityInput) {
+                quantityInput.addEventListener('change', updatePaymentSummary);
+            }
+        });
+        
+        // Adicionar listener para cliques nos labels também
+        const paymentLabels = document.querySelectorAll('.payment-option label');
+        paymentLabels.forEach(label => {
+            label.addEventListener('click', function() {
+                const radio = this.previousElementSibling;
+                if (radio && radio.type === 'radio') {
+                    radio.checked = true;
+                    radio.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+        
+        // Garantir que todos os formulários estejam escondidos inicialmente
+        const allPaymentForms = document.querySelectorAll('.payment-form');
+        allPaymentForms.forEach(form => {
+            form.classList.add('hidden');
+            form.style.display = 'none';
+        });
+    }, 100);
+}
+

@@ -445,7 +445,7 @@ function showNotification(message, type = 'info') {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
     max-width: 300px;
-    animation: slideIn 0.3s ease;
+            /* Removida animação */
   `;
 
   notification.querySelector('.notification-content').style.cssText = `
@@ -469,11 +469,11 @@ function showNotification(message, type = 'info') {
   style.textContent = `
     @keyframes slideIn {
       from {
-        transform: translateX(100%);
+        /* Removida transformação */
         opacity: 0;
       }
       to {
-        transform: translateX(0);
+        /* Removida transformação */
         opacity: 1;
       }
     }

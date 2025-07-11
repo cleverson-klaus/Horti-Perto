@@ -1,4 +1,4 @@
-# 🧪 Como Testar o Typebot - HortiPerto
+# 🧪 Como Testar o  - HortiPerto
 
 ## 🚀 **Teste Rápido**
 
@@ -33,7 +33,7 @@
 ## 🔧 **Página de Teste Avançado**
 
 ### **Acessar Página de Teste**
-1. Abra `tests/typebot-test.html` no navegador
+1. Abra `tests/-test.html` no navegador
 2. Esta página testa todas as funções individualmente
 
 ### **Testes Disponíveis**
@@ -134,10 +134,10 @@
 
 Se encontrar problemas:
 1. Verificar console do navegador (F12)
-2. Testar na página `tests/typebot-test.html`
+2. Testar na página `tests/-test.html`
 3. Verificar se todos os arquivos estão carregando
 4. Limpar cache do navegador se necessário
 
 ---
 
-*Este teste validará se o Typebot está funcionando corretamente e criando a experiência desejada para os usuários.* 
+*Este teste validará se o  está funcionando corretamente e criando a experiência desejada para os usuários.* 

@@ -638,14 +638,13 @@ nav.hidden.md\\:flex {
   flex-direction: column;
 }
 .product-card:hover {
-  /* Combinação possível dos efeitos */
-  box-shadow: var(--shadow-xl); /* Pode trocar para --shadow-md se quiser menos sombra */
+  box-shadow: var(--shadow-xl);
   transform: none;
 }
 
 .product-card img {
   width: 100%;
-  height: 12rem; /* Mantido do branch main; ajuste conforme necessidade */
+  height: 12rem;
   object-fit: cover;
   display: block;
   margin-left: 0 !important;
@@ -655,12 +654,7 @@ nav.hidden.md\\:flex {
   margin-top: 0 !important;
   vertical-align: top;
   box-sizing: border-box;
-  transition: none; /* Este estava no branch Cleverson */
-}
-
-.product-card:hover img {
-  transform: none;
-  /* Escala foi removida como nos dois lados */
+  transition: none;
 }
 
 .product-item img {
@@ -677,15 +671,31 @@ nav.hidden.md\\:flex {
   box-sizing: border-box;
 }
 
-.product-item:hover img {
-  /* Escala removida */
+.product-card:hover img {
+  transform: none;
 }
 
+.product-item:hover img {
+  transform: none;
+}
+
+.product-item img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  display: block;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 10px 10px 0 0;
+  background: #f8f8f8;
+  margin-top: 0 !important;
+  vertical-align: top;
+  box-sizing: border-box;
+}
 
 .product-card .card-content {
   padding: var(--spacing-sm);
 }
-
 .product-card .p-4 {
   flex: 1 1 auto;
   display: flex;
@@ -1564,38 +1574,6 @@ button[onclick="copyPixKey()"] {
 
 button[onclick="copyPixKey()"]:hover {
     transform: scale(1.05);
-}
-
-/* ========================================
-   TYPEBOT STYLES
-   ======================================== */
-
-#typebot-welcome,
-#typebot-help {
-    animation: slideInFromBottom 0.5s ease-out;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e5e7eb;
-}
-
-@keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#typebot-welcome button,
-#typebot-help button {
-    transition: all 0.2s ease;
-}
-
-#typebot-welcome button:hover,
-#typebot-help button:hover {
-    transform: translateX(5px);
 }
 
 /* ========================================

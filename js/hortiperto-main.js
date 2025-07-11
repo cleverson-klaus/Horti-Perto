@@ -237,8 +237,7 @@ let products = [
         reviews: 37,
         image: "imagens/img-mel.jpg",
         unit: "kg",
-        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo.",
-    
+        description: "Nosso <b>Mel Puro</b> é 100% natural, extraído diretamente dos favos e embalado com todo cuidado para preservar seu sabor e propriedades. Ideal para adoçar pães, frutas, chás ou receitas especiais, traz o melhor da natureza para sua mesa. Experimente a pureza e a doçura incomparável do mel produzido na Fazenda Feliz, o qual é vendido por quilo."
     },
     {
         id: 20,
@@ -251,8 +250,7 @@ let products = [
         image: "imagens/img-tomates.jpg",
         unit: "kg",
         description: "Nossos <b>Tomates</b> são vendidos por quilo e, absolutamente, frescos, uma vez que são colhidos diariamente, garantindo sabor, suculência e qualidade incomparáveis. Ideais para saladas, molhos ou consumo in natura, eles trazem o melhor da horta diretamente para a sua mesa. Experimente a diferença de um produto cultivado com cuidado e dedicação!"
-    
-    },
+    }
 ];
 
 // Produtos cadastrados pelos vendedores
@@ -323,12 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFileUploads(); // Configurar upload de arquivos
     
     // Inicializar efeitos 3D e animações
-    createParticles();
-    initParallax();
-    init3DHover();
-    animateOnScroll();
-    initNeonButtons();
-    initLogoRotation();
+    // Removidas todas as animações
     
     // Adicionar efeito de onda aos botões
     const buttons = document.querySelectorAll('.btn-neon, .action-btn');
@@ -367,6 +360,16 @@ function initializeApp() {
     setupFormSteps();
     setupLoginEmailAutofill();
     setupShowPasswordButtons();
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
 }
 
 // ========================================
@@ -1257,167 +1260,7 @@ window.validateCPFInput = validateCPFInput;
 window.validateAllCPFs = validateAllCPFs;
 window.getCleanCPF = getCleanCPF;
 
-// Sistema de partículas para efeito 3D
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    if (!particlesContainer) return;
-    
-    const particleCount = 20;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Posição aleatória
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        
-        // Tamanho aleatório
-        const size = Math.random() * 3 + 2;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Opacidade aleatória
-        particle.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Efeito de parallax suave
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.floating');
-        
-        parallaxElements.forEach((element, index) => {
-            const speed = 0.5 + (index * 0.1);
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
-    });
-}
-
-// Efeito de hover 3D para cards
-function init3DHover() {
-    const cards = document.querySelectorAll('.product-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        });
-    });
-}
-
-// Efeito de digitação para títulos
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Animação de entrada para elementos
-function animateOnScroll() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-    
-    const elements = document.querySelectorAll('.product-card, .floating');
-    elements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(50px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Efeito de brilho nos botões neon
-function initNeonButtons() {
-    const neonButtons = document.querySelectorAll('.btn-neon');
-    
-    neonButtons.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            button.style.boxShadow = `
-                0 0 10px #22c55e,
-                0 0 20px #22c55e,
-                0 0 30px #22c55e,
-                0 0 40px #22c55e
-            `;
-        });
-        
-        button.addEventListener('mouseleave', () => {
-            button.style.boxShadow = '';
-        });
-    });
-}
-
-// Efeito de rotação suave da logo
-function initLogoRotation() {
-    const logo = document.querySelector('.logo-rotating');
-    if (!logo) return;
-    
-    let isHovered = false;
-    
-    logo.addEventListener('mouseenter', () => {
-        isHovered = true;
-        logo.style.animationDuration = '2s';
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-        isHovered = false;
-        logo.style.animationDuration = '8s';
-    });
-}
-
-// Efeito de onda nos botões
-function createRippleEffect(event) {
-    const button = event.currentTarget;
-    const ripple = document.createElement('span');
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-    
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-    ripple.classList.add('ripple');
-    
-    button.appendChild(ripple);
-    
-    setTimeout(() => {
-        ripple.remove();
-    }, 600);
-}
+// Todas as animações foram removidas para criar uma experiência estática
 
 // ========================================
 // VALIDAÇÃO DE CEP
@@ -2411,31 +2254,257 @@ function setupShowPasswordButtons() {
     });
 }
 
-// Chamar na inicialização
+function updatePaymentOptionVisuals() {
+    const paymentOptions = document.querySelectorAll('.payment-option');
+    
+    paymentOptions.forEach(option => {
+        const radio = option.querySelector('input[type="radio"]');
+        const circle = option.querySelector('.w-3.h-3');
+        const label = option.querySelector('label');
+        
+        if (radio.checked) {
+            circle.classList.remove('hidden');
+            label.classList.add('border-green-500', 'bg-green-50');
+        } else {
+            circle.classList.add('hidden');
+            label.classList.remove('border-green-500', 'bg-green-50');
+        }
+    });
+}
+
+function setupCardFormValidation() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    
+    if (cardNumber) {
+        cardNumber.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            this.value = value;
+        });
+    }
+    
+    if (cardExpiry) {
+        cardExpiry.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            this.value = value;
+        });
+    }
+    
+    if (cardCvv) {
+        cardCvv.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+}
+
+function setupPixCopy() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.addEventListener('click', function() {
+            this.select();
+        });
+    }
+}
+
+function copyPixKey() {
+    const pixKey = document.getElementById('pix-key');
+    if (pixKey) {
+        pixKey.select();
+        document.execCommand('copy');
+        
+        // Mostrar feedback visual
+        const copyBtn = document.querySelector('button[onclick="copyPixKey()"]');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        copyBtn.classList.add('bg-green-700');
+        
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.classList.remove('bg-green-700');
+        }, 2000);
+        
+        showNotification('Chave PIX copiada!', 'success');
+    }
+}
+
+function updatePaymentSummary() {
+    const subtotal = cartTotal;
+    const shipping = 5.00;
+    let paymentFee = 0.00;
+    
+    // Calcular taxa baseada no método de pagamento
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    if (selectedMethod) {
+        switch (selectedMethod.value) {
+            case 'card':
+                paymentFee = subtotal * 0.029; // 2.9% para cartão
+                break;
+            case 'pix':
+                paymentFee = 0; // PIX sem taxa
+                break;
+            case 'cash':
+                paymentFee = 0; // Dinheiro sem taxa
+                break;
+        }
+    }
+    
+    const total = subtotal + shipping + paymentFee;
+    
+    // Atualizar valores na interface usando os elementos existentes
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartTotalWithShippingElement = document.getElementById('cart-total-with-shipping');
+    
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    if (cartTotalWithShippingElement) {
+        const totalWithShipping = subtotal + shipping + paymentFee;
+        cartTotalWithShippingElement.textContent = `R$ ${totalWithShipping.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+function confirmPayment() {
+    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
+    
+    if (!selectedMethod) {
+        showNotification('Selecione uma forma de pagamento', 'error');
+        return;
+    }
+    
+    // Validar formulário baseado no método selecionado
+    if (!validatePaymentForm(selectedMethod.value)) {
+        return;
+    }
+    
+    // Simular processamento de pagamento
+    const confirmBtn = document.getElementById('confirm-payment');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Processando...';
+    confirmBtn.disabled = true;
+    
+    setTimeout(() => {
+        // Simular sucesso do pagamento
+        showNotification('Pagamento processado com sucesso!', 'success');
+        
+        // Limpar carrinho
+        cart = [];
+        cartTotal = 0;
+        updateCartDisplay();
+        
+        // Redirecionar para página de sucesso ou home
+        showTab('home');
+        
+        // Resetar botão
+        confirmBtn.textContent = originalText;
+        confirmBtn.disabled = false;
+        
+    }, 2000);
+}
+
+function validatePaymentForm(method) {
+    switch (method) {
+        case 'card':
+            return validateCardForm();
+        case 'cash':
+            return validateCashForm();
+        case 'pix':
+            return true; // PIX não precisa de validação específica
+        default:
+            return false;
+    }
+}
+
+function validateCardForm() {
+    const cardNumber = document.getElementById('card-number');
+    const cardExpiry = document.getElementById('card-expiry');
+    const cardCvv = document.getElementById('card-cvv');
+    const cardHolder = document.getElementById('card-holder');
+    
+    if (!cardNumber.value.replace(/\s/g, '').match(/^\d{16}$/)) {
+        showNotification('Número do cartão inválido', 'error');
+        return false;
+    }
+    
+    if (!cardExpiry.value.match(/^\d{2}\/\d{2}$/)) {
+        showNotification('Data de validade inválida', 'error');
+        return false;
+    }
+    
+    if (!cardCvv.value.match(/^\d{3,4}$/)) {
+        showNotification('CVV inválido', 'error');
+        return false;
+    }
+    
+    if (!cardHolder.value.trim()) {
+        showNotification('Nome do titular é obrigatório', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function validateCashForm() {
+    // Validação básica para dinheiro (opcional)
+    return true;
+}
+
+// Modificar a função proceedToCheckout para atualizar o resumo do pagamento
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        showNotification('Seu carrinho está vazio', 'error');
+        return;
+    }
+    
+    // Atualizar resumo do pagamento
+    updatePaymentSummary();
+    showNotification('Carrinho atualizado! Escolha sua forma de pagamento.', 'success');
+}
+
+// ========================================
+// INICIALIZAÇÃO DO SISTEMA
+// ========================================
+
 function initializeApp() {
     setupFormHandlers();
     setupFormSteps();
     setupLoginEmailAutofill();
     setupShowPasswordButtons();
-    // ... outras inits ...
+    setupCEPValidation();
+    setupCPFValidation();
+    setupFileUploads();
+    setupLoginModal();
+    
+    // Inicializar novas funcionalidades
+    setupPaymentSystem();
+    
+    console.log('✅ HortiPerto inicializado com sucesso!');
+    setupRippleEffect();
 }
 
-// ... existente ...
 // Função para abrir o modal de login
 function openLoginModal() {
     document.getElementById('login-modal').style.display = 'flex';
     document.getElementById('login-error').style.display = 'none';
     document.getElementById('login-form').reset();
 }
+
 // Função para fechar o modal de login
 function closeLoginModal() {
     document.getElementById('login-modal').style.display = 'none';
 }
+
 // Handler do botão do menu
 const loginBtn = document.getElementById('login-btn');
 if (loginBtn) {
     loginBtn.addEventListener('click', openLoginModal);
 }
+
 // Handler do formulário de login
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('login-form');
@@ -2458,6 +2527,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
     // Botão de mostrar/ocultar senha
     const pwInput = document.getElementById('login-password');
     if (pwInput && !document.getElementById('show-login-password-btn')) {
@@ -2481,4 +2551,26 @@ document.addEventListener('DOMContentLoaded', function() {
         pwInput.parentNode.appendChild(btn);
     }
 });
-// ... existente ...
+
+// Exportar funções para o escopo global
+window.confirmPayment = confirmPayment;
+window.copyPixKey = copyPixKey;
+window.proceedToCheckout = proceedToCheckout;
+window.updateCartDisplay = updateCartDisplay;
+window.clearCart = clearCart;
+window.showTab = showTab;
+window.showNotification = showNotification;
+
+function setupPixQRCode() {
+    const qrContainer = document.getElementById('pix-qr-code');
+    if (qrContainer) {
+        // Limpa o conteúdo anterior
+        qrContainer.innerHTML = '';
+        // Gera o QR Code real
+        const qr = new QRious({
+            element: document.createElement('canvas'),
+            value: '00020126580014br.gov.bcb.pix0136hortiperto@email.com5204000053039865405100.005802BR5920HortiPerto Teste6009Sao Paulo62070503***6304B14F', // Exemplo de payload PIX fake
+            size: 180
+        });
+    }
+}

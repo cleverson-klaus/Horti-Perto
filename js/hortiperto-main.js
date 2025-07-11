@@ -395,6 +395,8 @@ function setupTabNavigation() {
 }
 
 function showTab(tabId) {
+    console.log('🔄 Tentando mostrar aba:', tabId);
+    
     // Esconder todas as abas
     const tabContents = document.querySelectorAll('.tab-content');
     tabContents.forEach(tab => {
@@ -405,6 +407,7 @@ function showTab(tabId) {
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
         targetTab.classList.add('active');
+        console.log('✅ Aba', tabId, 'mostrada com sucesso');
         
         // Se for a aba de entregador, configurar uploads
         if (tabId === 'delivery-register') {
@@ -412,6 +415,8 @@ function showTab(tabId) {
                 setupFileUploads();
             }, 100);
         }
+    } else {
+        console.error('❌ Aba', tabId, 'não encontrada no DOM');
     }
     
     // Atualizar navegação ativa
@@ -427,6 +432,7 @@ function showTab(tabId) {
     if (tabId === 'seller-register') {
         loadSellerProducts();
     } else if (tabId === 'products') {
+        console.log('🔄 Carregando produtos...');
         loadProducts();
     }
 }
@@ -447,15 +453,23 @@ function setupMobileMenu() {
 // ========================================
 
 function loadProducts() {
+    console.log('🔄 Iniciando carregamento de produtos...');
     const productsContainer = document.querySelector('#products .grid');
-    if (!productsContainer) return;
+    if (!productsContainer) {
+        console.error('❌ Container de produtos não encontrado');
+        return;
+    }
     
+    console.log('✅ Container encontrado, limpando conteúdo...');
     productsContainer.innerHTML = '';
     
+    console.log('🔄 Carregando', products.length, 'produtos...');
     products.forEach(product => {
         const productCard = createProductCard(product);
         productsContainer.appendChild(productCard);
     });
+    
+    console.log('✅ Produtos carregados com sucesso');
 }
 
 function loadFeaturedProducts() {
@@ -530,7 +544,7 @@ function generateStars(rating) {
 }
 
 function setupProductFilters() {
-    const categoryButtons = document.querySelectorAll('.category-btn');
+    const categoryButtons = document.querySelectorAll('[data-category]');
     
     categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -539,12 +553,12 @@ function setupProductFilters() {
             
             // Atualizar botões ativos
             categoryButtons.forEach(btn => {
-                btn.classList.remove('bg-green-600', 'text-white');
-                btn.classList.add('bg-gray-200');
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
             });
             
-            this.classList.remove('bg-gray-200');
-            this.classList.add('bg-green-600', 'text-white');
+            this.classList.remove('btn-secondary');
+            this.classList.add('btn-primary');
         });
     });
 }
@@ -2764,7 +2778,6 @@ function initializeApp() {
     setupPaymentSystem();
     
     console.log('✅ HortiPerto inicializado com sucesso!');
-    setupRippleEffect();
 }
 
 // Função para abrir o modal de login
@@ -2965,5 +2978,44 @@ function setupPaymentSystem() {
             form.style.display = 'none';
         });
     }, 100);
+}
+
+// ========================================
+// FUNÇÕES AUXILIARES
+// ========================================
+
+function createRippleEffect(event) {
+    const button = event.currentTarget;
+    const ripple = document.createElement('span');
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.classList.add('ripple');
+    
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+function typeWriter(element, text, speed) {
+    let i = 0;
+    element.textContent = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
 }
 
